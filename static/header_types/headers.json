@@ -1,0 +1,60 @@
+[
+  {
+    "filename": "header_1.png", 
+    "documentType": "Other adult vectors",
+    "columns": [
+      {"original": "No. da casa", "translation": "House Number"}, 
+      {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
+      {"original": "Coordenadas geográficas (lat)", "translation": "latitude", "pauseInput": true},
+      {"original": "Coordenadas geográficas (lon)", "translation": "longitude", "pauseInput": true},
+      {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
+      {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
+      {"original": "Culex sp M", "translation": "Culex sp Males"},
+      {"original": "Culex sp F", "translation": "Culex sp Females"},
+      {"original": "Aedes sp M", "translation": "Aedes sp Males"},
+      {"original": "Aedes sp F", "translation": "Aedes sp Females"},
+      {"original": "Mansonia sp M", "translation": "Mansonia sp Males"},
+      {"original": "Mansonia sp F", "translation": "Mansonia sp Females"},
+      {"original": "Outros (Anopheles não identificados / des conhecidos) M", "translation": "Other (Unidentified Anopheles) Male"},
+      {"original": "Outros (Anopheles não identificados / des conhecidos) F", "translation": "Other (Unidentified Anopheles) Female"},
+      {"original": "Presença de rede", "translation": "Presence of net"}
+    ]
+  },
+  {
+    "filename": "header_2.png", 
+    "documentType": "Anopheline adult vectors",
+    "columns": [
+      {"original": "No. da casa", "translation": "House Number"}, 
+      {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
+      {"original": "Coordenadas geográficas (lat)", "translation": "latitude", "pauseInput": true},
+      {"original": "Coordenadas geográficas (lon)", "translation": "longitude", "pauseInput": true},
+      {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
+      {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
+      {"original": "Alimentados", "translation": "Fed"},
+      {"original": "Grávidos", "translation": "Pregnant"},
+      {"original": "Não alimentados", "translation": "Not fed"},
+      {"original": "Total de fêmeas", "translation": "Total females"},
+      {"original": "Total de machos", "translation": "Total males"},
+      {"original": "Presença de rede", "translation": "Presence of net"}
+    ]
+  },
+  {
+    "filename": "header_3.png", 
+    "documentType": "Coustani/Phaorensis vectors",
+    "columns": [
+      {"original": "Ordem", "translation": "House Number"}, 
+      {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
+      {"original": "Coordenadas geográficas (lat)", "translation": "latitude", "pauseInput": true},
+      {"original": "Coordenadas geográficas (lon)", "translation": "longitude", "pauseInput": true},
+      {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
+      {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
+      {"original": "An coustani M", "translation": "Anopheles coustani Males"},
+      {"original": "An coustani F", "translation": "Anopheles coustani Females"},
+      {"original": "An pharoensis M", "translation": "Anopheles Phaorensis Males"},
+      {"original": "An pharoensis F", "translation": "Anopheles Phaorensis Females"},
+      {"original": "Outros (Anopheles não identificados / des conhecidos) M", "translation": "Other (Unidentified Anopheles) Male"},
+      {"original": "Outros (Anopheles não identificados / des conhecidos) F", "translation": "Other (Unidentified Anopheles) Female"},
+      {"original": "Presença de rede", "translation": "Presence of net"}
+    ]
+  }
+]
