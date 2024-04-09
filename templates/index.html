@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Cropper and Segmenter</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='app.css') }}">
+    <script src="{{ url_for('static', filename='js/globals.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/document.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dewarp.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/transcription.js') }}"></script>
+</head>
+<body>
+
+  <div class="flex-container">
+    <div id="file-sidebar" class="sidebar">
+        <h3>Source Files</h3>
+        <ul id="file-list"></ul>
+    </div>
+    <div class="content">
+      <h2 id="current-filename"></h2>
+      {% include 'document-tab.html' %}
+      {% include 'dewarp-tab.html' %}
+      {% include 'transcription-tab.html' %}
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div id="document-tab" style="display: none">
+  <div id="document-container">
+    <img id="document-image-display"/>
+    <canvas id="document-overlay-canvas"></canvas>
+  </div>
+  <div id="document-inputs">
+    <div>
+      <label>
+        District: 
+        <input type="text" id="document-district" placeholder="Distrito/Municipio"/>
+      </label>
+    </div>
+    <div>
+      <label>
+        Collection date: 
+        <input type="date" id="document-collection-date" placeholder="Data de colheita"/>
+      </label>
+    </div>
+    <div>
+      <label>
+        Year sprayed: 
+        <input type="number" id="document-year-sprayed" placeholder="Mês de pulverização"/>
+      </label>
+    </div>
+    <input type="text" hidden="true" id="document-type"/>
+  </div>
+  <div id="header-types">
+    <!-- Images for header types will be added dynamically or you can add them statically here -->
+  </div>
+  <button id="document-submit-btn">Submit document info</button>
+</div>

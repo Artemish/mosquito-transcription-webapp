@@ -1,0 +1,31 @@
+<div id="transcription-tab" style="display: none">
+  <div id="transcription-container">
+    <img id="transcription-image-display"/>
+    <canvas id="transcription-overlay-canvas"></canvas>
+  </div>
+  <div id="transcription-buttons">
+    <button id="crop-btn">Crop and Segment</button>
+    <button id="transcription-submit-btn">Submit transcription</button>
+  </div>
+  <div id="transcription-area" style="margin-top: 20px;">
+      <div>Transcribe Cell:</div>
+      <img id="current-cell-view" src="" alt="Zoomed Cell" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
+      <div id="enum-transcription" style="display: none">
+        <select name="wall" id="select-wall">
+          <option value="">-- Select a wall type --</option>
+          <option value="Brickwork">Alvenaria (Brickwork)</option>
+          <option value="Blocks">Bloco (Blocks)</option>
+          <option value="Wattle and reed">Caniço (Wattle and reed)</option>
+          <option value="Cement">Cimento (Cement)</option>
+          <option value="Wood">Madeira (Wood)</option>
+          <option value="Mixed">Misto (Mixed)</option>
+          <option value="Paulia">Paulia</option>
+          <option value="Stone">Pedra (Stone)</option>
+          <option value="Reboco">Reboco (Reboco)</option>
+        </select>
+      </div>
+      <div id="text-transcription">
+        <input type="text" id="transcription-input" placeholder="Enter transcription here" style="display: none;"/>
+      </div>
+  </div>
+</div>
