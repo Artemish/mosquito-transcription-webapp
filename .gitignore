@@ -1,0 +1,4 @@
+__pycache__/
+source_images/*.png
+table_images/*.png
+transcriptions/*.json

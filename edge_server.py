@@ -14,9 +14,9 @@ from subset_table_warp import subset_table_warp
 app = Flask(__name__)
 CORS(app) # This will enable CORS for all routes and methods
 
-SOURCE_DIRECTORY = '../Redacted Horizontal Mosquito Images'
+SOURCE_DIRECTORY = 'source_images'
 TRANSCRIPT_DIRECTORY = 'transcriptions'
-TABLE_IMG_DIRECTORY = '../dewarped'
+TABLE_IMG_DIRECTORY = 'table_images'
 
 IMG_RE = re.compile('.*\.(png|jpg)')
 
