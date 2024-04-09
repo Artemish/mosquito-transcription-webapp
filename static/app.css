@@ -1,0 +1,80 @@
+#transcription-container {
+    position: relative;
+    display: block;
+    border: 1px solid black;
+}
+
+#document-container {
+    position: relative;
+    display: block;
+    border: 1px solid black;
+}
+#document-image-display, #document-overlay-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#transcription-image-display, #transcription-overlay-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+canvas {
+    pointer-events: none; /* Make the canvas click-through */
+}
+
+.flex-container {
+    display: flex; /* Use flex layout */
+}
+
+.sidebar {
+    height: 100vh; /* Full height of the viewport */
+    width: 350px; /* Sidebar width */
+    background-color: #f1f1f1; /* Sidebar background color */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+.content {
+    flex-grow: 1; /* Take up the remaining space */
+    background-color: #ffffff; /* Content background color */
+    padding: 20px; /* Padding around content */
+}
+
+.sidebar h3 {
+    padding-left: 15px;
+}
+
+.sidebar ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 8px;
+    text-align: left;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.selected {
+    border: 2px solid black;
+}
+
+.has-document {
+    background-color: #54ca74;
+}
+
+.has-table {
+    background-color: #cad147;
+}
+
+.has-transcript {
+    background-color: #32a852;
+}
+
+
+.sidebar ul li:hover {
+    background-color: #ddd; /* Change background on hover */
+}
