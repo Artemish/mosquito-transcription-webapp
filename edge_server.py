@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, Response
 from flask_cors import CORS
+from glob import glob
 
 import base64
 import re
 import cv2
 import numpy as np
+import pandas as pd
 import os
 import json
 
@@ -207,6 +209,66 @@ def submit_transcription():
 
     # Return the segmentation result
     return jsonify(None)
+
+@app.route('/download_csv', methods=['GET'])
+def download_csv():
+    result = pd.DataFrame()
+
+    for file in glob(f'{TRANSCRIPT_DIRECTORY}/*_transcript.json'):
+        file_id = file[file.rindex('/')+1:-16]
+        transcription = json.load(open(file))
+        columns = [c['translation'] for c in transcription['header']['columns']]
+        try:
+            transcription_df = pd.DataFrame(
+                transcription['transcriptions'],
+                columns = columns
+            )
+            transcription_df['file_id'] = file_id
+            result = pd.concat([result, transcription_df])
+        except:
+            print(f"Couldn't process {file}")
+            print([len(r) for r in transcription['transcriptions']])
+
+    csv = result.to_csv(index=False)
+    
+    # Create a response with the CSV data
+    response = Response(
+        csv,
+        mimetype="text/csv",
+        headers={
+            "Content-disposition": "attachment; filename=transcription_results.csv"
+        }
+    )
+    
+    return response
+
+
+@app.route('/download_documents_csv', methods=['GET'])
+def download_documents_csv():
+    result = pd.DataFrame()
+
+    for file in glob(f'{TRANSCRIPT_DIRECTORY}/*_document.json'):
+        print(file)
+        file_id = file[file.rindex('/')+1:-14]
+        document = json.load(open(file))
+        try:
+            document_df = pd.DataFrame([document])
+            result = pd.concat([result, document_df])
+        except:
+            print(f"Couldn't process {file}")
+
+    csv = result.to_csv(index=False)
+    
+    # Create a response with the CSV data
+    response = Response(
+        csv,
+        mimetype="text/csv",
+        headers={
+            "Content-disposition": "attachment; filename=document_results.csv"
+        }
+    )
+    
+    return response
 
 
 @app.route('/')

@@ -8,20 +8,13 @@ import numpy as np
 import pandas as pd
 import re
 
-from utils import show, s
+from utils import show, show_contour
 
 THRESHOLD=115
 
 def apply_threshold(img, bottom, top=255):
     img_bin = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,5,2)    
     return img_bin
-
-def show_contour(img, contour):
-    # Draw the approximated contour
-    img_with_approx = img.copy()
-    cv2.drawContours(img_with_approx, [contour], 0, (0, 0, 255), 5)
-    
-    show(img_with_approx)
 
 def simplify_contour(img, contour, eps_lower=0.1, eps_upper=10):
     desired_segments = 8  # For example, to approximate to a rectangle
@@ -225,6 +218,8 @@ if __name__ == '__main__':
 
     contours, out_img = subset_table_warp(img)
     t_a = img.shape[0] * img.shape[1]
+
+    show(out_img)
 
     import json
     for contour in contours:
