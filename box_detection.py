@@ -24,7 +24,7 @@ def box_extraction(img, save_boxes=False):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = cv2.Canny(gray, 20, 200)
 
-    s(gray)
+    # s(gray)
 
     img_bin = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,block_size,C)
 
@@ -43,13 +43,13 @@ def box_extraction(img, save_boxes=False):
     img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=n_iter)
     verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=n_iter)
 
-    s(verticle_lines_img)
+    # s(verticle_lines_img)
 
     cv2.imwrite("verticle_lines.jpg",verticle_lines_img)# Morphological operation to detect horizontal lines from an image
     img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=1)
     horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=n_iter)
 
-    s(horizontal_lines_img)
+    # s(horizontal_lines_img)
 
     cv2.imwrite("horizontal_lines.jpg",horizontal_lines_img)# Weighting parameters, this will decide the quantity of an image to be added to make a new image.
     alpha = 0.5
@@ -61,7 +61,7 @@ def box_extraction(img, save_boxes=False):
     # Enable this line to see verticle and horizontal lines in the image which is used to find boxes
     cv2.imwrite("img_final_bin.jpg",img_final_bin)
 
-    s(img_final_bin)
+    # s(img_final_bin)
 
     # Find contours for image, which will detect all the boxes
     contours, hierarchy = cv2.findContours(img_final_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -244,7 +244,7 @@ def outline_boxes(img, boxes, color=(128,0,255)):
         bottomright = box['x']+box['w'], box['y']+box['h']
         show = cv2.rectangle(show, topleft, bottomright, color, 2)
 
-    s(show)
+    # s(show)
 
 if __name__ == '__main__':
     source_image = sys.argv[1]
