@@ -92,7 +92,7 @@ def warp_hull(img, hull):
     # epsilon = 0.05 * cv2.arcLength(hull, True)
     # rect_approx = cv2.approxPolyDP(hull, epsilon, True)
 
-    h = hull[:,0,:]
+    h = hull
     
     # Order the points of the rectangular approximation
     ordered_points = order_points(h)
@@ -195,7 +195,7 @@ def reshape_contour(contour):
     n_points = contour.shape[0] * contour.shape[1]
     return contour.reshape((n_points, 2)).tolist()
 
-def subset_table_warp(img):
+def find_contours(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     threshold = apply_threshold(gray, 80)
 
@@ -206,10 +206,12 @@ def subset_table_warp(img):
     contours = [process_contour(img, c) for c in contours]
     contour_points = [reshape_contour(c) for c in contours]
 
-    for contour in contours:
-        show_contour(img, contour)
+    return contour_points
 
-    target_contour = contours[0]
+def subset_table_warp(img):
+    contour_points = find_contours(img)
+
+    target_contour = np.array(contour_points[0])
 
     table_img = warp_hull(img, target_contour)
 

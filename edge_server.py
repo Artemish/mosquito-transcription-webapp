@@ -9,7 +9,9 @@ import os
 import json
 
 from box_detection import box_extraction, bbs_to_array, coerce_to_grid
-from subset_table_warp import subset_table_warp
+from subset_table_warp import find_contours, warp_hull
+
+from utils import show_contour, show
 
 app = Flask(__name__)
 CORS(app) # This will enable CORS for all routes and methods
@@ -102,8 +104,8 @@ def upload_file():
     return jsonify(segmentation_result)
 
 
-@app.route('/dewarp', methods=['POST'])
-def dewarp_file():
+@app.route('/find_table', methods=['POST'])
+def find_table():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
     file = request.files['file']
@@ -112,23 +114,47 @@ def dewarp_file():
 
     file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-    cv2.imwrite('last_dewarp_input.png', img)
+    # cv2.imwrite('last_dewarp_input.png', img)
 
-    contours, stw = subset_table_warp(img)
+    contours = find_contours(img)
+
+    # Sending the encoded image along with additional data
+    response_data = { "contours": contours }
+
+    # Return the transformed image
+    return jsonify(response_data)
+
+
+@app.route('/dewarp_along_contour', methods=['POST'])
+def dewarp_along_contour():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['file']
+    contour = json.loads(request.form['contour'])
+
+    with open('last_contour.json', 'w') as outf:
+        outf.write(json.dumps(contour))
+
+    contour = np.array(contour)
+
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
+    img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+
+    stw = warp_hull(img, contour)
+
+    dewarp_name = f'{TABLE_IMG_DIRECTORY}/{file.filename}_dewarped.png'
+    cv2.imwrite(dewarp_name, stw)
 
     _, encoded_stw = cv2.imencode('.png', stw)
     b64_image = base64.b64encode(encoded_stw).decode('ascii')
         
-    # Additional data you want to send
-    additional_data = {
-        "contours": contours,
-        # "filename": filename
-    }
-
     # Sending the encoded image along with additional data
     response_data = {
         "image": b64_image,
-        "data": additional_data
     }
 
     # Return the transformed image
