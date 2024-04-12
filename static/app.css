@@ -2,19 +2,36 @@
     position: relative;
     display: block;
     border: 1px solid black;
+    max-width: 90vw;
 }
 
 #document-container {
     position: relative;
     display: block;
     border: 1px solid black;
+    max-width: 90vw;
 }
+
+#dewarp-container {
+    position: relative;
+    display: block;
+    border: 1px solid black;
+    max-width: 90vw;
+}
+
 #document-image-display, #document-overlay-canvas {
     position: absolute;
     top: 0;
     left: 0;
 }
+
 #transcription-image-display, #transcription-overlay-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#dewarp-image-display, #dewarp-overlay-canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,3 +95,30 @@ canvas {
 .sidebar ul li:hover {
     background-color: #ddd; /* Change background on hover */
 }
+
+
+
+.tab-navbar {
+    display: flex;
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+.tab {
+    flex-grow: 1;
+    padding: 12px;
+    text-align: center;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ccc; /* Lighten tab on hover */
+}
+
+.selected-tab {
+    background-color: #bbb; /* Darker background for selected tab */
+    color: white;
+}
+

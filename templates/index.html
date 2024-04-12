@@ -14,11 +14,18 @@
 
   <div class="flex-container">
     <div id="file-sidebar" class="sidebar">
+        <div>
+          <a href="download_csv" download="transcription.csv">Download Transcription CSV</a>
+        </div>
+        <div>
+          <a href="download_documents_csv" download="documents.csv">Download Documents CSV</a>
+        </div>
         <h3>Source Files</h3>
         <ul id="file-list"></ul>
     </div>
     <div class="content">
       <h2 id="current-filename"></h2>
+      {% include 'tabnav.html' %}
       {% include 'document-tab.html' %}
       {% include 'dewarp-tab.html' %}
       {% include 'transcription-tab.html' %}

@@ -83,7 +83,7 @@ function init_transcription() {
         cropCanvas.toBlob(async function(blob) {
             const formData = new FormData();
             formData.append('file', blob, 'crop.png');
-            const response = await fetch('http://localhost:5000/upload', {
+            const response = await fetch('upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -270,25 +270,6 @@ function init_transcription() {
         // Optionally, redraw anything that was there before, like cell outlines
     }
 
-    async function uploadAndTransformImage(imageFile) {
-        const formData = new FormData();
-        formData.append('file', imageFile);
-
-        try {
-            const response = await fetch('http://localhost:5000/dewarp', {
-                method: 'POST',
-                body: formData,
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const blob = await response.blob();
-            return URL.createObjectURL(blob);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
     async function submitTranscription() {
         const submission = {
           filename: current_file,
@@ -298,7 +279,7 @@ function init_transcription() {
           points: points
         }
 
-        const response = await fetch('http://localhost:5000/submit_transcription', {
+        const response = await fetch('submit_transcription', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -327,6 +308,24 @@ function init_transcription() {
     };
 
     initialize();
+}
+
+async function fetchTranscription(file) {
+    const response = await fetch(`transcription/${file.id}`);
+    
+    if (!response.ok) {
+        console.error(`Failed to fetch transcription: ${response.statusText}`);
+        return;
+    }
+
+    const transcription = await response.json();
+    console.log("Fetched transcription:");
+    console.log(transcription);
+    
+    header = transcription?.header || null;
+    transcriptions = transcription?.transcriptions || [];
+    segmentationData = transcription?.segmentationData || [];
+    points = transcription?.points || [];
 }
 
 window.addEventListener('load', (event) => {

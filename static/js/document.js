@@ -23,7 +23,7 @@ function init_document() {
           'doctype': doctypeInput.value
         }
 
-        const response = await fetch('http://localhost:5000/submit_document', {
+        const response = await fetch('submit_document', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,10 +38,33 @@ function init_document() {
 
         console.log(response);
         
-        setTab('transcription');
+        fetchAndDisplayImage(current_file, target="dewarp"); 
+        setTab('dewarp');
     }
 
     initialize();
+}
+
+async function fetchDocument(file) {
+    const response = await fetch(`document/${file.id}`);
+
+    const districtInput = document.getElementById('document-district');
+    const collectDateInput = document.getElementById('document-collection-date');
+    const sprayYearInput = document.getElementById('document-year-sprayed');
+    const doctypeInput = document.getElementById('document-type');
+    
+    if (!response.ok) {
+        console.error(`Failed to fetch transcription: ${response.statusText}`);
+        return;
+    }
+
+    const doc = await response.json();
+    console.log("Fetched document:");
+    console.log(doc);
+    districtInput.value = doc?.district || "";
+    collectDateInput.value = doc?.collect_date || "";
+    sprayYearInput.value = doc?.spray_year || "";
+    doctypeInput.value = doc?.doctype || "";
 }
 
 window.addEventListener('load', (event) => {

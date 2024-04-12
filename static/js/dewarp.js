@@ -1,10 +1,10 @@
 function init_dewarp() {
     const dewarpBtn = document.getElementById('dewarp-btn');
-    const imageDisplay = document.getElementById('image-display');
+    const detectTablesBtn = document.getElementById('detect-tables-btn');
+    const imageDisplay = document.getElementById('dewarp-image-display');
     const container = document.getElementById('container');
-    const canvas = document.getElementById('overlay-canvas');
+    const canvas = document.getElementById('dewarp-overlay-canvas');
     const context = canvas.getContext('2d');
-    const resultBox = document.getElementById('segmentation-result');
 
     var currentImage = null;
     var contours = [];
@@ -15,6 +15,7 @@ function init_dewarp() {
     }
 
     function attachEventListeners() {
+        detectTablesBtn.addEventListener('click', detectTables);
         dewarpBtn.addEventListener('click', applyDewarp);
         document.addEventListener('keypress', handleDewarpKeypress);
     }
@@ -32,12 +33,18 @@ function init_dewarp() {
       }
     }
 
-    async function applyDewarp() {
+    async function detectTables() {
+        console.log("Detecting!");
+
         // Convert the crop canvas to a Blob and send it to the Flask app
+        context.drawImage(imageDisplay, 0, 0, imageDisplay.width, imageDisplay.height);
+
         canvas.toBlob(async function(blob) {
+            console.log("Tables!");
             const formData = new FormData();
             formData.append('file', blob, 'document.png');
-            const response = await fetch('http://localhost:5000/dewarp', {
+
+            const response = await fetch('find_table', {
                 method: 'POST',
                 body: formData,
             });
@@ -48,20 +55,45 @@ function init_dewarp() {
             }
         
             const responseData = await response.json();
-            currentImage = responseData.image;
-            const additionalData = responseData.data;
-
-            // Handle additional JSON data
-            console.log(additionalData);
-
-            contours = additionalData.contours;
+            contours = responseData.contours;
             currentContour = 0;
             drawContour(contours[0]);
+            dewarpBtn.style.display = "";
+        }, 'image/png');
+    }
+
+    async function applyDewarp() {
+        const contour = contours[currentContour];
+
+        // Convert the crop canvas to a Blob and send it to the Flask app
+        context.drawImage(imageDisplay, 0, 0, imageDisplay.width, imageDisplay.height);
+
+        canvas.toBlob(async function(blob) {
+            console.log("Dewarping!");
+            const formData = new FormData();
+            formData.append('file', blob, current_file);
+            formData.append('contour', JSON.stringify(contour));
+
+            const response = await fetch('dewarp_along_contour', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                console.error(`Failed to fetch image: ${response.statusText}`);
+                return;
+            }
+        
+            const responseData = await response.json();
+
+            fetchAndDisplayImage(current_file, target="transcription"); 
+            setTab('transcription');
         }, 'image/png');
     }
 
     function drawContour(contour) {
       const ctx = canvas.getContext('2d');
+      console.log("Drawning contour:", contour);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (contour.length < 2) return; // Need at least two points to draw a line
@@ -80,7 +112,7 @@ function init_dewarp() {
       ctx.lineWidth = 2; // Set the line width
       ctx.stroke(); // Render the path
     }
-
+    
     initialize();
 }
 
