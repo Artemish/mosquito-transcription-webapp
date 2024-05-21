@@ -1,3 +1,5 @@
+var headerTypes = null;
+
 async function fetchFilesAndPopulateSidebar() {
     const sidebarList = document.getElementById('file-list');
     let prevSelection = null;
@@ -60,7 +62,7 @@ async function loadHeaderTypes() {
 
     // Assuming an endpoint like `/list_header_types` that returns an array of image filenames
     const response = await fetch('static/header_types/headers.json');
-    const headerTypes = await response.json();
+    headerTypes = await response.json();
 
     headerTypes.forEach(headerType => {
         const div = document.createElement('div');
@@ -68,17 +70,27 @@ async function loadHeaderTypes() {
         img.src = `static/header_types/${headerType.filename}`;
         img.alt = headerType;
         img.style.cursor = 'pointer'; // Make it visually obvious it's clickable
-        img.onclick = () => setCurrentHeader(headerType);
+        img.onclick = () => setCurrentHeader(headerType.documentType);
         
         div.appendChild(img);
         headerTypesDiv.appendChild(div);
+        headerType['element'] = div;
     });
 }
 
-function setCurrentHeader(headerType) {
-    console.log(`Current header set to: ${headerType}`);
-    header = headerType;
-    // Perform actions based on the selected header type, such as updating a variable or UI elements
+function setCurrentHeader(documentType) {
+    console.log(`Current header set to: ${documentType}`);
+    headerTypes.forEach(headerType => {
+      if (headerType.documentType == documentType) {
+        header = headerType;
+        headerType.element.style.border = '3px red solid';
+      } else {
+        headerType.element.style = '';
+      }
+    });
+
+    const doctypeInput = document.getElementById('document-type');
+    doctypeInput.value = header?.documentType;
 }
 
 // Call the function when the DOM is fully loaded
