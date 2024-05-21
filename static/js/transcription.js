@@ -9,6 +9,7 @@ function init_transcription() {
     const context = canvas.getContext('2d');
     const resultBox = document.getElementById('segmentation-result');
     const selectWall = document.getElementById('select-wall');
+    const transcriptionTab = document.getElementById('transcription-tab');
 
     let overlayVisible = false;
     let currentCellIndex = {row: 0, col: 0};
@@ -26,7 +27,7 @@ function init_transcription() {
         // fileInput.addEventListener('change', handleFileInputChange);
         imageDisplay.addEventListener('click', handleImageDisplayClick);
         cropBtn.addEventListener('click', handleCropButtonClick);
-        document.addEventListener('keydown', handleTranscriptionInputKeydown);
+        transcriptionTab.addEventListener('keydown', handleTranscriptionInputKeydown);
         submitBtn.addEventListener('click', submitTranscription);
         selectWall.addEventListener('change', updateSelectWall);
     }
