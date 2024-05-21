@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory, Response
+from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS
 from glob import glob
 
@@ -17,12 +18,28 @@ from utils import show_contour, show
 
 app = Flask(__name__)
 CORS(app) # This will enable CORS for all routes and methods
+auth = HTTPBasicAuth()
 
 SOURCE_DIRECTORY = 'source_images'
 TRANSCRIPT_DIRECTORY = 'transcriptions'
 TABLE_IMG_DIRECTORY = 'table_images'
 
 IMG_RE = re.compile('.*\.(png|jpg)')
+
+users = {
+    "alexa": "mosquito",
+    "mitch": "mosquito",
+}
+
+@auth.get_password
+def get_password(username):
+    if username in users:
+        return users.get(username)
+    return None
+
+@auth.error_handler
+def unauthorized():
+    return "Unauthorized Access", 401
 
 def process_image(file_stream):
     # Convert the uploaded file stream to a numpy array
@@ -40,6 +57,7 @@ def process_image(file_stream):
 
 
 @app.route('/fetch_table/<filename>', methods=['GET'])
+@auth.login_required
 def fetch_table(filename):
     try:
         # Ensure the filename is secure and prevents directory traversal
@@ -52,6 +70,7 @@ def fetch_table(filename):
         return {"error": str(e)}, 500
 
 @app.route('/fetch_document/<filename>', methods=['GET'])
+@auth.login_required
 def fetch_document(filename):
     try:
         # Ensure the filename is secure and prevents directory traversal
@@ -86,12 +105,14 @@ def get_content_index():
 
 
 @app.route('/list_source_images', methods=['GET'])
+@auth.login_required
 def list_source_images():
     content = get_content_index()
     return jsonify(content), 200
 
 
 @app.route('/upload', methods=['POST'])
+@auth.login_required
 def upload_file():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
@@ -107,6 +128,7 @@ def upload_file():
 
 
 @app.route('/find_table', methods=['POST'])
+@auth.login_required
 def find_table():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
@@ -128,6 +150,7 @@ def find_table():
 
 
 @app.route('/dewarp_along_contour', methods=['POST'])
+@auth.login_required
 def dewarp_along_contour():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
@@ -164,6 +187,7 @@ def dewarp_along_contour():
 
 
 @app.route('/transcription/<file_id>', methods=['GET'])
+@auth.login_required
 def get_transcription(file_id):
     transcript_path = os.path.join(TRANSCRIPT_DIRECTORY, file_id + '_transcript.json')
 
@@ -176,6 +200,7 @@ def get_transcription(file_id):
 
 
 @app.route('/document/<file_id>', methods=['GET'])
+@auth.login_required
 def get_document(file_id):
     document_path = os.path.join(TRANSCRIPT_DIRECTORY, file_id + '_document.json')
 
@@ -188,6 +213,7 @@ def get_document(file_id):
 
 
 @app.route('/submit_document', methods=['POST'])
+@auth.login_required
 def submit_document():
     print(request.json)
     file_id = request.json['file_id']
@@ -200,6 +226,7 @@ def submit_document():
 
 
 @app.route('/submit_transcription', methods=['POST'])
+@auth.login_required
 def submit_transcription():
     print(request.json)
     filename = request.json['filename']
@@ -211,6 +238,7 @@ def submit_transcription():
     return jsonify(None)
 
 @app.route('/download_csv', methods=['GET'])
+@auth.login_required
 def download_csv():
     result = pd.DataFrame()
 
@@ -244,6 +272,7 @@ def download_csv():
 
 
 @app.route('/download_documents_csv', methods=['GET'])
+@auth.login_required
 def download_documents_csv():
     result = pd.DataFrame()
 
@@ -272,6 +301,7 @@ def download_documents_csv():
 
 
 @app.route('/')
+@auth.login_required
 def home():
     return render_template('index.html')  # Assuming your HTML file is named 'index.html' and is located in the 'templates' folder
 
