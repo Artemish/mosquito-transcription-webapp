@@ -81,9 +81,9 @@ async function fetchAndDisplayImage(file_id, target) {
     imageDisplay.onload = function() {
         canvas.width = imageDisplay.width;
         canvas.height = imageDisplay.height;
-        container.style.width = `${imageDisplay.width}px`;
-        container.style.height = `${imageDisplay.height}px`;
     };
+    console.log(imageBlob);
+    console.log(imageUrl);
 
     imageDisplay.src = imageUrl;
 

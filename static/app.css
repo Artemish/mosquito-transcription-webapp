@@ -19,19 +19,17 @@
     max-width: 90vw;
 }
 
-#document-image-display, #document-overlay-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
+#document-image-display,
+#transcription-image-display,
+#dewarp-image-display {
+    width: 100%;
+    height: 100%;
 }
 
-#transcription-image-display, #transcription-overlay-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#dewarp-image-display, #dewarp-overlay-canvas {
+#document-overlay-canvas,
+#transcription-overlay-canvas,
+#dewarp-overlay-canvas
+{
     position: absolute;
     top: 0;
     left: 0;
