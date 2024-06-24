@@ -1,5 +1,7 @@
+let document_tab = {};
+
 function init_document() {
-    const districtInput = document.getElementById('document-district');
+    const provinceInput = document.getElementById('document-province');
     const collectDateInput = document.getElementById('document-collection-date');
     const sprayYearInput = document.getElementById('document-year-sprayed');
     const doctypeInput = document.getElementById('document-type');
@@ -22,7 +24,7 @@ function init_document() {
     async function handleDocumentSubmit(e) {
         const submission = {
           'file_id': current_file,
-          'district': districtInput.value,
+          'province': provinceInput.value,
           'locality1': locality1.value,
           'neighborhood1': neighborhood1.value,
           'locality2': locality2.value,
@@ -51,13 +53,16 @@ function init_document() {
         setTab('dewarp');
     }
 
+
+    
+
     initialize();
 }
 
 async function fetchDocument(file) {
     const response = await fetch(`document/${file.id}`);
 
-    const districtInput = document.getElementById('document-district');
+    const provinceInput = document.getElementById('document-province');
     const collectDateInput = document.getElementById('document-collection-date');
     const sprayYearInput = document.getElementById('document-year-sprayed');
     const doctypeInput = document.getElementById('document-type');
@@ -69,7 +74,7 @@ async function fetchDocument(file) {
     const neighborhood2 = document.getElementById('document-neighborhood-2');
 
     if (!response.ok) {
-        console.error(`Failed to fetch transcription: ${response.statusText}`);
+        console.error(`Failed to fetch document: ${response.statusText}`);
         return;
     }
 
@@ -78,7 +83,7 @@ async function fetchDocument(file) {
     console.log("Fetched document:");
     console.log(doc);
 
-    districtInput.value = doc?.district || "";
+    provinceInput.value = doc?.province || "";
     collectDateInput.value = doc?.collect_date || "";
     sprayYearInput.value = doc?.spray_year || "";
     doctypeInput.value = doc?.doctype || "";
@@ -88,6 +93,24 @@ async function fetchDocument(file) {
     neighborhood2.value = doc?.neighborhood2 || "";
 
     setCurrentHeader(doctypeInput.value);
+}
+
+function updateProvince() {
+    const districtSelect = document.getElementById('document-locality-1');
+    const provinceSelect = document.getElementById('document-province');
+    
+    // Get the selected district option
+    const selectedDistrict = districtSelect.options[districtSelect.selectedIndex];
+    const province = selectedDistrict.getAttribute('data-province');
+    
+    // Clear the province dropdown
+    provinceSelect.value = province;
+}
+
+function updateHeader() {
+    const headerSelect = document.getElementById('document-type');
+    const selectedHeader = headerSelect.options[headerSelect.selectedIndex];
+    setCurrentHeader(selectedHeader.value);
 }
 
 window.addEventListener('load', (event) => {

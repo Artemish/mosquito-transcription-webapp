@@ -31,6 +31,11 @@ users = {
     "mitch": "mosquito",
 }
 
+with open('mozambique_districts.json') as districtfile:
+    districts = json.load(districtfile)
+    districts = sorted(districts, key=lambda x: x['district'])
+    provinces = sorted(set([district['province'] for district in districts]))
+
 @auth.get_password
 def get_password(username):
     if username in users:
@@ -303,7 +308,11 @@ def download_documents_csv():
 @app.route('/')
 @auth.login_required
 def home():
-    return render_template('index.html')  # Assuming your HTML file is named 'index.html' and is located in the 'templates' folder
+    return render_template(
+        'index.html',
+        districts = districts,
+        provinces = provinces
+    ) 
 
 if __name__ == '__main__':
     app.run(debug=True)

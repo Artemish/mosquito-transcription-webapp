@@ -10,14 +10,37 @@
     </p>
     <div>
       <label>
-        District: 
-        <input type="text" id="document-district" placeholder="Distrito/Municipio"/>
+        Document type:
+        <select id="document-type" onchange="updateHeader()">
+          <option value=""></option>
+          <option value="anopheles_funestus">Anopheles Funestus</option>
+          <option value="anopheles_gambia_s.1">Anopheles Gambiae s.1</option>
+          <option value="anopheles_gambia_s.1_compact">Anopheles Gambiae s.1 (Compact)</option>
+          <option value="other_anopheles">Outros Anopheles</option>
+          <option value="other_vectors">Outros Vectores</option>
+        </select>
       </label>
     </div>
     <div>
       <label>
-        Locality 1: 
-        <input type="text" id="document-locality-1" placeholder="Localidade"/>
+        Province: 
+        <select id="document-province" placeholder="Province"/>
+          <option value="">Distrito/Municipo</option>
+          {% for province in provinces %}
+          <option value="{{ province }}">{{ province }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>
+        District 1: 
+        <select id="document-locality-1" placeholder="Localidade" onchange="updateProvince()"/>
+          <option value="">Distrito/Municipo</option>
+          {% for item in districts %}
+          <option value="{{ item.district }}" data-province="{{item.province}}">{{ item.district }}</option>
+          {% endfor %}
+        </select>
       </label>
       <label>
         Neighborhood 1: 
@@ -26,8 +49,13 @@
     </div>
     <div>
       <label>
-        Locality 2: 
-        <input type="text" id="document-locality-2" placeholder="Localidade 2"/>
+        District 2: 
+        <select id="document-locality-2" placeholder="Localidade"/>
+          <option value="" disabled selected>Distrito/Municipo</option>
+          {% for item in districts %}
+          <option value="{{ item.district }}" data-province="{{item.province}}">{{ item.district }}</option>
+          {% endfor %}
+        </select>
       </label>
       <label>
         Neighborhood 2: 
@@ -37,19 +65,16 @@
     <div>
       <label>
         Collection date: 
-        <input type="date" id="document-collection-date" placeholder="Data de colheita"/>
+        <input type="date" id="document-collection-date"
+        placeholder="Data de colheita" placeholder="dd-mm-yyyy"/>
       </label>
     </div>
     <div>
       <label>
         Year sprayed: 
-        <input type="number" id="document-year-sprayed" placeholder="Mês de pulverização"/>
+        <input type="number" id="document-year-sprayed" placeholder="Mês de pulverização" min="2000" max="2024" value="2014"/>
       </label>
     </div>
-    <input type="text" hidden="true" id="document-type"/>
-  </div>
-  <div id="header-types">
-    <!-- Images for header types will be added dynamically or you can add them statically here -->
   </div>
   <button id="document-submit-btn">Submit document info</button>
 </div>
