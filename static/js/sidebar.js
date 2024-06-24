@@ -33,11 +33,14 @@ async function fetchFilesAndPopulateSidebar() {
                 prevSelection.classList.remove('selected');
               }
 
+              document_tab.reset();
+              dewarp_tab.reset();
+              transcription_tab.reset();
+
               prevSelection = listItem;
               console.log(file);
 
-              fetchDocument(file);
-              fetchTranscription(file);
+              fetchDocument(file).then((_) => fetchTranscription(file));
               current_file = file.id;
 
               if (! file.has_document) {
@@ -58,39 +61,25 @@ async function fetchFilesAndPopulateSidebar() {
 }
 
 async function loadHeaderTypes() {
-    const headerTypesDiv = document.getElementById('header-types');
-
     // Assuming an endpoint like `/list_header_types` that returns an array of image filenames
     const response = await fetch('static/header_types/headers.json');
     headerTypes = await response.json();
-
-    headerTypes.forEach(headerType => {
-        const div = document.createElement('div');
-        const img = document.createElement('img');
-        img.src = `static/header_types/${headerType.filename}`;
-        img.alt = headerType;
-        img.style.cursor = 'pointer'; // Make it visually obvious it's clickable
-        img.onclick = () => setCurrentHeader(headerType.documentType);
-        
-        div.appendChild(img);
-        headerTypesDiv.appendChild(div);
-        headerType['element'] = div;
-    });
 }
 
 function setCurrentHeader(documentType) {
     console.log(`Current header set to: ${documentType}`);
+    if (documentType == "") {
+      header = null;
+    }
+
     headerTypes.forEach(headerType => {
       if (headerType.documentType == documentType) {
         header = headerType;
-        headerType.element.style.border = '3px red solid';
-      } else {
-        headerType.element.style = '';
       }
     });
 
     const doctypeInput = document.getElementById('document-type');
-    doctypeInput.value = header?.documentType;
+    doctypeInput.value = header?.documentType || "";
 }
 
 // Call the function when the DOM is fully loaded

@@ -1,11 +1,12 @@
 let current_file = null;
 let header = null;
 let transcriptions = [];
-let segmentationData = [];
 let currentTab = "";
 let points = [];
 
 function setTab(tab) {
+    currentTab = tab;
+
     // Get all elements with class="tab" and remove the class "selected"
     var tabs = document.getElementsByClassName("tab");
     for (var i = 0; i < tabs.length; i++) {

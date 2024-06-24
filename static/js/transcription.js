@@ -1,5 +1,6 @@
+var transcription_tab = null;
+
 function init_transcription() {
-    const cropBtn = document.getElementById('crop-btn');
     const submitBtn = document.getElementById('transcription-submit-btn');
     const enumTranscription = document.getElementById('enum-transcription');
     const textTranscription = document.getElementById('text-transcription');
@@ -21,13 +22,33 @@ function init_transcription() {
 
     function initialize() {
         attachEventListeners();
+        transcription_tab = {
+          redraw: redraw,
+          reset: reset
+        };
+	const resizeObserver = new ResizeObserver((entries) => {
+	  for (let entry of entries) {
+	    if (entry.target === imageDisplay) {
+	      redraw();
+	    }
+	  }
+	});
+
+	// Start observing the element
+	resizeObserver.observe(imageDisplay);
+    }
+
+    function reset() {
+        imageDisplay.src = "";
+        points = [];
+        overlayVisible = false;
+        currentCellIndex = {row: 0, col: 0};
     }
 
     function attachEventListeners() {
         // fileInput.addEventListener('change', handleFileInputChange);
         imageDisplay.addEventListener('click', handleImageDisplayClick);
-        cropBtn.addEventListener('click', handleCropButtonClick);
-        transcriptionTab.addEventListener('keydown', handleTranscriptionInputKeydown);
+        window.addEventListener('keydown', handleTranscriptionInputKeydown);
         submitBtn.addEventListener('click', submitTranscription);
         selectWall.addEventListener('change', updateSelectWall);
     }
@@ -41,23 +62,74 @@ function init_transcription() {
             points = [];
         }
 
-        points.push({x: x, y: y});
-        
-        if (points.length === 2) {
-            drawRectangle(points[0], points[1]);
-        }
+        points.push({x: x / imageDisplay.width, y: y / imageDisplay.height});
 
-        console.log("New points:");
-        console.log(points);
-        console.log("Found canvas:");
-        console.log(canvas);
+        if (points.length == 2) {
+          selectCell(0, 1);
+        }
+        
+        redraw();
     }
 
-    function handleCropButtonClick() {
-        if (points.length === 2) {
-            const [point1, point2] = points;
-            cropAndSendImage(point1, point2);
+    // Return the points in real pixel space, scaled to the image
+    function imagePoints() {
+        const imageWidth = imageDisplay.width;
+        const imageHeight = imageDisplay.height;
+
+        return points.map((point) => ({x: point.x * imageWidth, y: point.y * imageHeight}));
+    }
+
+    function checkForInputPattern(val) {
+      let header_col = header.columns[currentCellIndex.col];
+      if (header_col.translation == 'latitude' || header_col.translation == 'longitude') {
+        if (currentCellIndex.row == 0) {
+          let prefix = val.slice(0, val.indexOf('.')+1);
+          if (prefix != "") {
+            transcriptions.forEach((row) => {
+              row[currentCellIndex.col] = row[currentCellIndex.col] || prefix
+            });
+          }
         }
+      }
+    }
+
+    function redraw() {
+        const imageWidth = imageDisplay.width;
+        const imageHeight = imageDisplay.height;
+
+        canvas.width = imageWidth;
+        canvas.height = imageHeight;
+
+        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the overlay
+
+        if (points.length == 1) {
+          const point = imagePoints()[0];
+          context.fillStyle = 'rgb(255, 0, 0)';
+          context.fillRect(point.x, point.y, 20, 4);
+          context.fillRect(point.x, point.y, 4, 20);
+        } else if (points.length == 2) {
+          const [point1, point2] = imagePoints();
+          context.beginPath();
+          context.lineWidth = 2;
+          context.rect(point1.x, point1.y, point2.x - point1.x, point2.y - point1.y);
+          context.strokeStyle = 'blue';
+          context.stroke();
+
+          if (overlayVisible) {
+              drawTranscriptionOverlay();
+          } 
+
+          outlineCurrentCell();
+        }
+    }
+
+    function outlineCurrentCell() {
+        const cell = cellToRect(currentCellIndex.row, currentCellIndex.col);
+
+        context.beginPath();
+        context.rect(cell.x-2, cell.y-2, cell.w+2, cell.h+2);
+        context.strokeStyle = 'red';
+        context.stroke();
     }
 
     function drawRectangle(startPoint, endPoint) {
@@ -68,37 +140,12 @@ function init_transcription() {
         context.stroke();
     }
 
-    async function cropAndSendImage(point1, point2) {
-        // Extract the crop area from the canvas (not the original image, for simplicity)
-        const cropCanvas = document.createElement('canvas');
-        const cropContext = cropCanvas.getContext('2d');
-        const width = Math.abs(point2.x - point1.x);
-        const height = Math.abs(point2.y - point1.y);
-        cropCanvas.width = width;
-        cropCanvas.height = height;
-
-        // Assume point1 is the top-left corner for simplicity
-        cropContext.drawImage(imageDisplay, point1.x, point1.y, width, height, 0, 0, width, height);
-        
-        // Convert the crop canvas to a Blob and send it to the Flask app
-        cropCanvas.toBlob(async function(blob) {
-            const formData = new FormData();
-            formData.append('file', blob, 'crop.png');
-            const response = await fetch('upload', {
-                method: 'POST',
-                body: formData,
-            });
-            const data = await response.json();
-            displaySegmentationResult(data);
-        }, 'image/png');
-    }
-
-    function displaySegmentationResult(data) {
-        // Process data, draw bounding boxes as before
-        segmentationData = data; // Store segmentation data globally
-        transcriptions = data.map(row => row.map(() => "")); // Initialize transcription array
-        selectCell(0, 0); // Start transcription with the top-left cell
-    }
+    // function displaySegmentationResult(data) {
+    //     // Process data, draw bounding boxes as before
+    //     segmentationData = data; // Store segmentation data globally
+    //     transcriptions = data.map(row => row.map(() => "")); // Initialize transcription array
+    //     selectCell(0, 0); // Start transcription with the top-left cell
+    // }
 
     function showWall(show) {
       if (show) {
@@ -112,45 +159,47 @@ function init_transcription() {
       }
     }
 
-    function deleteCurrentCell() {
-      const [row, col] = [currentCellIndex.row, currentCellIndex.col];
-      segmentationData[row].splice(col, 1);
-      transcriptions[row].splice(col, 1);
-      selectCell(row, col - 1);
-    }
+    // function deleteCurrentCell() {
+    //   const [row, col] = [currentCellIndex.row, currentCellIndex.col];
+    //   segmentationData[row].splice(col, 1);
+    //   transcriptions[row].splice(col, 1);
+    //   selectCell(row, col - 1);
+    // }
 
     function selectCell(rowIndex, colIndex) {
         currentCellIndex = {row: rowIndex, col: colIndex};
-        const cell = segmentationData[rowIndex][colIndex];
+        const cell = cellToRect(rowIndex, colIndex);
 
-        pauseCol = header?.columns[colIndex]?.pauseInput;
-        wallCol = header?.columns[colIndex]?.enum == "wall";
+        pauseCol = header.columns[colIndex].pauseInput;
+        wallCol = header.columns[colIndex].enum == "wall";
 
         console.log(`Pausing: ${pauseCol}`);
         console.log(`wallCol: ${wallCol}`);
 
         showWall(wallCol);
+
+        redraw();
         
         // Show zoomed cell view
         const cropCanvas = document.createElement('canvas');
         const cropContext = cropCanvas.getContext('2d');
-        cropCanvas.width = cell.w;
-        cropCanvas.height = cell.h;
 
-        const [point1, point2] = points;
+        const buffer = 10;
+        const dispHeight = cell.h + 2*buffer;
+        const dispWidth = cell.w + 2*buffer;
 
-        cropContext.drawImage(imageDisplay, point1.x+cell.x, point1.y+cell.y, cell.w, cell.h, 0, 0, cell.w, cell.h);
+        const r_w = imageDisplay.naturalWidth / imageDisplay.width;
+        const r_h = imageDisplay.naturalHeight / imageDisplay.height;
+
+        cropCanvas.width = dispWidth;
+        cropCanvas.height = dispHeight;
+        cropContext.drawImage(imageDisplay, cell.x * r_w - buffer, cell.y * r_h - buffer, dispWidth, dispHeight, 0, 0, dispWidth, dispHeight);
+
         currentCellView.src = cropCanvas.toDataURL();
         currentCellView.style.display = 'block';
-        currentCellView.width = 5 * cell.w
-        currentCellView.height = 5 * cell.h
+        currentCellView.width = 5 * dispWidth
+        currentCellView.height = 5 * dispHeight
 
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.beginPath();
-        context.rect(cell.x+point1.x, cell.y+point1.y, cell.w, cell.h);
-        context.strokeStyle = 'blue'; // Use blue for visibility
-        context.stroke();
-        
         // Show transcription input
         transcriptionInput.style.display = 'block';
         transcriptionInput.value = transcriptions[rowIndex][colIndex];
@@ -159,22 +208,28 @@ function init_transcription() {
 
     // Handle transcription input and navigation
     function handleTranscriptionInputKeydown(e) {
-        const maxRow = segmentationData.length - 1;
-        let maxCol = segmentationData[currentCellIndex.row]?.length - 1;
+        if (currentTab != "transcription") {
+          return;
+        }
+
+        const maxRow = header.row_structure.length - 1;
+        const minCol = 1; // Don't allow editing the house number
+        let maxCol = header.column_structure.length - 1;
         let newRow = currentCellIndex.row;
         let newCol = currentCellIndex.col;
 
         if (("0123456789".includes(e.key)) && !pauseCol) {
             transcriptions[newRow][newCol] = transcriptionInput.value + e.key;
             e.preventDefault(); // Prevent default to avoid keeping the value in the input
-            newCol += 1;
+            newRow += 1;
         } else {
           switch(e.key) {
               case 'Enter':
                   // Store transcription
                   transcriptions[currentCellIndex.row][currentCellIndex.col] = transcriptionInput.value;
+                  checkForInputPattern(transcriptionInput.value);
                   // Assume moving to the next cell (right) by default
-                  newCol += 1;
+                  newRow += 1;
                   break;
               case 'ArrowRight':
                   newCol += 1;
@@ -196,10 +251,10 @@ function init_transcription() {
                   toggleTranscriptionOverlay();
                   e.preventDefault();
                   break;
-              case 'X':
-                  deleteCurrentCell();
-                  e.preventDefault();
-                  return;
+              //case 'X':
+              //    deleteCurrentCell();
+              //    e.preventDefault();
+              //    return;
               default:
                   return; // Skip any other keys
           }
@@ -209,23 +264,28 @@ function init_transcription() {
         if (newCol > maxCol) {
             if (newRow < maxRow) {
                 newRow += 1;
-                newCol = 0; // Move to the beginning of the next row
+                newCol = minCol; // Move to the beginning of the next row
             } else {
                 // If at the last cell, wrap around or do nothing
                 newCol = maxCol; // Stay at the last cell; remove this line to wrap around
             }
-        } else if (newCol < 0) {
+        } else if (newCol < minCol) {
             if (newRow > 0) {
                 newRow -= 1;
-                newCol = segmentationData[newRow].length - 1; // Move to the end of the previous row
+                newCol = maxCol - 1; // Move to the end of the previous row
             } else {
-                newCol = 0; // Stay at the first cell; remove this line to wrap around
+                newCol = minCol; // Stay at the first cell; remove this line to wrap around
             }
         }
 
         // Adjust for vertical navigation at the edges
         if (newRow > maxRow) {
-            newRow = maxRow; // Stay at the last row; remove this line to wrap around
+            if (newCol < maxCol) {
+              newRow = 0; // Stay at the last row; remove this line to wrap around
+              newCol += 1;
+            } else {
+              newRow = maxRow;
+            }
         } else if (newRow < 0) {
             newRow = 0; // Stay at the first row; remove this line to wrap around
         }
@@ -238,29 +298,46 @@ function init_transcription() {
 
     function toggleTranscriptionOverlay() {
         overlayVisible = !overlayVisible; // Toggle overlay visibility
-        if (overlayVisible) {
-            drawTranscriptionOverlay();
-        } else {
-            clearTranscriptionOverlay();
-        }
+        redraw();
+    }
+
+    function cellToRect(rowIndex, colIndex) {
+        const imageWidth = imageDisplay.width;
+        const imageHeight = imageDisplay.height;
+
+        const row = header.row_structure[rowIndex];
+        const col = header.column_structure[colIndex];
+        
+        const [point1, point2] = points;
+
+        const tableWidth = (point2.x - point1.x) * imageWidth;
+        const tableHeight = (point2.y - point1.y) * imageHeight;
+
+        return {
+            x: (point1.x * imageWidth) + (col.x * tableWidth),
+            w: (col.w * tableWidth),
+            y: (point1.y * imageHeight) + (row.y * tableHeight),
+            h: (row.h * tableHeight)
+        };
     }
 
     function drawTranscriptionOverlay() {
-        context.clearRect(0, 0, canvas.width, canvas.height); // Clear any existing overlay
-        const [point1, point2] = points;
-        segmentationData.forEach((row, rowIndex) => {
-            row.forEach((cell, colIndex) => {
+        header.row_structure.forEach((row, rowIndex) => {
+            header.column_structure.forEach((col, colIndex) => {
+                // Translate the ratio coordinates to pixel coordinates
+                const cell = cellToRect(rowIndex, colIndex);
+
                 // Draw a white rectangle for the cell
-                context.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                context.fillRect(cell.x+point1.x, cell.y+point1.y, cell.w, cell.h);
+                context.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                context.fillRect(cell.x, cell.y, cell.w, cell.h);
                 
                 // Draw the transcription text
                 const text = transcriptions[rowIndex][colIndex];
                 if (text) {
-                    context.font = '12px Arial';
-                    context.fillStyle = 'black';
+                    context.font = '16px Arial';
+                    context.fillStyle = 'green';
                     context.textBaseline = 'top';
-                    context.fillText(text, cell.x + point1.x + 2, cell.y + point1.y + 2, cell.w - 4); // Adjust text position and max width as needed
+                    context.fillText(text, cell.x + 2, cell.y + 2, cell.w - 4); // Adjust text position and max width as needed
                 }
             });
         });
@@ -274,9 +351,8 @@ function init_transcription() {
     async function submitTranscription() {
         const submission = {
           filename: current_file,
-          segmentationData: segmentationData,
           transcriptions: transcriptions,
-          header: header,
+          documentType: header.documentType,
           points: points
         }
 
@@ -289,7 +365,9 @@ function init_transcription() {
         });
 
         if (!response.ok) {
-            console.error('Error in network response');
+            alert(`Could not save transcription: ${response.text}`);
+        } else {
+            alert(`Transcription saved for ${current_file}`);
         }
     }
 
@@ -302,7 +380,7 @@ function init_transcription() {
 
       const [row, col] = [currentCellIndex.row, currentCellIndex.col];
       transcriptions[row][col] = selectedValue;
-      selectCell(row, col+1);
+      selectCell(row+1, col);
 
       console.log(`You selected: ${selectedValue}`);
       this.value = "";
@@ -322,10 +400,11 @@ async function fetchTranscription(file) {
     const transcription = await response.json();
     console.log("Fetched transcription:");
     console.log(transcription);
+
+    const default_transcriptions = header.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
     
-    header = transcription?.header || null;
-    transcriptions = transcription?.transcriptions || [];
-    segmentationData = transcription?.segmentationData || [];
+    transcriptions = transcription?.transcriptions || default_transcriptions;
+    console.log("Set transcriptions to: ", transcriptions);
     points = transcription?.points || [];
 }
 

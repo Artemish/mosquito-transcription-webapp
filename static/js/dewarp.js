@@ -1,3 +1,5 @@
+let dewarp_tab = {};
+
 function init_dewarp() {
     const dewarpBtn = document.getElementById('dewarp-btn');
     const detectTablesBtn = document.getElementById('detect-tables-btn');
@@ -12,6 +14,15 @@ function init_dewarp() {
 
     function initialize() {
         attachEventListeners();
+        dewarp_tab = {
+          reset: reset
+        };
+    }
+
+    function reset() {
+      imageDisplay.src = "";
+      contours = [];
+      currentContour = null;
     }
 
     function attachEventListeners() {

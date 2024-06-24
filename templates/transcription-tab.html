@@ -7,17 +7,14 @@
     <p>
       Start by clicking the top left of the data rows (i.e. the top
       left of row 1), then click the bottom right of the data rows.
-      This should outline the data table in red. Then click "crop 
-      and segment" to try and process the data section into boxes.
+      This should outline the data table in blue.
     </p>
     <p>
       Hit space to toggle the boxes detected. Navigate with the arrow
-      keys. Type 'X' to remove a junk cell. By default, transcription
-      moves forward after putting in a single number - go back with
-      the Left arrow key and add a digit if the number is 10 or
-      greater.
+      keys. By default, transcription moves forward after putting in a
+      single number - go back with the Left arrow key and add a digit
+      if the number is 10 or greater.
     </p>
-    <button id="crop-btn">Crop and Segment</button>
     <button id="transcription-submit-btn">Submit transcription</button>
   </div>
   <div id="transcription-area" style="margin-top: 20px;">
@@ -27,14 +24,14 @@
         <select name="wall" id="select-wall">
           <option value="">-- Select a wall type --</option>
           <option value="Brickwork">Alvenaria (Brickwork)</option>
-          <option value="Blocks">Bloco (Blocks)</option>
+          <option value="Blocks">Bloco (Mud Bricks)</option>
           <option value="Wattle and reed">Caniço (Wattle and reed)</option>
           <option value="Cement">Cimento (Cement)</option>
           <option value="Wood">Madeira (Wood)</option>
           <option value="Mixed">Misto (Mixed)</option>
-          <option value="Paulia">Paulia</option>
+          <option value="Paulia">Paupica (Wood and mud)</option>
           <option value="Stone">Pedra (Stone)</option>
-          <option value="Reboco">Reboco (Reboco)</option>
+          <option value="Reboco">Bloco Rebocado (Cement bricks with rebar)</option>
         </select>
       </div>
       <div id="text-transcription">

@@ -11,10 +11,28 @@ function init_document() {
     const neighborhood1 = document.getElementById('document-neighborhood-1');
     const locality2 = document.getElementById('document-locality-2');
     const neighborhood2 = document.getElementById('document-neighborhood-2');
+
+    const imageDisplay = document.getElementById('document-image-display');
     
     function initialize() {
         attachEventListeners();
+        document_tab = {
+          reset: reset
+        };
     }
+
+    function reset() {
+      imageDisplay.src = "";
+      provinceInput.value = "";
+      collectDateInput.value = "";
+      sprayYearInput.value = "";
+      doctypeInput.value = "";
+      locality1.value = "";
+      neighborhood1.value = "";
+      locality2.value = "";
+      neighborhood2.value = "";
+    }
+
 
     function attachEventListeners() {
         docSubmitButton.addEventListener('click', handleDocumentSubmit);
