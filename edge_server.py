@@ -292,6 +292,7 @@ def download_csv():
                 columns = columns
             )
             transcription_df['file_id'] = file_id
+            transcription_df['document_type'] = transcription['documentType']
             result = pd.concat([result, transcription_df], axis=0)
         except Exception as e:
             print(f"Couldn't process {file}: {e}")
