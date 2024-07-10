@@ -12,6 +12,8 @@ function init_dewarp() {
     var contours = [];
     var currentContour = null;
 
+    var points = [];
+
     function initialize() {
         attachEventListeners();
         dewarp_tab = {
@@ -22,6 +24,7 @@ function init_dewarp() {
     function reset() {
       imageDisplay.src = "";
       contours = [];
+      points = [];
       currentContour = null;
     }
 
@@ -29,6 +32,7 @@ function init_dewarp() {
         detectTablesBtn.addEventListener('click', detectTables);
         dewarpBtn.addEventListener('click', applyDewarp);
         document.addEventListener('keypress', handleDewarpKeypress);
+        imageDisplay.addEventListener('click', handleImageClick);
     }
 
     function handleDewarpKeypress(e) {
@@ -42,6 +46,39 @@ function init_dewarp() {
         drawContour(contours[currentContour]);
         console.log(`Drawing ${currentContour}..`);
       }
+    }
+
+    function handleImageClick(e) {
+        dewarpBtn.style.display = "";
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        points.push([x,y]);
+        console.log("Using points: ", points);
+
+        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        context.fillStyle = 'red';
+        context.strokeStyle = 'black';
+        context.lineWidth = 2;
+
+        for (let i = 0; i < points.length; i++) {
+            const point = points[i];
+
+            // Draw point
+            context.beginPath();
+            context.arc(point[0], point[1], 3, 0, 2 * Math.PI);
+            context.fill();
+
+            // Draw line to the next point
+            if (i > 0) {
+                const prevPoint = points[i - 1];
+                context.beginPath();
+                context.moveTo(prevPoint[0], prevPoint[1]);
+                context.lineTo(point[0], point[1]);
+                context.stroke();
+            }
+        }
     }
 
     async function detectTables() {
@@ -74,7 +111,7 @@ function init_dewarp() {
     }
 
     async function applyDewarp() {
-        const contour = contours[currentContour];
+        const contour = contours.length ? contours[currentContour] : points;
 
         // Convert the crop canvas to a Blob and send it to the Flask app
         context.drawImage(imageDisplay, 0, 0, imageDisplay.width, imageDisplay.height);
@@ -103,25 +140,25 @@ function init_dewarp() {
     }
 
     function drawContour(contour) {
-      const ctx = canvas.getContext('2d');
+      const context = canvas.getContext('2d');
       console.log("Drawning contour:", contour);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
       if (contour.length < 2) return; // Need at least two points to draw a line
 
-      ctx.beginPath(); // Start a new path
-      ctx.moveTo(contour[0][0], contour[0][1]); // Move the pen to the start point
+      context.beginPath(); // Start a new path
+      context.moveTo(contour[0][0], contour[0][1]); // Move the pen to the start point
 
       // Draw lines to subsequent points
       for (let i = 1; i < contour.length; i++) {
-          ctx.lineTo(contour[i][0], contour[i][1]);
+          context.lineTo(contour[i][0], contour[i][1]);
       }
 
-      ctx.lineTo(contour[0][0], contour[0][1]); // Optional: Close the path back to the start point for a closed shape
+      context.lineTo(contour[0][0], contour[0][1]); // Optional: Close the path back to the start point for a closed shape
 
-      ctx.strokeStyle = 'red'; // Set the color of the contour
-      ctx.lineWidth = 2; // Set the line width
-      ctx.stroke(); // Render the path
+      context.strokeStyle = 'red'; // Set the color of the contour
+      context.lineWidth = 2; // Set the line width
+      context.stroke(); // Render the path
     }
     
     initialize();

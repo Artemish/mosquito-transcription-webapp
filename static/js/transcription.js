@@ -2,6 +2,7 @@ var transcription_tab = null;
 
 function init_transcription() {
     const submitBtn = document.getElementById('transcription-submit-btn');
+    const markCompleteBtn = document.getElementById('transcription-complete-btn');
     const enumTranscription = document.getElementById('enum-transcription');
     const textTranscription = document.getElementById('text-transcription');
     const imageDisplay = document.getElementById('transcription-image-display');
@@ -16,6 +17,7 @@ function init_transcription() {
     let currentCellIndex = {row: 0, col: 0};
     let pauseCol = false;
     let wallCol = false;
+    let queuedInput = "";
 
     const currentCellView = document.getElementById('current-cell-view');
     const transcriptionInput = document.getElementById('transcription-input');
@@ -43,6 +45,14 @@ function init_transcription() {
         points = [];
         overlayVisible = false;
         currentCellIndex = {row: 0, col: 0};
+
+        if (header) {
+          default_transcriptions = header.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
+          transcriptions = default_transcriptions;
+          points = header.points;
+        } else {
+          transcriptions = [];
+        }
     }
 
     function attachEventListeners() {
@@ -50,7 +60,9 @@ function init_transcription() {
         imageDisplay.addEventListener('click', handleImageDisplayClick);
         window.addEventListener('keydown', handleTranscriptionInputKeydown);
         submitBtn.addEventListener('click', submitTranscription);
-        selectWall.addEventListener('change', updateSelectWall);
+        markCompleteBtn.addEventListener('click', markComplete);
+        // selectWall.addEventListener('change', updateSelectWall);
+        transcriptionInput.addEventListener('input', redraw);
     }
 
     function handleImageDisplayClick(e) {
@@ -79,11 +91,18 @@ function init_transcription() {
         return points.map((point) => ({x: point.x * imageWidth, y: point.y * imageHeight}));
     }
 
+    const findOptionsByPrefix = (selectElement, prefix) => 
+      Array.from(selectElement.options).filter(option => option.text.toLowerCase().startsWith(prefix));
+
     function checkForInputPattern(val) {
       let header_col = header.columns[currentCellIndex.col];
       if (header_col.translation == 'latitude' || header_col.translation == 'longitude') {
         if (currentCellIndex.row == 0) {
           let prefix = val.slice(0, val.indexOf('.')+1);
+          if (prefix == "") {
+            prefix = val.slice(0, 2);
+          }
+
           if (prefix != "") {
             transcriptions.forEach((row) => {
               row[currentCellIndex.col] = row[currentCellIndex.col] || prefix
@@ -130,6 +149,15 @@ function init_transcription() {
         context.rect(cell.x-2, cell.y-2, cell.w+2, cell.h+2);
         context.strokeStyle = 'red';
         context.stroke();
+
+        const redText = queuedInput || transcriptionInput.value;
+
+        if (redText) {
+            context.font = '20px Arial';
+            context.fillStyle = 'red';
+            context.textBaseline = 'top';
+            context.fillText(redText, cell.x + 2, cell.y + 2, cell.w - 4); // Adjust text position and max width as needed
+        }
     }
 
     function drawRectangle(startPoint, endPoint) {
@@ -151,11 +179,11 @@ function init_transcription() {
       if (show) {
         enumTranscription.style = "display: block";
         textTranscription.style = "display: none";
-        selectWall.focus();
+        selectWall.focus({preventScroll: true});
       } else {
         enumTranscription.style = "display: none";
         textTranscription.style = "display: block";
-        transcriptionInput.focus();
+        transcriptionInput.focus({preventScroll: true});
       }
     }
 
@@ -170,15 +198,18 @@ function init_transcription() {
         currentCellIndex = {row: rowIndex, col: colIndex};
         const cell = cellToRect(rowIndex, colIndex);
 
+        queuedInput = "";
         pauseCol = header.columns[colIndex].pauseInput;
         wallCol = header.columns[colIndex].enum == "wall";
+
+        if (wallCol) {
+          selectWall.value = transcriptions[rowIndex][colIndex];
+        }
 
         console.log(`Pausing: ${pauseCol}`);
         console.log(`wallCol: ${wallCol}`);
 
         showWall(wallCol);
-
-        redraw();
         
         // Show zoomed cell view
         const cropCanvas = document.createElement('canvas');
@@ -193,7 +224,7 @@ function init_transcription() {
 
         cropCanvas.width = dispWidth;
         cropCanvas.height = dispHeight;
-        cropContext.drawImage(imageDisplay, cell.x * r_w - buffer, cell.y * r_h - buffer, dispWidth, dispHeight, 0, 0, dispWidth, dispHeight);
+        cropContext.drawImage(imageDisplay, (cell.x - buffer) * r_w, (cell.y - buffer) * r_h, dispWidth, dispHeight, 0, 0, dispWidth, dispHeight);
 
         currentCellView.src = cropCanvas.toDataURL();
         currentCellView.style.display = 'block';
@@ -203,7 +234,11 @@ function init_transcription() {
         // Show transcription input
         transcriptionInput.style.display = 'block';
         transcriptionInput.value = transcriptions[rowIndex][colIndex];
-        transcriptionInput.focus(); // Focus on the input for immediate typing
+        if (!wallCol) {
+          transcriptionInput.focus({preventScoll: true}); // Focus on the input for immediate typing
+        }
+
+        redraw();
     }
 
     // Handle transcription input and navigation
@@ -222,11 +257,25 @@ function init_transcription() {
             transcriptions[newRow][newCol] = transcriptionInput.value + e.key;
             e.preventDefault(); // Prevent default to avoid keeping the value in the input
             newRow += 1;
+        } else if (e.key.match(/^[a-z]$/) && wallCol) {
+          queuedInput += e.key;
+          let options = findOptionsByPrefix(selectWall, queuedInput);
+          if (options.length == 1) {
+              newRow += 1;
+              transcriptions[currentCellIndex.row][currentCellIndex.col] = options[0].value;
+              e.preventDefault();
+          } else if (options.length == 0) {
+            queuedInput = "";
+          } 
         } else {
           switch(e.key) {
               case 'Enter':
                   // Store transcription
-                  transcriptions[currentCellIndex.row][currentCellIndex.col] = transcriptionInput.value;
+                  if (wallCol) {
+                    transcriptions[currentCellIndex.row][currentCellIndex.col] = selectWall.value;
+                  } else {
+                    transcriptions[currentCellIndex.row][currentCellIndex.col] = transcriptionInput.value;
+                  }
                   checkForInputPattern(transcriptionInput.value);
                   // Assume moving to the next cell (right) by default
                   newRow += 1;
@@ -293,7 +342,7 @@ function init_transcription() {
         // If navigation results in a valid cell, select the new cell
         if (newRow !== currentCellIndex.row || newCol !== currentCellIndex.col) {
             selectCell(newRow, newCol);
-        }
+        } 
     }
 
     function toggleTranscriptionOverlay() {
@@ -334,7 +383,7 @@ function init_transcription() {
                 // Draw the transcription text
                 const text = transcriptions[rowIndex][colIndex];
                 if (text) {
-                    context.font = '16px Arial';
+                    context.font = '20px Arial';
                     context.fillStyle = 'green';
                     context.textBaseline = 'top';
                     context.fillText(text, cell.x + 2, cell.y + 2, cell.w - 4); // Adjust text position and max width as needed
@@ -368,6 +417,29 @@ function init_transcription() {
             alert(`Could not save transcription: ${response.text}`);
         } else {
             alert(`Transcription saved for ${current_file}`);
+        }
+    }
+
+    async function markComplete() {
+        submitTranscription();
+
+        const submission = {
+          filename: current_file,
+        }
+
+        const response = await fetch('mark_complete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submission)
+        });
+
+        if (!response.ok) {
+            alert(`Could not mark as complete: ${response.text}`);
+        } else {
+            alert(`Document ${current_file} marked as complete`);
+            sidebar.markComplete();
         }
     }
 
@@ -405,7 +477,7 @@ async function fetchTranscription(file) {
     
     transcriptions = transcription?.transcriptions || default_transcriptions;
     console.log("Set transcriptions to: ", transcriptions);
-    points = transcription?.points || [];
+    points = transcription?.points || header?.points || [];
 }
 
 window.addEventListener('load', (event) => {

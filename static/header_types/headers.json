@@ -1,287 +1,1008 @@
 [
-    {
-        "filename": "header_1.png",
-        "documentType": "other_vectors",
-        "columns": [
-            {"original": "No. da casa", "translation": "House Number"},
-            {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lat)",
-                "translation": "latitude",
-                "pauseInput": true
-            },
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lon)",
-                "translation": "longitude",
-                "pauseInput": true
-            },
-            {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
-            {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
-            {"original": "Culex sp M", "translation": "Culex sp Males"},
-            {"original": "Culex sp F", "translation": "Culex sp Females"},
-            {"original": "Aedes sp M", "translation": "Aedes sp Males"},
-            {"original": "Aedes sp F", "translation": "Aedes sp Females"},
-            {"original": "Mansonia sp M", "translation": "Mansonia sp Males"},
-            {"original": "Mansonia sp F", "translation": "Mansonia sp Females"},
-            {
-                "original"   : "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
-                "translation": "Other (Unidentified Anopheles) Male"
-            },
-            {
-                "original"   : "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
-                "translation": "Other (Unidentified Anopheles) Female"
-            },
-            {"original": "Presen\u00e7a de rede", "translation": "Presence of net"}
-        ],
-        "row_structure": [
-            {"y": 0.0173, "h": 0.0899},
-            {"y": 0.1167, "h": 0.0889},
-            {"y": 0.2156, "h": 0.0886},
-            {"y": 0.3148, "h": 0.0884},
-            {"y": 0.4140, "h": 0.0878},
-            {"y": 0.5123, "h": 0.0880},
-            {"y": 0.6111, "h": 0.0880},
-            {"y": 0.7102, "h": 0.0876},
-            {"y": 0.8092, "h": 0.0893},
-            {"y": 0.9092, "h": 0.0889}
-        ],
-        "column_structure": [
-            {"x": 0.0014, "w": 0.0548},
-            {"x": 0.2451, "w": 0.0519},
-            {"x": 0.3000, "w": 0.0821},
-            {"x": 0.3853, "w": 0.0744},
-            {"x": 0.4630, "w": 0.0739},
-            {"x": 0.5402, "w": 0.0676},
-            {"x": 0.6114, "w": 0.0271},
-            {"x": 0.6420, "w": 0.0270},
-            {"x": 0.6724, "w": 0.0267},
-            {"x": 0.7030, "w": 0.0274},
-            {"x": 0.7340, "w": 0.0274},
-            {"x": 0.7649, "w": 0.0401},
-            {"x": 0.8085, "w": 0.0463},
-            {"x": 0.8583, "w": 0.0590},
-            {"x": 0.9207, "w": 0.0785}
-        ]
-    },
-    {
-        "filename": "header_2.png",
-        "documentType": "anopheles_gambia_s.1_compact",
-        "columns": [
-            {"original": "No. da casa", "translation": "House Number"},
-            {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lat)",
-                "translation": "latitude",
-                "pauseInput": true
-            },
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lon)",
-                "translation": "longitude",
-                "pauseInput": true
-            },
-            {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
-            {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
-            {"original": "Alimentados", "translation": "Fed"},
-            {"original": "Gr\u00e1vidos", "translation": "Pregnant"},
-            {"original": "N\u00e3o alimentados", "translation": "Not fed"},
-            {"original": "Total de f\u00eameas", "translation": "Total females"},
-            {"original": "Total de machos", "translation": "Total males"},
-            {"original": "Presen\u00e7a de rede", "translation": "Presence of net"}
-        ],
-        "column_structure": [
-            {"w": 0.0672, "x": 0.0047},
-            {"w": 0.0926, "x": 0.2675},
-            {"w": 0.0593, "x": 0.3635},
-            {"w": 0.0605, "x": 0.4261},
-            {"w": 0.0699, "x": 0.4898},
-            {"w": 0.0656, "x": 0.5631},
-            {"w": 0.0711, "x": 0.6320},
-            {"w": 0.0546, "x": 0.7063},
-            {"w": 0.0664, "x": 0.7641},
-            {"w": 0.0552, "x": 0.8339},
-            {"w": 0.0534, "x": 0.8923},
-            {"w": 0.0491, "x": 0.9488}
-        ],
-        "row_structure": [
-            {"h": 0.0601, "y": 0.0115},
-            {"h": 0.0581, "y": 0.0799},
-            {"h": 0.0591, "y": 0.1460},
-            {"h": 0.0575, "y": 0.2126},
-            {"h": 0.0571, "y": 0.2784},
-            {"h": 0.0577, "y": 0.3443},
-            {"h": 0.0577, "y": 0.4101},
-            {"h": 0.0573, "y": 0.4761},
-            {"h": 0.0573, "y": 0.5418},
-            {"h": 0.0575, "y": 0.6074},
-            {"h": 0.0581, "y": 0.6738},
-            {"h": 0.0577, "y": 0.7407},
-            {"h": 0.0579, "y": 0.8073},
-            {"h": 0.0577, "y": 0.8743},
-            {"h": 0.0583, "y": 0.9409}
-        ]
-    },
-    {
-        "filename": "header_2.png",
-        "documentType": "anopheles_gambia_s.1",
-        "columns": [
-            {"original": "No. da casa", "translation": "House Number"},
-            {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lat)",
-                "translation": "latitude",
-                "pauseInput": true
-            },
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lon)",
-                "translation": "longitude",
-                "pauseInput": true
-            },
-            {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
-            {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
-            {"original": "Alimentados", "translation": "Fed"},
-            {"original": "Gr\u00e1vidos", "translation": "Pregnant"},
-            {"original": "N\u00e3o alimentados", "translation": "Not fed"},
-            {"original": "Total de f\u00eameas", "translation": "Total females"},
-            {"original": "Total de machos", "translation": "Total males"},
-            {"original": "Presen\u00e7a de rede", "translation": "Presence of net"}
-        ],
-        "row_structure": [
-            {"y": 0.0127, "h": 0.0900},
-            {"y": 0.1146, "h": 0.0883},
-            {"y": 0.2148, "h": 0.0892},
-            {"y": 0.3153, "h": 0.0883},
-            {"y": 0.4148, "h": 0.0889},
-            {"y": 0.5155, "h": 0.0886},
-            {"y": 0.6157, "h": 0.0889},
-            {"y": 0.7160, "h": 0.0900},
-            {"y": 0.8178, "h": 0.0905},
-            {"y": 0.9194, "h": 0.0806}
-        ],
-        "column_structure": [
-            {"x": 0.0019, "w": 0.0486},
-            {"x": 0.2460, "w": 0.0633},
-            {"x": 0.3126, "w": 0.0788},
-            {"x": 0.3947, "w": 0.0793},
-            {"x": 0.4774, "w": 0.0782},
-            {"x": 0.5590, "w": 0.0792},
-            {"x": 0.6417, "w": 0.0615},
-            {"x": 0.7066, "w": 0.0613},
-            {"x": 0.7713, "w": 0.0510},
-            {"x": 0.8257, "w": 0.0513},
-            {"x": 0.8804, "w": 0.0550},
-            {"x": 0.9388, "w": 0.0600}
-        ]
-    },
-    {
-        "filename": "header_3.png",
-        "documentType": "other_anopheles",
-        "columns": [
-            {"original": "Ordem", "translation": "House Number"},
-            {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lat)",
-                "translation": "latitude",
-                "pauseInput": true
-            },
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lon)",
-                "translation": "longitude",
-                "pauseInput": true
-            },
-            {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
-            {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
-            {"original": "An coustani M", "translation": "Anopheles coustani Males"},
-            {"original": "An coustani F", "translation": "Anopheles coustani Females"},
-            {"original": "An pharoensis M", "translation": "Anopheles Phaorensis Males"},
-            {"original": "An pharoensis F", "translation": "Anopheles Phaorensis Females"},
-            {
-                "original"   : "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
-                "translation": "Other (Unidentified Anopheles) Male"
-            },
-            {
-                "original"   : "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
-                "translation": "Other (Unidentified Anopheles) Female"
-            },
-            {"original": "Presen\u00e7a de rede", "translation": "Presence of net"}
-        ],
-        "row_structure": [
-            {"y": 0.0053, "h": 0.0906},
-            {"y": 0.1069, "h": 0.0888},
-            {"y": 0.2064, "h": 0.0896},
-            {"y": 0.3074, "h": 0.0883},
-            {"y": 0.4072, "h": 0.0888},
-            {"y": 0.5073, "h": 0.0894},
-            {"y": 0.6078, "h": 0.0899},
-            {"y": 0.7093, "h": 0.0911},
-            {"y": 0.8124, "h": 0.0906},
-            {"y": 0.9147, "h": 0.0853}
-        ],
-        "column_structure": [
-            {"x": 0.0019, "w": 0.0491},
-            {"x": 0.2425, "w": 0.0632},
-            {"x": 0.3090, "w": 0.0760},
-            {"x": 0.3881, "w": 0.0815},
-            {"x": 0.4732, "w": 0.0746},
-            {"x": 0.5514, "w": 0.0996},
-            {"x": 0.6548, "w": 0.0268},
-            {"x": 0.6853, "w": 0.0275},
-            {"x": 0.7165, "w": 0.0257},
-            {"x": 0.7459, "w": 0.0272},
-            {"x": 0.7768, "w": 0.0462},
-            {"x": 0.8265, "w": 0.0622},
-            {"x": 0.8922, "w": 0.1064}
-        ]
-    },
-    {
-        "filename": "header_2.png",
-        "documentType": "anopheles_funestus",
-        "columns": [
-            {"original": "No. da casa", "translation": "House Number"},
-            {"original": "Tipo de parede", "translation": "Type of wall", "enum": "wall"},
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lat)",
-                "translation": "latitude",
-                "pauseInput": true
-            },
-            {
-                "original": "Coordenadas geogr\u00e1ficas (lon)",
-                "translation": "longitude",
-                "pauseInput": true
-            },
-            {"original": "Nr. pessoas pernoitaram", "translation": "People present"},
-            {"original": "Nr. compartimentos visitados", "translation": "Number of rooms visited"},
-            {"original": "Alimentados", "translation": "Fed"},
-            {"original": "Gr\u00e1vidos", "translation": "Pregnant"},
-            {"original": "N\u00e3o alimentados", "translation": "Not fed"},
-            {"original": "Total de f\u00eameas", "translation": "Total females"},
-            {"original": "Total de machos", "translation": "Total males"},
-            {"original": "Presen\u00e7a de rede", "translation": "Presence of net"}
-        ],
-        "column_structure": [
-            {"x": 0.0019  , "w": 0.0486  },
-            {"x": 0.188488, "w": 0.108363},
-            {"x": 0.300152, "w": 0.085104},
-            {"x": 0.388555, "w": 0.085644},
-            {"x": 0.477599, "w": 0.069456},
-            {"x": 0.550456, "w": 0.065536},
-            {"x": 0.619492, "w": 0.061419},
-            {"x": 0.684312, "w": 0.066204},
-            {"x": 0.753916, "w": 0.05508 },
-            {"x": 0.812396, "w": 0.055403},
-            {"x": 0.8712  , "w": 0.0594  },
-            {"x": 0.933999, "w": 0.0648  }
-        ],
-        "row_structure": [
-            {"y": 0.0127, "h": 0.0900},
-            {"y": 0.1146, "h": 0.0883},
-            {"y": 0.2148, "h": 0.0892},
-            {"y": 0.3153, "h": 0.0883},
-            {"y": 0.4148, "h": 0.0889},
-            {"y": 0.5155, "h": 0.0886},
-            {"y": 0.6157, "h": 0.0889},
-            {"y": 0.7160, "h": 0.0900},
-            {"y": 0.8178, "h": 0.0905},
-            {"y": 0.9194, "h": 0.0806}
-        ]
-    }
+  {
+    "filename": "header_1.png",
+    "documentType": "other_vectors",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Culex sp M",
+        "translation": "Culex sp Males"
+      },
+      {
+        "original": "Culex sp F",
+        "translation": "Culex sp Females"
+      },
+      {
+        "original": "Aedes sp M",
+        "translation": "Aedes sp Males"
+      },
+      {
+        "original": "Aedes sp F",
+        "translation": "Aedes sp Females"
+      },
+      {
+        "original": "Mansonia sp M",
+        "translation": "Mansonia sp Males"
+      },
+      {
+        "original": "Mansonia sp F",
+        "translation": "Mansonia sp Females"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
+        "translation": "Other (Unidentified Anopheles) Male"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
+        "translation": "Other (Unidentified Anopheles) Female"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0173,
+        "h": 0.0899
+      },
+      {
+        "y": 0.1167,
+        "h": 0.0889
+      },
+      {
+        "y": 0.2156,
+        "h": 0.0886
+      },
+      {
+        "y": 0.3148,
+        "h": 0.0884
+      },
+      {
+        "y": 0.414,
+        "h": 0.0878
+      },
+      {
+        "y": 0.5123,
+        "h": 0.088
+      },
+      {
+        "y": 0.6111,
+        "h": 0.088
+      },
+      {
+        "y": 0.7102,
+        "h": 0.0876
+      },
+      {
+        "y": 0.8092,
+        "h": 0.0893
+      },
+      {
+        "y": 0.9092,
+        "h": 0.0889
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0014,
+        "w": 0.0548
+      },
+      {
+        "x": 0.2451,
+        "w": 0.0519
+      },
+      {
+        "x": 0.3,
+        "w": 0.0821
+      },
+      {
+        "x": 0.3853,
+        "w": 0.0744
+      },
+      {
+        "x": 0.463,
+        "w": 0.0739
+      },
+      {
+        "x": 0.5402,
+        "w": 0.0676
+      },
+      {
+        "x": 0.6114,
+        "w": 0.0271
+      },
+      {
+        "x": 0.642,
+        "w": 0.027
+      },
+      {
+        "x": 0.6724,
+        "w": 0.0267
+      },
+      {
+        "x": 0.703,
+        "w": 0.0274
+      },
+      {
+        "x": 0.734,
+        "w": 0.0274
+      },
+      {
+        "x": 0.7649,
+        "w": 0.0401
+      },
+      {
+        "x": 0.8085,
+        "w": 0.0463
+      },
+      {
+        "x": 0.8583,
+        "w": 0.059
+      },
+      {
+        "x": 0.9207,
+        "w": 0.0785
+      }
+    ],
+    "points": [
+      {
+        "x": 0.00175,
+        "y": 0.23235
+      },
+      {
+        "x": 0.99824,
+        "y": 0.92830
+      }
+    ]
+  },
+  {
+    "filename": "header_2.png",
+    "documentType": "anopheles_gambia_s.1_compact",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Alimentados",
+        "translation": "Fed"
+      },
+      {
+        "original": "Gr\u00e1vidos",
+        "translation": "Pregnant"
+      },
+      {
+        "original": "N\u00e3o alimentados",
+        "translation": "Not fed"
+      },
+      {
+        "original": "Total de f\u00eameas",
+        "translation": "Total females"
+      },
+      {
+        "original": "Total de machos",
+        "translation": "Total males"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "column_structure": [
+      {
+        "w": 0.0672,
+        "x": 0.0047
+      },
+      {
+        "w": 0.0926,
+        "x": 0.2675
+      },
+      {
+        "w": 0.0593,
+        "x": 0.3635
+      },
+      {
+        "w": 0.0605,
+        "x": 0.4261
+      },
+      {
+        "w": 0.0699,
+        "x": 0.4898
+      },
+      {
+        "w": 0.0656,
+        "x": 0.5631
+      },
+      {
+        "w": 0.0711,
+        "x": 0.632
+      },
+      {
+        "w": 0.0546,
+        "x": 0.7063
+      },
+      {
+        "w": 0.0664,
+        "x": 0.7641
+      },
+      {
+        "w": 0.0552,
+        "x": 0.8339
+      },
+      {
+        "w": 0.0534,
+        "x": 0.8923
+      },
+      {
+        "w": 0.0491,
+        "x": 0.9488
+      }
+    ],
+    "row_structure": [
+      {
+        "h": 0.0601,
+        "y": 0.0115
+      },
+      {
+        "h": 0.0581,
+        "y": 0.0799
+      },
+      {
+        "h": 0.0591,
+        "y": 0.146
+      },
+      {
+        "h": 0.0575,
+        "y": 0.2126
+      },
+      {
+        "h": 0.0571,
+        "y": 0.2784
+      },
+      {
+        "h": 0.0577,
+        "y": 0.3443
+      },
+      {
+        "h": 0.0577,
+        "y": 0.4101
+      },
+      {
+        "h": 0.0573,
+        "y": 0.4761
+      },
+      {
+        "h": 0.0573,
+        "y": 0.5418
+      },
+      {
+        "h": 0.0575,
+        "y": 0.6074
+      },
+      {
+        "h": 0.0581,
+        "y": 0.6738
+      },
+      {
+        "h": 0.0577,
+        "y": 0.7407
+      },
+      {
+        "h": 0.0579,
+        "y": 0.8073
+      },
+      {
+        "h": 0.0577,
+        "y": 0.8743
+      },
+      {
+        "h": 0.0583,
+        "y": 0.9409
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0036530752905009024,
+        "y": 0.15771605713954417
+      },
+      {
+        "x": 0.9979800479568237,
+        "y": 0.9429375476047623
+      }
+    ]
+  },
+  {
+    "filename": "header_2.png",
+    "documentType": "anopheles_gambia_s.1",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Alimentados",
+        "translation": "Fed"
+      },
+      {
+        "original": "Gr\u00e1vidos",
+        "translation": "Pregnant"
+      },
+      {
+        "original": "N\u00e3o alimentados",
+        "translation": "Not fed"
+      },
+      {
+        "original": "Total de f\u00eameas",
+        "translation": "Total females"
+      },
+      {
+        "original": "Total de machos",
+        "translation": "Total males"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0127,
+        "h": 0.09
+      },
+      {
+        "y": 0.1146,
+        "h": 0.0883
+      },
+      {
+        "y": 0.2148,
+        "h": 0.0892
+      },
+      {
+        "y": 0.3153,
+        "h": 0.0883
+      },
+      {
+        "y": 0.4148,
+        "h": 0.0889
+      },
+      {
+        "y": 0.5155,
+        "h": 0.0886
+      },
+      {
+        "y": 0.6157,
+        "h": 0.0889
+      },
+      {
+        "y": 0.716,
+        "h": 0.09
+      },
+      {
+        "y": 0.8178,
+        "h": 0.0905
+      },
+      {
+        "y": 0.9194,
+        "h": 0.0806
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0019,
+        "w": 0.0486
+      },
+      {
+        "x": 0.246,
+        "w": 0.0633
+      },
+      {
+        "x": 0.3126,
+        "w": 0.0788
+      },
+      {
+        "x": 0.3947,
+        "w": 0.0793
+      },
+      {
+        "x": 0.4774,
+        "w": 0.0782
+      },
+      {
+        "x": 0.559,
+        "w": 0.0792
+      },
+      {
+        "x": 0.6417,
+        "w": 0.0615
+      },
+      {
+        "x": 0.7066,
+        "w": 0.0613
+      },
+      {
+        "x": 0.7713,
+        "w": 0.051
+      },
+      {
+        "x": 0.8257,
+        "w": 0.0513
+      },
+      {
+        "x": 0.8804,
+        "w": 0.055
+      },
+      {
+        "x": 0.9388,
+        "w": 0.06
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0008896797153024911,
+        "y": 0.20467142934187574
+      },
+      {
+        "x": 0.9991103202846975,
+        "y": 0.919635799888194
+      }
+    ]
+  },
+  {
+    "filename": "header_2.png",
+    "documentType": "anopheles_gambia_s.1_widecol",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Alimentados",
+        "translation": "Fed"
+      },
+      {
+        "original": "Gr\u00e1vidos",
+        "translation": "Pregnant"
+      },
+      {
+        "original": "N\u00e3o alimentados",
+        "translation": "Not fed"
+      },
+      {
+        "original": "Total de f\u00eameas",
+        "translation": "Total females"
+      },
+      {
+        "original": "Total de machos",
+        "translation": "Total males"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0127,
+        "h": 0.09
+      },
+      {
+        "y": 0.1146,
+        "h": 0.0883
+      },
+      {
+        "y": 0.2148,
+        "h": 0.0892
+      },
+      {
+        "y": 0.3153,
+        "h": 0.0883
+      },
+      {
+        "y": 0.4148,
+        "h": 0.0889
+      },
+      {
+        "y": 0.5155,
+        "h": 0.0886
+      },
+      {
+        "y": 0.6157,
+        "h": 0.0889
+      },
+      {
+        "y": 0.716,
+        "h": 0.09
+      },
+      {
+        "y": 0.8178,
+        "h": 0.0905
+      },
+      {
+        "y": 0.9194,
+        "h": 0.0806
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0018999999999999998,
+        "w": 0.053399999999999996
+      },
+      {
+        "x": 0.20231480000000004,
+        "w": 0.0676044
+      },
+      {
+        "x": 0.27301919999999996,
+        "w": 0.0691584
+      },
+      {
+        "x": 0.3454775999999999,
+        "w": 0.0646924
+      },
+      {
+        "x": 0.4135699999999999,
+        "w": 0.08351760000000001
+      },
+      {
+        "x": 0.5004876000000001,
+        "w": 0.0915856
+      },
+      {
+        "x": 0.5955732000000001,
+        "w": 0.05868200000000002
+      },
+      {
+        "x": 0.6576552000000001,
+        "w": 0.0494684
+      },
+      {
+        "x": 0.7105236,
+        "w": 0.06446800000000001
+      },
+      {
+        "x": 0.7783916000000001,
+        "w": 0.0707884
+      },
+      {
+        "x": 0.85258,
+        "w": 0.06874000000000001
+      },
+      {
+        "x": 0.92472,
+        "w": 0.07408
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0036101083032490976,
+        "y": 0.20229613242976172
+      },
+      {
+        "x": 0.9972924187725631,
+        "y": 0.9267616906245361
+      }
+    ]
+  },
+  {
+    "filename": "header_3.png",
+    "documentType": "other_anopheles",
+    "columns": [
+      {
+        "original": "Ordem",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "An coustani M",
+        "translation": "Anopheles coustani Males"
+      },
+      {
+        "original": "An coustani F",
+        "translation": "Anopheles coustani Females"
+      },
+      {
+        "original": "An pharoensis M",
+        "translation": "Anopheles Phaorensis Males"
+      },
+      {
+        "original": "An pharoensis F",
+        "translation": "Anopheles Phaorensis Females"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
+        "translation": "Other (Unidentified Anopheles) Male"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
+        "translation": "Other (Unidentified Anopheles) Female"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0053,
+        "h": 0.0906
+      },
+      {
+        "y": 0.1069,
+        "h": 0.0888
+      },
+      {
+        "y": 0.2064,
+        "h": 0.0896
+      },
+      {
+        "y": 0.3074,
+        "h": 0.0883
+      },
+      {
+        "y": 0.4072,
+        "h": 0.0888
+      },
+      {
+        "y": 0.5073,
+        "h": 0.0894
+      },
+      {
+        "y": 0.6078,
+        "h": 0.0899
+      },
+      {
+        "y": 0.7093,
+        "h": 0.0911
+      },
+      {
+        "y": 0.8124,
+        "h": 0.0906
+      },
+      {
+        "y": 0.9147,
+        "h": 0.0853
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0019,
+        "w": 0.0491
+      },
+      {
+        "x": 0.2425,
+        "w": 0.0632
+      },
+      {
+        "x": 0.309,
+        "w": 0.076
+      },
+      {
+        "x": 0.3881,
+        "w": 0.0815
+      },
+      {
+        "x": 0.4732,
+        "w": 0.0746
+      },
+      {
+        "x": 0.5514,
+        "w": 0.0996
+      },
+      {
+        "x": 0.6548,
+        "w": 0.0268
+      },
+      {
+        "x": 0.6853,
+        "w": 0.0275
+      },
+      {
+        "x": 0.7165,
+        "w": 0.0257
+      },
+      {
+        "x": 0.7459,
+        "w": 0.0272
+      },
+      {
+        "x": 0.7768,
+        "w": 0.0462
+      },
+      {
+        "x": 0.8265,
+        "w": 0.0622
+      },
+      {
+        "x": 0.8922,
+        "w": 0.1064
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0008250825082508251,
+        "y": 0.2183048541729267
+      },
+      {
+        "x": 0.9983498349834984,
+        "y": 0.9319800678481404
+      }
+    ]
+  },
+  {
+    "filename": "header_2.png",
+    "documentType": "anopheles_funestus",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Alimentados",
+        "translation": "Fed"
+      },
+      {
+        "original": "Gr\u00e1vidos",
+        "translation": "Pregnant"
+      },
+      {
+        "original": "N\u00e3o alimentados",
+        "translation": "Not fed"
+      },
+      {
+        "original": "Total de f\u00eameas",
+        "translation": "Total females"
+      },
+      {
+        "original": "Total de machos",
+        "translation": "Total males"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0019,
+        "w": 0.0486
+      },
+      {
+        "x": 0.188488,
+        "w": 0.108363
+      },
+      {
+        "x": 0.300152,
+        "w": 0.085104
+      },
+      {
+        "x": 0.388555,
+        "w": 0.085644
+      },
+      {
+        "x": 0.477599,
+        "w": 0.069456
+      },
+      {
+        "x": 0.550456,
+        "w": 0.065536
+      },
+      {
+        "x": 0.619492,
+        "w": 0.061419
+      },
+      {
+        "x": 0.684312,
+        "w": 0.066204
+      },
+      {
+        "x": 0.753916,
+        "w": 0.05508
+      },
+      {
+        "x": 0.812396,
+        "w": 0.055403
+      },
+      {
+        "x": 0.8712,
+        "w": 0.0594
+      },
+      {
+        "x": 0.933999,
+        "w": 0.0648
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0127,
+        "h": 0.09
+      },
+      {
+        "y": 0.1146,
+        "h": 0.0883
+      },
+      {
+        "y": 0.2148,
+        "h": 0.0892
+      },
+      {
+        "y": 0.3153,
+        "h": 0.0883
+      },
+      {
+        "y": 0.4148,
+        "h": 0.0889
+      },
+      {
+        "y": 0.5155,
+        "h": 0.0886
+      },
+      {
+        "y": 0.6157,
+        "h": 0.0889
+      },
+      {
+        "y": 0.716,
+        "h": 0.09
+      },
+      {
+        "y": 0.8178,
+        "h": 0.0905
+      },
+      {
+        "y": 0.9194,
+        "h": 0.0806
+      }
+    ],
+    "points": [
+      {
+        "x": 0.00175,
+        "y": 0.19517
+      },
+      {
+        "x": 0.99736,
+        "y": 0.92676
+      }
+    ]
+  }
 ]

@@ -95,13 +95,23 @@ def get_content_index():
     ]
 
     def get_file_status(file):
+
         file_base = file[:file.rindex('.')]
         document_path = os.path.join(TRANSCRIPT_DIRECTORY, file_base + '_document.json')
         dewarp_path = os.path.join(TABLE_IMG_DIRECTORY, file_base + '_dewarped.png')
         transcript_path = os.path.join(TRANSCRIPT_DIRECTORY, file_base + '_transcript.json')
+
+        has_document = os.path.isfile(document_path)
+        if has_document:
+            with open(document_path) as docfile:
+                complete = json.load(docfile).get('complete')
+        else:
+            complete = False
+
         return {
             'id': file_base,
-            'has_document': os.path.isfile(document_path),
+            'complete': complete,
+            'has_document': has_document,
             'has_table': os.path.isfile(dewarp_path),
             'has_transcript': os.path.isfile(transcript_path),
         }
@@ -242,25 +252,49 @@ def submit_transcription():
     # Return the segmentation result
     return jsonify(None)
 
+@app.route('/mark_complete', methods=['POST'])
+@auth.login_required
+def mark_complete():
+    filename = request.json['filename']
+    document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
+
+    with open(document_path) as docfile:
+        document = json.load(docfile)
+
+    document['complete'] = True
+    with open(document_path, 'w') as docfile:
+        docfile.write(json.dumps(document, indent=2))
+
+    # Return the segmentation result
+    return jsonify(None)
+
 @app.route('/download_csv', methods=['GET'])
 @auth.login_required
 def download_csv():
     result = pd.DataFrame()
 
+    with open('static/header_types/headers.json') as hf:
+        header_types = json.load(hf)
+        header_map = {}
+        for header in header_types:
+            header_map[header['documentType']] = header
+
     for file in glob(f'{TRANSCRIPT_DIRECTORY}/*_transcript.json'):
         file_id = file[file.rindex('/')+1:-16]
         transcription = json.load(open(file))
-        columns = [c['translation'] for c in transcription['header']['columns']]
+
+        # print(json.dumps(transcription, indent=2))
+        doctype = header_map[transcription['documentType']]
+        columns = [c['translation'] for c in doctype['columns']]
         try:
             transcription_df = pd.DataFrame(
                 transcription['transcriptions'],
                 columns = columns
             )
             transcription_df['file_id'] = file_id
-            result = pd.concat([result, transcription_df])
-        except:
-            print(f"Couldn't process {file}")
-            print([len(r) for r in transcription['transcriptions']])
+            result = pd.concat([result, transcription_df], axis=0)
+        except Exception as e:
+            print(f"Couldn't process {file}: {e}")
 
     csv = result.to_csv(index=False)
     

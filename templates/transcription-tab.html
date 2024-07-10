@@ -3,6 +3,29 @@
     <img id="transcription-image-display"/>
     <canvas id="transcription-overlay-canvas"></canvas>
   </div>
+  <div id="transcription-area" style="margin-top: 20px;">
+      <div>Transcribe Cell:</div>
+      <img id="current-cell-view" src="" alt="Zoomed Cell" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
+      <div id="enum-transcription" style="display: none">
+        <select name="wall" id="select-wall">
+          <option value="">-- Select a wall type --</option>
+          <option value="Alvenaria">Alvenaria (Brickwork)</option>
+          <option value="Bloco">Bloco (Mud Bricks)</option>
+          <option value="Caniço">Caniço (Wattle and reed)</option>
+          <option value="Cimento">Cimento (Cement)</option>
+          <option value="Convencional">Conventional</option>
+          <option value="Madeira">Madeira (Wood)</option>
+          <option value="Maticado">Maticado (plaster)</option>
+          <option value="Misto">Misto (Mixed)</option>
+          <option value="Paupica">Paupica (Wood and mud)</option>
+          <option value="Pedra">Pedra (Stone)</option>
+          <option value="Rebocado">Rebocado (Cement bricks with rebar)</option>
+        </select>
+      </div>
+      <div id="text-transcription">
+        <input type="text" id="transcription-input" placeholder="Enter transcription here" style="display: none;"/>
+      </div>
+  </div>
   <div id="transcription-buttons">
     <p>
       Start by clicking the top left of the data rows (i.e. the top
@@ -16,26 +39,6 @@
       if the number is 10 or greater.
     </p>
     <button id="transcription-submit-btn">Submit transcription</button>
-  </div>
-  <div id="transcription-area" style="margin-top: 20px;">
-      <div>Transcribe Cell:</div>
-      <img id="current-cell-view" src="" alt="Zoomed Cell" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
-      <div id="enum-transcription" style="display: none">
-        <select name="wall" id="select-wall">
-          <option value="">-- Select a wall type --</option>
-          <option value="Brickwork">Alvenaria (Brickwork)</option>
-          <option value="Blocks">Bloco (Mud Bricks)</option>
-          <option value="Wattle and reed">Caniço (Wattle and reed)</option>
-          <option value="Cement">Cimento (Cement)</option>
-          <option value="Wood">Madeira (Wood)</option>
-          <option value="Mixed">Misto (Mixed)</option>
-          <option value="Paulia">Paupica (Wood and mud)</option>
-          <option value="Stone">Pedra (Stone)</option>
-          <option value="Reboco">Bloco Rebocado (Cement bricks with rebar)</option>
-        </select>
-      </div>
-      <div id="text-transcription">
-        <input type="text" id="transcription-input" placeholder="Enter transcription here" style="display: none;"/>
-      </div>
+    <button id="transcription-complete-btn">Mark transcription complete</button>
   </div>
 </div>
