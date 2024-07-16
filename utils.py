@@ -28,7 +28,7 @@ def show_contour(img, contour):
 
 from copy import deepcopy
 
-header_index = 3
+header_index = 6
 
 def get_current_cols():
     filename = 'static/header_types/headers.json'

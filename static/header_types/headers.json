@@ -32,35 +32,35 @@
       },
       {
         "original": "Culex sp M",
-        "translation": "Culex sp Males"
+        "translation": "Males (Culex sp)"
       },
       {
         "original": "Culex sp F",
-        "translation": "Culex sp Females"
+        "translation": "Females (Culex sp)"
       },
       {
         "original": "Aedes sp M",
-        "translation": "Aedes sp Males"
+        "translation": "Males (Aedes sp)"
       },
       {
         "original": "Aedes sp F",
-        "translation": "Aedes sp Females"
+        "translation": "Females (Aedes sp)"
       },
       {
         "original": "Mansonia sp M",
-        "translation": "Mansonia sp Males"
+        "translation": "Males (Mansonia sp)"
       },
       {
         "original": "Mansonia sp F",
-        "translation": "Mansonia sp Females"
+        "translation": "Females (Mansonia sp)"
       },
       {
         "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
-        "translation": "Other (Unidentified Anopheles) Male"
+        "translation": "Males (Unidentified Anopheles)"
       },
       {
         "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
-        "translation": "Other (Unidentified Anopheles) Female"
+        "translation": "Females (Unidentified Anopheles)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -178,7 +178,7 @@
       },
       {
         "x": 0.99824,
-        "y": 0.92830
+        "y": 0.9283
       }
     ]
   },
@@ -215,23 +215,23 @@
       },
       {
         "original": "Alimentados",
-        "translation": "Fed"
+        "translation": "Feeding (Anopheles Gambia)"
       },
       {
         "original": "Gr\u00e1vidos",
-        "translation": "Pregnant"
+        "translation": "Pregnant (Anopheles Gambia)"
       },
       {
         "original": "N\u00e3o alimentados",
-        "translation": "Not fed"
+        "translation": "Not feeding (Anopheles Gambia)"
       },
       {
         "original": "Total de f\u00eameas",
-        "translation": "Total females"
+        "translation": "Females (Anopheles Gambia)"
       },
       {
         "original": "Total de machos",
-        "translation": "Total males"
+        "translation": "Males (Anopheles Gambia)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -394,23 +394,23 @@
       },
       {
         "original": "Alimentados",
-        "translation": "Fed"
+        "translation": "Feeding (Anopheles Gambia)"
       },
       {
         "original": "Gr\u00e1vidos",
-        "translation": "Pregnant"
+        "translation": "Pregnant (Anopheles Gambia)"
       },
       {
         "original": "N\u00e3o alimentados",
-        "translation": "Not fed"
+        "translation": "Not feeding (Anopheles Gambia)"
       },
       {
         "original": "Total de f\u00eameas",
-        "translation": "Total females"
+        "translation": "Females (Anopheles Gambia)"
       },
       {
         "original": "Total de machos",
-        "translation": "Total males"
+        "translation": "Males (Anopheles Gambia)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -553,23 +553,23 @@
       },
       {
         "original": "Alimentados",
-        "translation": "Fed"
+        "translation": "Feeding (Anopheles Gambia)"
       },
       {
         "original": "Gr\u00e1vidos",
-        "translation": "Pregnant"
+        "translation": "Pregnant (Anopheles Gambia)"
       },
       {
         "original": "N\u00e3o alimentados",
-        "translation": "Not fed"
+        "translation": "Not feeding (Anopheles Gambia)"
       },
       {
         "original": "Total de f\u00eameas",
-        "translation": "Total females"
+        "translation": "Females (Anopheles Gambia)"
       },
       {
         "original": "Total de machos",
-        "translation": "Total males"
+        "translation": "Males (Anopheles Gambia)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -712,27 +712,27 @@
       },
       {
         "original": "An coustani M",
-        "translation": "Anopheles coustani Males"
+        "translation": "Males (Anopheles Coustani)"
       },
       {
         "original": "An coustani F",
-        "translation": "Anopheles coustani Females"
+        "translation": "Females (Anopheles Coustani)"
       },
       {
         "original": "An pharoensis M",
-        "translation": "Anopheles Phaorensis Males"
+        "translation": "Males (Anopheles Phaorensis)"
       },
       {
         "original": "An pharoensis F",
-        "translation": "Anopheles Phaorensis Females"
+        "translation": "Females (Anopheles Phaorensis)"
       },
       {
         "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
-        "translation": "Other (Unidentified Anopheles) Male"
+        "translation": "Males (Unidentified Anopheles)"
       },
       {
         "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
-        "translation": "Other (Unidentified Anopheles) Female"
+        "translation": "Females (Unidentified Anopheles)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -879,23 +879,23 @@
       },
       {
         "original": "Alimentados",
-        "translation": "Fed"
+        "translation": "Feeding (Anopheles Funestus)"
       },
       {
         "original": "Gr\u00e1vidos",
-        "translation": "Pregnant"
+        "translation": "Pregnant (Anopheles Funestus)"
       },
       {
         "original": "N\u00e3o alimentados",
-        "translation": "Not fed"
+        "translation": "Not feeding (Anopheles Funestus)"
       },
       {
         "original": "Total de f\u00eameas",
-        "translation": "Total females"
+        "translation": "Females (Anopheles Funestus)"
       },
       {
         "original": "Total de machos",
-        "translation": "Total males"
+        "translation": "Males (Anopheles Funestus)"
       },
       {
         "original": "Presen\u00e7a de rede",
@@ -1002,6 +1002,188 @@
       {
         "x": 0.99736,
         "y": 0.92676
+      }
+    ]
+  },
+  {
+    "filename": "",
+    "documentType": "other_vectors_disease",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas",
+        "translation": "Geographic Coordinates",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Culex sp M",
+        "translation": "Males (Culex sp)"
+      },
+      {
+        "original": "Culex sp F",
+        "translation": "Females (Culex sp)"
+      },
+      {
+        "original": "Aedes sp M",
+        "translation": "Males (Aedes sp)"
+      },
+      {
+        "original": "Aedes sp F",
+        "translation": "Females (Aedes sp)"
+      },
+      {
+        "original": "Mansonia sp M",
+        "translation": "Males (Mansonia sp)"
+      },
+      {
+        "original": "Mansonia sp F",
+        "translation": "Females (Mansonia sp)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
+        "translation": "Males (Unidentified Anopheles)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
+        "translation": "Females (Unidentified Anopheles)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      },
+      {
+        "original": "Data de ultima pulvericao",
+        "translation": "Date of last spraying"
+      }
+    ],
+    "row_structure": [
+      {
+        "y": 0.0173,
+        "h": 0.0899
+      },
+      {
+        "y": 0.1167,
+        "h": 0.0889
+      },
+      {
+        "y": 0.2156,
+        "h": 0.0886
+      },
+      {
+        "y": 0.3148,
+        "h": 0.0884
+      },
+      {
+        "y": 0.414,
+        "h": 0.0878
+      },
+      {
+        "y": 0.5123,
+        "h": 0.088
+      },
+      {
+        "y": 0.6111,
+        "h": 0.088
+      },
+      {
+        "y": 0.7102,
+        "h": 0.0876
+      },
+      {
+        "y": 0.8092,
+        "h": 0.0893
+      },
+      {
+        "y": 0.9092,
+        "h": 0.0889
+      }
+    ],
+    "column_structure": [
+      {
+        "x": 0.0014,
+        "w": 0.0548
+      },
+      {
+        "x": 0.1858651000000001,
+        "w": 0.07623365
+      },
+      {
+        "x": 0.26509874999999994,
+        "w": 0.09895535
+      },
+      {
+        "x": 0.36725409999999997,
+        "w": 0.0756124
+      },
+      {
+        "x": 0.44616649999999997,
+        "w": 0.06507065
+      },
+      {
+        "x": 0.5145371499999999,
+        "w": 0.0332446
+      },
+      {
+        "x": 0.5513817499999998,
+        "w": 0.035362849999999994
+      },
+      {
+        "x": 0.5902445999999998,
+        "w": 0.025254500000000003
+      },
+      {
+        "x": 0.6188990999999998,
+        "w": 0.038929450000000004
+      },
+      {
+        "x": 0.6617285499999997,
+        "w": 0.029687899999999993
+      },
+      {
+        "x": 0.6950164499999998,
+        "w": 0.0476879
+      },
+      {
+        "x": 0.7462043499999998,
+        "w": 0.035448349999999997
+      },
+      {
+        "x": 0.7851526999999998,
+        "w": 0.037166050000000006
+      },
+      {
+        "x": 0.8258187499999998,
+        "w": 0.0669265
+      },
+      {
+        "x": 0.8961452499999999,
+        "w": 0.10305475
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0036101083032490976,
+        "y": 0.20229613242976172
+      },
+      {
+        "x": 0.9972924187725631,
+        "y": 0.9267616906245361
       }
     ]
   }

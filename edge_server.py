@@ -13,6 +13,7 @@ import json
 
 from box_detection import box_extraction, bbs_to_array, coerce_to_grid
 from subset_table_warp import find_contours, warp_hull
+from contour_stitch import rebuild_img
 
 from utils import show_contour, show
 
@@ -184,7 +185,8 @@ def dewarp_along_contour():
     file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-    stw = warp_hull(img, contour)
+    # stw = warp_hull(img, contour)
+    stw = rebuild_img(img, contour)
 
     dewarp_name = f'{TABLE_IMG_DIRECTORY}/{file.filename}_dewarped.png'
     cv2.imwrite(dewarp_name, stw)
