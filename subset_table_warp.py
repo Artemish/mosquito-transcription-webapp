@@ -112,6 +112,25 @@ def warp_hull(img, hull):
 
     return warped
 
+def contour_to_box(contour):
+    xs = contour[:,0,0]
+    ys = contour[:,0,1]
+    x1, y1 = map(int, [xs.min(), ys.min()])
+    x2, y2 = map(int, [xs.max(), ys.max()])
+    return ((x1, y1), (x2, y2))
+
+def box_to_contour(box):
+    contour = np.zeros((4,1,2))
+
+    ((x1,y1), (x2, y2)) = box
+    arr = [x1,y1], [x1,y2], [x2, y2], [x2, y1]
+
+    # Fill out this third dimension because that's how CV2 contours
+    # are structured
+    contour[:, 0, :] = arr
+
+    return contour
+
 def filter_bounding_boxes(boxes, min_area=20, max_area=5000, min_aspect=0.2, max_aspect=5.0):
     filtered_boxes = []
     for box in boxes:
@@ -129,6 +148,9 @@ def filter_bounding_boxes(boxes, min_area=20, max_area=5000, min_aspect=0.2, max
     
         if min_aspect <= aspect_ratio <= max_aspect and min_area <= area <= max_area:
             filtered_boxes.append(box)
+        else:
+            print(f'Dropping box with {aspect_ratio}, {area}')
+            print(box)
 
     return filtered_boxes
     

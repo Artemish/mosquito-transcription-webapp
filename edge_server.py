@@ -14,6 +14,7 @@ import json
 from box_detection import box_extraction, bbs_to_array, coerce_to_grid
 from subset_table_warp import find_contours, warp_hull
 from contour_stitch import rebuild_img
+from header_detection import experiment_find_columns
 
 from utils import show_contour, show
 
@@ -270,16 +271,62 @@ def mark_complete():
     # Return the segmentation result
     return jsonify(None)
 
-@app.route('/download_csv', methods=['GET'])
-@auth.login_required
-def download_csv():
-    result = pd.DataFrame()
 
+@app.route('/textract', methods=['POST'])
+@auth.login_required
+def textract():
+    filename = request.json['filename']
+    document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
+
+    with open(document_path) as docfile:
+        document = json.load(docfile)
+
+    document['complete'] = True
+    with open(document_path, 'w') as docfile:
+        docfile.write(json.dumps(document, indent=2))
+
+    # Return the segmentation result
+    return jsonify(None)
+
+
+@app.route('/fix_columns', methods=['POST'])
+@auth.login_required
+def fix_columns():
+    filename = request.json['filename']
+    document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
+    image_path = f'{TABLE_IMG_DIRECTORY}/{filename}_dewarped.png'
+
+    header_map = get_header_map()
+
+    with open(document_path) as docfile:
+        document = json.load(docfile)
+
+    doctype = header_map[document['doctype']]
+    expected_columns = len(doctype['columns'])
+
+    extracted_cols = experiment_find_columns(image_path, expected_columns)
+
+    if extracted_cols:
+        return jsonify(extracted_cols)
+    else:
+        return jsonify({"error": "Failed to extact expected columns"}), 400
+
+
+def get_header_map():
     with open('static/header_types/headers.json') as hf:
         header_types = json.load(hf)
         header_map = {}
         for header in header_types:
             header_map[header['documentType']] = header
+
+    return header_map
+
+@app.route('/download_csv', methods=['GET'])
+@auth.login_required
+def download_csv():
+    result = pd.DataFrame()
+
+    header_map = get_header_map()
 
     for file in glob(f'{TRANSCRIPT_DIRECTORY}/*_transcript.json'):
         file_id = file[file.rindex('/')+1:-16]

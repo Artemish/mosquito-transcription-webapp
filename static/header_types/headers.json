@@ -183,6 +183,209 @@
     ]
   },
   {
+    "filename": "header_1.png",
+    "documentType": "other_vectors_compact",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Culex sp M",
+        "translation": "Males (Culex sp)"
+      },
+      {
+        "original": "Culex sp F",
+        "translation": "Females (Culex sp)"
+      },
+      {
+        "original": "Aedes sp M",
+        "translation": "Males (Aedes sp)"
+      },
+      {
+        "original": "Aedes sp F",
+        "translation": "Females (Aedes sp)"
+      },
+      {
+        "original": "Mansonia sp M",
+        "translation": "Males (Mansonia sp)"
+      },
+      {
+        "original": "Mansonia sp F",
+        "translation": "Females (Mansonia sp)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
+        "translation": "Males (Unidentified Anopheles)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
+        "translation": "Females (Unidentified Anopheles)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "h": 0.0601,
+        "y": 0.0115
+      },
+      {
+        "h": 0.0581,
+        "y": 0.0799
+      },
+      {
+        "h": 0.0591,
+        "y": 0.146
+      },
+      {
+        "h": 0.0575,
+        "y": 0.2126
+      },
+      {
+        "h": 0.0571,
+        "y": 0.2784
+      },
+      {
+        "h": 0.0577,
+        "y": 0.3443
+      },
+      {
+        "h": 0.0577,
+        "y": 0.4101
+      },
+      {
+        "h": 0.0573,
+        "y": 0.4761
+      },
+      {
+        "h": 0.0573,
+        "y": 0.5418
+      },
+      {
+        "h": 0.0575,
+        "y": 0.6074
+      },
+      {
+        "h": 0.0581,
+        "y": 0.6738
+      },
+      {
+        "h": 0.0577,
+        "y": 0.7407
+      },
+      {
+        "h": 0.0579,
+        "y": 0.8073
+      },
+      {
+        "h": 0.0577,
+        "y": 0.8743
+      },
+      {
+        "h": 0.0583,
+        "y": 0.9409
+      }
+    ],
+    "column_structure": [
+      {
+          "w": 0.05361930294906166,
+          "x": 0.004468275245755138
+      },
+      {
+          "w": 0.0902591599642538,
+          "x": 0.22698838248436104
+      },
+      {
+          "w": 0.0840035746201966,
+          "x": 0.3190348525469169
+      },
+      {
+          "w": 0.09294012511170688,
+          "x": 0.40482573726541554
+      },
+      {
+          "w": 0.08310991957104558,
+          "x": 0.49955317247542447
+      },
+      {
+          "w": 0.05451295799821269,
+          "x": 0.5853440571939231
+      },
+      {
+          "w": 0.025915996425379804,
+          "x": 0.6425379803395889
+      },
+      {
+          "w": 0.03663985701519214,
+          "x": 0.6711349419124218
+      },
+      {
+          "w": 0.025915996425379804,
+          "x": 0.710455764075067
+      },
+      {
+          "w": 0.02680965147453083,
+          "x": 0.7390527256478999
+      },
+      {
+          "w": 0.02680965147453083,
+          "x": 0.7685433422698839
+      },
+      {
+          "w": 0.035746201966041107,
+          "x": 0.7980339588918678
+      },
+      {
+          "w": 0.04647006255585344,
+          "x": 0.8364611260053619
+      },
+      {
+          "w": 0.05540661304736372,
+          "x": 0.8847184986595175
+      },
+      {
+          "w": 0.05361930294906166,
+          "x": 0.9428060768543343
+      }
+    ],
+    "points": [
+      {
+        "x": 0.00175,
+        "y": 0.23235
+      },
+      {
+        "x": 0.99824,
+        "y": 0.9283
+      }
+    ]
+  },
+  {
     "filename": "header_2.png",
     "documentType": "anopheles_gambia_s.1_compact",
     "columns": [
@@ -681,6 +884,187 @@
   },
   {
     "filename": "header_3.png",
+    "documentType": "other_anopheles_compact",
+    "columns": [
+      {
+        "original": "Ordem",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "An coustani M",
+        "translation": "Males (Anopheles Coustani)"
+      },
+      {
+        "original": "An coustani F",
+        "translation": "Females (Anopheles Coustani)"
+      },
+      {
+        "original": "An pharoensis M",
+        "translation": "Males (Anopheles Phaorensis)"
+      },
+      {
+        "original": "An pharoensis F",
+        "translation": "Females (Anopheles Phaorensis)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
+        "translation": "Males (Unidentified Anopheles)"
+      },
+      {
+        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
+        "translation": "Females (Unidentified Anopheles)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [
+      {
+        "h": 0.0601,
+        "y": 0.0115
+      },
+      {
+        "h": 0.0581,
+        "y": 0.0799
+      },
+      {
+        "h": 0.0591,
+        "y": 0.146
+      },
+      {
+        "h": 0.0575,
+        "y": 0.2126
+      },
+      {
+        "h": 0.0571,
+        "y": 0.2784
+      },
+      {
+        "h": 0.0577,
+        "y": 0.3443
+      },
+      {
+        "h": 0.0577,
+        "y": 0.4101
+      },
+      {
+        "h": 0.0573,
+        "y": 0.4761
+      },
+      {
+        "h": 0.0573,
+        "y": 0.5418
+      },
+      {
+        "h": 0.0575,
+        "y": 0.6074
+      },
+      {
+        "h": 0.0581,
+        "y": 0.6738
+      },
+      {
+        "h": 0.0577,
+        "y": 0.7407
+      },
+      {
+        "h": 0.0579,
+        "y": 0.8073
+      },
+      {
+        "h": 0.0577,
+        "y": 0.8743
+      },
+      {
+        "h": 0.0583,
+        "y": 0.9409
+      }
+    ],
+    "column_structure": [
+      {
+          "w": 0.04533091568449683,
+          "x": 0.003626473254759746
+      },
+      {
+          "w": 0.05983680870353581,
+          "x": 0.1441523118766999
+      },
+      {
+          "w": 0.09156844968268359,
+          "x": 0.20670897552130554
+      },
+      {
+          "w": 0.09156844968268359,
+          "x": 0.30099728014505894
+      },
+      {
+          "w": 0.06980961015412511,
+          "x": 0.3952855847688123
+      },
+      {
+          "w": 0.09066183136899365,
+          "x": 0.46781504986400724
+      },
+      {
+          "w": 0.07252946509519492,
+          "x": 0.5611967361740707
+      },
+      {
+          "w": 0.05530371713508613,
+          "x": 0.6364460562103355
+      },
+      {
+          "w": 0.07071622846781506,
+          "x": 0.6944696282864914
+      },
+      {
+          "w": 0.0471441523118767,
+          "x": 0.7679057116953762
+      },
+      {
+          "w": 0.05893019038984588,
+          "x": 0.8177697189483227
+      },
+      {
+          "w": 0.057116953762466005,
+          "x": 0.8785131459655485
+      },
+      {
+          "w": 0.056210335448776065,
+          "x": 0.9383499546690843
+      }
+    ],
+    "points": [
+      {"x":0.000936831546067543,"y":0.16250945975721018},
+      {"x":0.9973103582913078,"y":0.942554811231133}
+    ]
+  },
+  {
+    "filename": "header_3.png",
     "documentType": "other_anopheles",
     "columns": [
       {
@@ -1002,6 +1386,185 @@
       {
         "x": 0.99736,
         "y": 0.92676
+      }
+    ]
+  },
+  {
+    "filename": "header_2.png",
+    "documentType": "anopheles_funestus_s.1_compact",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Nr. compartimentos visitados",
+        "translation": "Number of rooms visited"
+      },
+      {
+        "original": "Alimentados",
+        "translation": "Feeding (Anopheles Funestus)"
+      },
+      {
+        "original": "Gr\u00e1vidos",
+        "translation": "Pregnant (Anopheles Funestus)"
+      },
+      {
+        "original": "N\u00e3o alimentados",
+        "translation": "Not feeding (Anopheles Funestus)"
+      },
+      {
+        "original": "Total de f\u00eameas",
+        "translation": "Females (Anopheles Funestus)"
+      },
+      {
+        "original": "Total de machos",
+        "translation": "Males (Anopheles Funestus)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "column_structure": [
+      {
+          "w": 0.04535637149028078,
+          "x": 0.00755939524838013
+      },
+      {
+          "w": 0.07883369330453564,
+          "x": 0.2224622030237581
+      },
+      {
+          "w": 0.08531317494600432,
+          "x": 0.3045356371490281
+      },
+      {
+          "w": 0.08531317494600432,
+          "x": 0.3930885529157667
+      },
+      {
+          "w": 0.07127429805615551,
+          "x": 0.4816414686825054
+      },
+      {
+          "w": 0.07235421166306695,
+          "x": 0.5561555075593952
+      },
+      {
+          "w": 0.05399568034557235,
+          "x": 0.6317494600431965
+      },
+      {
+          "w": 0.06047516198704104,
+          "x": 0.6889848812095032
+      },
+      {
+          "w": 0.061555075593952485,
+          "x": 0.7526997840172787
+      },
+      {
+          "w": 0.05075593952483801,
+          "x": 0.8174946004319654
+      },
+      {
+          "w": 0.056155507559395246,
+          "x": 0.8714902807775378
+      },
+      {
+          "w": 0.06263498920086392,
+          "x": 0.9308855291576674
+      }
+    ],
+    "row_structure": [
+      {
+        "h": 0.0601,
+        "y": 0.0115
+      },
+      {
+        "h": 0.0581,
+        "y": 0.0799
+      },
+      {
+        "h": 0.0591,
+        "y": 0.146
+      },
+      {
+        "h": 0.0575,
+        "y": 0.2126
+      },
+      {
+        "h": 0.0571,
+        "y": 0.2784
+      },
+      {
+        "h": 0.0577,
+        "y": 0.3443
+      },
+      {
+        "h": 0.0577,
+        "y": 0.4101
+      },
+      {
+        "h": 0.0573,
+        "y": 0.4761
+      },
+      {
+        "h": 0.0573,
+        "y": 0.5418
+      },
+      {
+        "h": 0.0575,
+        "y": 0.6074
+      },
+      {
+        "h": 0.0581,
+        "y": 0.6738
+      },
+      {
+        "h": 0.0577,
+        "y": 0.7407
+      },
+      {
+        "h": 0.0579,
+        "y": 0.8073
+      },
+      {
+        "h": 0.0577,
+        "y": 0.8743
+      },
+      {
+        "h": 0.0583,
+        "y": 0.9409
+      }
+    ],
+    "points": [
+      {
+        "x": 0.0013216900569136426,
+        "y": 0.08075118803642166
+      },
+      {
+        "x": 0.9986335180139029,
+        "y": 0.9455399204307878
       }
     ]
   },

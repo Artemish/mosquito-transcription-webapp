@@ -18,13 +18,26 @@ def crop_to_box(img, cell):
 
     return img[y_slice, x_slice, :]
 
-def box_extraction(img, save_boxes=False):
-    n_iter, kernel_div, block_size, C = 1, 40, 7, 1
+DEFAULT_PARAMS = {
+    'n_iter': 1,
+    'kernel_div': 20,
+    'block_size': 7,
+    'C': 1
+}
+
+def box_extraction(img, save_boxes=False, n_iter=1, kernel_div=20,
+                   block_size=7, C=1, edge_thresh_low=20,
+                   edge_thresh_high=200):
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    gray = cv2.Canny(gray, 20, 200)
 
-    # s(gray)
+    gray = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,block_size,C)
+
+    s(gray, "Thresholded")
+
+    gray = cv2.Canny(gray, edge_thresh_low, edge_thresh_high)
+
+    s(gray, "Edge detection")
 
     img_bin = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,block_size,C)
 
@@ -32,7 +45,7 @@ def box_extraction(img, save_boxes=False):
     cv2.imwrite("Image_bin.jpg",img_bin)
 
     # Defining a kernel length
-    kernel_length = np.array(gray).shape[1] // kernel_div
+    kernel_length = kernel_div # np.array(gray).shape[1] // kernel_div
 
     # A verticle kernel of (1 X kernel_length), which will detect all the verticle lines from the image.
     verticle_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, kernel_length//2))
@@ -43,13 +56,13 @@ def box_extraction(img, save_boxes=False):
     img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=n_iter)
     verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=n_iter)
 
-    # s(verticle_lines_img)
+    s(verticle_lines_img, "Vertical lines")
 
     cv2.imwrite("verticle_lines.jpg",verticle_lines_img)# Morphological operation to detect horizontal lines from an image
     img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=1)
     horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=n_iter)
 
-    # s(horizontal_lines_img)
+    s(horizontal_lines_img, "Horizontal lines")
 
     cv2.imwrite("horizontal_lines.jpg",horizontal_lines_img)# Weighting parameters, this will decide the quantity of an image to be added to make a new image.
     alpha = 0.5
@@ -61,7 +74,7 @@ def box_extraction(img, save_boxes=False):
     # Enable this line to see verticle and horizontal lines in the image which is used to find boxes
     cv2.imwrite("img_final_bin.jpg",img_final_bin)
 
-    # s(img_final_bin)
+    s(img_final_bin, "Image final bin")
 
     # Find contours for image, which will detect all the boxes
     contours, hierarchy = cv2.findContours(img_final_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -234,7 +247,8 @@ def coerce_to_grid(bb):
     return output
 
 def outline_boxes(img, boxes, color=(128,0,255)):
-    if type(boxes[0]) == list:
+
+    if boxes and type(boxes[0]) == list:
         boxes = [box for row in boxes for box in row]
 
     show = img.copy()
@@ -244,20 +258,43 @@ def outline_boxes(img, boxes, color=(128,0,255)):
         bottomright = box['x']+box['w'], box['y']+box['h']
         show = cv2.rectangle(show, topleft, bottomright, color, 2)
 
-    # s(show)
+    s(show)
+
+def box_extraction_hyperparams(img):
+    from itertools import product
+    import random
+
+    n_iter_range = range(1,4)
+    kernel_div_range = range(30,50)
+    block_size_range = range(41,51,2)
+    C_range = range(5,10)
+    edge_thresh_low_range = range(10,50,10)
+    edge_thresh_high_range = range(180,230,10)
+
+    hyperparams = list(product(n_iter_range, kernel_div_range,
+                          block_size_range, C_range,
+                               edge_thresh_low_range,
+                               edge_thresh_high_range))
+
+    random.shuffle(hyperparams)
+
+    for (n_iter, kernel_div, block_size, C, edge_thresh_low,
+         edge_thresh_high) in hyperparams:
+        print(f'Trying hyperparams ({n_iter}, {kernel_div}, {block_size}, {C}, {edge_thresh_low}, {edge_thresh_high})')
+        result = box_extraction(img, n_iter=n_iter,
+                                kernel_div=kernel_div,block_size=block_size,C=C,edge_thresh_low=edge_thresh_low,edge_thresh_high=edge_thresh_high)
+        ordered = bbs_to_array(result)
+        # gridded = coerce_to_grid(ordered)
+        outline_boxes(img, ordered)
 
 if __name__ == '__main__':
     source_image = sys.argv[1]
     img = cv2.imread(source_image)  # Read the image
 
-    # result = box_extraction(img)
+    box_extraction_hyperparams(img)
 
-    # ordered = bbs_to_array(result)
-    # gridded = coerce_to_grid(ordered)
-
-    table = table_extraction(img)
+    # table = table_extraction(img)
 
     # outline_boxes(img, ordered)
-    # outline_boxes(img, gridded)
 
     # print(json.dumps(result, indent=2))

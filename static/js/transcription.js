@@ -3,6 +3,7 @@ var transcription_tab = null;
 function init_transcription() {
     const submitBtn = document.getElementById('transcription-submit-btn');
     const markCompleteBtn = document.getElementById('transcription-complete-btn');
+    const fixColsBtn = document.getElementById('transcription-fixcols-btn');
     const enumTranscription = document.getElementById('enum-transcription');
     const textTranscription = document.getElementById('text-transcription');
     const imageDisplay = document.getElementById('transcription-image-display');
@@ -61,6 +62,7 @@ function init_transcription() {
         window.addEventListener('keydown', handleTranscriptionInputKeydown);
         submitBtn.addEventListener('click', submitTranscription);
         markCompleteBtn.addEventListener('click', markComplete);
+        fixColsBtn.addEventListener('click', fixColumns);
         // selectWall.addEventListener('change', updateSelectWall);
         transcriptionInput.addEventListener('input', redraw);
     }
@@ -79,6 +81,8 @@ function init_transcription() {
         if (points.length == 2) {
           selectCell(0, 1);
         }
+
+        console.log("Settings points: ", points);
         
         redraw();
     }
@@ -441,6 +445,30 @@ function init_transcription() {
             alert(`Document ${current_file} marked as complete`);
             sidebar.markComplete();
         }
+    }
+
+    async function fixColumns() {
+        const submission = {
+          filename: current_file,
+        }
+
+        const response = await fetch('fix_columns', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submission)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(`Failed to fix columns: ${result}`);
+            return;
+        }
+
+        header.column_structure = result;
+        redraw();
     }
 
     async function updateSelectWall() {
