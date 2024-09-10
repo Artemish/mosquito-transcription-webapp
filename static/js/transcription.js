@@ -374,7 +374,82 @@ function init_transcription() {
         };
     }
 
+    function setFontSizeToFit(text, size) {
+        console.log(`Fitting text ${text} to size ${size}`);
+        let fontSize = 24;
+        context.font = `${fontSize} Arial`;
+        let textWidth = context.measureText(text).width;
+
+        while (textWidth > size) {
+            fontSize--;
+            context.font = `${fontSize}px Arial`;
+            textWidth = context.measureText(text).width;
+            console.log(`Reducing text(${text}) to size ${fontSize} (calculated ${textWidth})`);
+        }
+    }
+
+    function drawTextToBox(text, x, y, w, h) {
+      var words = text.split(" ");
+      var lines = [];
+      var line = words[0];
+      var startY = 2;
+
+      for (var i = 1; i < words.length; i++) {
+        var newline = line + " " + words[i];
+        if (context.measureText(newline).width > (w * 1.2)) {
+          lines.push(line);
+          line = words[i];
+        } else {
+          line = newline;
+        }
+      }
+
+      lines.push(line);
+
+      lines.forEach((line, lineNo) => {
+        context.fillText(line, x, startY, w);
+        startY += 16;
+      });
+    }
+
+    function drawColumnNames() {
+        header.column_structure.forEach((col, colIndex) => {
+          const cell = cellToRect(0, colIndex); 
+          // End the column just above the first cell
+          const bottomExtent = cell.y - 5
+          const text = header.columns[colIndex].original;
+
+          // Draw a white rectangle for the cell
+          context.fillStyle = 'rgba(255, 255, 255, 0.6)';
+          context.fillRect(cell.x, 0, cell.w, bottomExtent);
+
+          let x = cell.x;
+          let y = bottomExtent;
+          let drawVertical = cell.y > (cell.w * 1.5);
+
+          context.font = `20 Arial`;
+          context.fillStyle = 'black';
+          context.textBaseline = 'top';
+
+          if (text && drawVertical) {
+              context.save();
+              context.translate(x, y);
+              context.rotate(-1 * Math.PI / 2);
+              // setFontSizeToFit(text, cell.y - 4);
+              // context.fillText(text, 2, 2, cell.y - 4); // Adjust text position and max width as needed
+              drawTextToBox(text, 2, 2, cell.y - 4, cell.w - 4);
+              context.restore();
+          } else {
+              // setFontSizeToFit(text, cell.w - 4);
+              // context.fillText(text, x, 2, cell.w - 4); // Adjust text position and max width as needed
+              drawTextToBox(text, x + 2, y + 2, cell.w - 4, y - 4);
+          }
+        });
+    }
+
     function drawTranscriptionOverlay() {
+        drawColumnNames();
+
         header.row_structure.forEach((row, rowIndex) => {
             header.column_structure.forEach((col, colIndex) => {
                 // Translate the ratio coordinates to pixel coordinates
