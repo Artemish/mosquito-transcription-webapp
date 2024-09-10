@@ -26,7 +26,7 @@ SOURCE_DIRECTORY = 'source_images'
 TRANSCRIPT_DIRECTORY = 'transcriptions'
 TABLE_IMG_DIRECTORY = 'table_images'
 
-IMG_RE = re.compile('.*\.(png|jpg)')
+IMG_RE = re.compile(r'.*\.(png|jpg)')
 
 users = {
     "alexa": "mosquito",
