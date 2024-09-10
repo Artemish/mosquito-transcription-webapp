@@ -8,8 +8,26 @@ async function fetchFilesAndPopulateSidebar() {
     let prevSelection = null;
     let currentSelection = null;
 
+    let setFileParam = function(file) {
+      const url = new URL(window.location);
+      url.searchParams.set('filename', file);
+      window.history.pushState({}, '', url);
+    }
+
+    let loadFileFromParam = function() { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const filename = urlParams.get('filename');  // Get the value of the 'doc' parameter
+      const file = (fileList.find(f => f.id == filename));
+
+      if (file) {
+        console.log(`Loading ${file.id} from URL params..`);
+        selectFile(file);
+      }
+    }
+
     let selectFile = function(file) {
       file.element.classList.add('selected');
+      setFileParam(file.id);
 
       if (prevSelection) {
         prevSelection.classList.remove('selected');
@@ -62,7 +80,6 @@ async function fetchFilesAndPopulateSidebar() {
         let n_complete = fileList.filter(f => f.complete).length;
         listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
 
-
         fileList.forEach(file => {
             if (file.complete) {
               return;
@@ -83,6 +100,8 @@ async function fetchFilesAndPopulateSidebar() {
 
             listItem.addEventListener('click', () => selectFile(file));
         });
+
+        loadFileFromParam();
     } catch (error) {
         console.error('Error:', error);
     }
