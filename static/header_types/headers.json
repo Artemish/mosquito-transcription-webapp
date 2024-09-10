@@ -1576,198 +1576,11 @@
   },
   {
     "filename": "",
-    "documentType": "other_vectors_disease",
-    "columns": [
-      {
-        "original": "No. da casa",
-        "translation": "House Number"
-      },
-      {
-        "original": "Tipo de parede",
-        "translation": "Type of wall",
-        "enum": "wall"
-      },
-      {
-        "original": "Coordenadas geogr\u00e1ficas",
-        "translation": "Geographic Coordinates",
-        "pauseInput": true
-      },
-      {
-        "original": "Nr. pessoas pernoitaram",
-        "translation": "People present"
-      },
-      {
-        "original": "Nr. compartimentos visitados",
-        "translation": "Number of rooms visited"
-      },
-      {
-        "original": "Culex sp M",
-        "translation": "Males (Culex sp)"
-      },
-      {
-        "original": "Culex sp F",
-        "translation": "Females (Culex sp)"
-      },
-      {
-        "original": "Aedes sp M",
-        "translation": "Males (Aedes sp)"
-      },
-      {
-        "original": "Aedes sp F",
-        "translation": "Females (Aedes sp)"
-      },
-      {
-        "original": "Mansonia sp M",
-        "translation": "Males (Mansonia sp)"
-      },
-      {
-        "original": "Mansonia sp F",
-        "translation": "Females (Mansonia sp)"
-      },
-      {
-        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) M",
-        "translation": "Males (Unidentified Anopheles)"
-      },
-      {
-        "original": "Outros (Anopheles n\u00e3o identificados / des conhecidos) F",
-        "translation": "Females (Unidentified Anopheles)"
-      },
-      {
-        "original": "Presen\u00e7a de rede",
-        "translation": "Presence of net"
-      },
-      {
-        "original": "Data de ultima pulvericao",
-        "translation": "Date of last spraying"
-      }
-    ],
-    "row_structure": [
-      {
-        "y": 0.0173,
-        "h": 0.0899
-      },
-      {
-        "y": 0.1167,
-        "h": 0.0889
-      },
-      {
-        "y": 0.2156,
-        "h": 0.0886
-      },
-      {
-        "y": 0.3148,
-        "h": 0.0884
-      },
-      {
-        "y": 0.414,
-        "h": 0.0878
-      },
-      {
-        "y": 0.5123,
-        "h": 0.088
-      },
-      {
-        "y": 0.6111,
-        "h": 0.088
-      },
-      {
-        "y": 0.7102,
-        "h": 0.0876
-      },
-      {
-        "y": 0.8092,
-        "h": 0.0893
-      },
-      {
-        "y": 0.9092,
-        "h": 0.0889
-      }
-    ],
-    "column_structure": [
-      {
-        "x": 0.0014,
-        "w": 0.0548
-      },
-      {
-        "x": 0.1858651000000001,
-        "w": 0.07623365
-      },
-      {
-        "x": 0.26509874999999994,
-        "w": 0.09895535
-      },
-      {
-        "x": 0.36725409999999997,
-        "w": 0.0756124
-      },
-      {
-        "x": 0.44616649999999997,
-        "w": 0.06507065
-      },
-      {
-        "x": 0.5145371499999999,
-        "w": 0.0332446
-      },
-      {
-        "x": 0.5513817499999998,
-        "w": 0.035362849999999994
-      },
-      {
-        "x": 0.5902445999999998,
-        "w": 0.025254500000000003
-      },
-      {
-        "x": 0.6188990999999998,
-        "w": 0.038929450000000004
-      },
-      {
-        "x": 0.6617285499999997,
-        "w": 0.029687899999999993
-      },
-      {
-        "x": 0.6950164499999998,
-        "w": 0.0476879
-      },
-      {
-        "x": 0.7462043499999998,
-        "w": 0.035448349999999997
-      },
-      {
-        "x": 0.7851526999999998,
-        "w": 0.037166050000000006
-      },
-      {
-        "x": 0.8258187499999998,
-        "w": 0.0669265
-      },
-      {
-        "x": 0.8961452499999999,
-        "w": 0.10305475
-      }
-    ],
-    "points": [
-      {
-        "x": 0.0036101083032490976,
-        "y": 0.20229613242976172
-      },
-      {
-        "x": 0.9972924187725631,
-        "y": 0.9267616906245361
-      }
-    ]
-  },
-  {
-    "filename": "",
     "documentType": "light_traps_indoor_outdoor",
     "columns": [
       {
         "original": "No. da casa",
         "translation": "House Number"
-      },
-      {
-        "original": "Tipo de parede",
-        "translation": "Type of wall",
-        "enum": "wall"
       },
       {
         "original": "Coordenadas geogr\u00e1ficas (lat)",
@@ -1820,111 +1633,424 @@
         "translation": "Other Anopheles (Outdoors)"
       }
     ],
-    "row_structure": [
+    "column_structure": [{"x": 0.0009861932938856016, "w": 0.05325443786982249}, {"x": 0.1913214990138067, "w": 0.07692307692307693}, {"x": 0.27120315581854043, "w": 0.07495069033530571}, {"x": 0.34911242603550297, "w": 0.0670611439842209}, {"x": 0.41913214990138065, "w": 0.07001972386587771}, {"x": 0.4921104536489152, "w": 0.05621301775147929}, {"x": 0.5512820512820513, "w": 0.05719921104536489}, {"x": 0.611439842209073, "w": 0.05917159763313609}, {"x": 0.6735700197238659, "w": 0.06903353057199212}, {"x": 0.7445759368836292, "w": 0.07199211045364892}, {"x": 0.8195266272189349, "w": 0.05719921104536489}, {"x": 0.8796844181459567, "w": 0.05719921104536489}, {"x": 0.9398422090729783, "w": 0.05719921104536489}],
+    "row_structure": [{"y": 0.015, "h": 0.14916666666666667}, {"y": 0.1791666666666667, "h": 0.14916666666666667}, {"y": 0.3433333333333334, "h": 0.14916666666666667}, {"y": 0.5075000000000001, "h": 0.14916666666666667}, {"y": 0.6716666666666667, "h": 0.14916666666666667}, {"y": 0.8358333333333334, "h": 0.14916666666666667}],
+    "points": [{"x":0.0019723865877712033,"y":0.3690058657997533},{"x":0.9970414201183432,"y":0.9900584973787007}]
+  },
+  {
+    "filename": "",
+    "documentType": "other_vectors_disease_a",
+    "columns": [
       {
-        "y": 0.0053,
-        "h": 0.0906
+        "original": "No. da casa",
+        "translation": "House Number"
       },
       {
-        "y": 0.1069,
-        "h": 0.0888
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
       },
       {
-        "y": 0.2064,
-        "h": 0.0896
+        "original": "Tipo de chão",
+        "translation": "Type of floor"
       },
       {
-        "y": 0.3074,
-        "h": 0.0883
+        "original": "Tipo de tecto",
+        "translation": "Type of ceiling"
       },
       {
-        "y": 0.4072,
-        "h": 0.0888
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
       },
       {
-        "y": 0.5073,
-        "h": 0.0894
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
       },
       {
-        "y": 0.6078,
-        "h": 0.0899
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
       },
       {
-        "y": 0.7093,
-        "h": 0.0911
+        "original": "Culex sp M",
+        "translation": "Males (Culex sp)"
       },
       {
-        "y": 0.8124,
-        "h": 0.0906
+        "original": "Culex sp F",
+        "translation": "Females (Culex sp)"
       },
       {
-        "y": 0.9147,
-        "h": 0.0853
+        "original": "Aedes sp M",
+        "translation": "Males (Aedes sp)"
+      },
+      {
+        "original": "Aedes sp F",
+        "translation": "Females (Aedes sp)"
+      },
+      {
+        "original": "Outros Vectores 1 M",
+        "translation": "Males (Unspecified 1)"
+      },
+      {
+        "original": "Outros Vectores 1 F",
+        "translation": "Females (Unspecified 1)"
+      },
+      {
+        "original": "Outros Vectores 2 M",
+        "translation": "Males (Unspecified 2)"
+      },
+      {
+        "original": "Outros Vectores 2 F",
+        "translation": "Females (Unspecified 2)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
       }
     ],
-    "column_structure": [
+    "row_structure": [{"y": 0.004, "h": 0.09559999999999999}, {"y": 0.1036, "h": 0.09559999999999999}, {"y": 0.2032, "h": 0.09559999999999999}, {"y": 0.30279999999999996, "h": 0.09559999999999999}, {"y": 0.4024, "h": 0.09559999999999999}, {"y": 0.502, "h": 0.09559999999999999}, {"y": 0.6015999999999999, "h": 0.09559999999999999}, {"y": 0.7011999999999999, "h": 0.09559999999999999}, {"y": 0.8008, "h": 0.09559999999999999}, {"y": 0.9004, "h": 0.09559999999999999}],
+    "column_structure": [{"x": 0.000999000999000999, "w": 0.04795204795204795}, {"x": 0.14885114885114886, "w": 0.06493506493506493}, {"x": 0.21678321678321677, "w": 0.061938061938061936}, {"x": 0.2817182817182817, "w": 0.06293706293706294}, {"x": 0.34865134865134867, "w": 0.06493506493506493}, {"x": 0.4165834165834166, "w": 0.06393606393606394}, {"x": 0.4835164835164835, "w": 0.06993006993006994}, {"x": 0.5564435564435565, "w": 0.04195804195804196}, {"x": 0.6013986013986014, "w": 0.04095904095904096}, {"x": 0.6453546453546454, "w": 0.04195804195804196}, {"x": 0.6903096903096904, "w": 0.04195804195804196}, {"x": 0.7352647352647352, "w": 0.04895104895104895}, {"x": 0.7872127872127872, "w": 0.04495504495504495}, {"x": 0.8351648351648352, "w": 0.04495504495504495}, {"x": 0.8831168831168831, "w": 0.04495504495504495}, {"x": 0.932067932067932, "w": 0.06693306693306693}],
+    "points": [{"x":0.0018314967503199925,"y":0.18119100599766816},{"x":0.998834493753317,"y":0.9241103959758816}]
+  },
+  {
+    "filename": "",
+    "documentType": "other_vectors_disease_b",
+    "columns": [
       {
-        "x": 0.0019,
-        "w": 0.0486
+        "original": "No. da casa",
+        "translation": "House Number"
       },
       {
-        "x": 0.19977608939999997,
-        "w": 0.0753419582
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
       },
       {
-        "x": 0.27841804759999994,
-        "w": 0.0758316952
+        "original": "Tipo de chão",
+        "translation": "Type of floor"
       },
       {
-        "x": 0.3575497427999999,
-        "w": 0.06936362220000002
+        "original": "Tipo de tecto",
+        "translation": "Type of ceiling"
       },
       {
-        "x": 0.4303133649999999,
-        "w": 0.06319338280000002
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
       },
       {
-        "x": 0.4969067477999999,
-        "w": 0.05425723679999999
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
       },
       {
-        "x": 0.5546639845999999,
-        "w": 0.05042702099999997
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
       },
       {
-        "x": 0.6084910055999999,
-        "w": 0.057214250200000004
+        "original": "An. Gambiae s.l. Alimentados",
+        "translation": "Feeding (An. Gambiae s.l.)"
       },
       {
-        "x": 0.6691052557999999,
-        "w": 0.073256554
+        "original": "An. Gambiae s.l. Gravidos",
+        "translation": "Pregnant (An. Gambiae s.l.)"
       },
       {
-        "x": 0.7457618098,
-        "w": 0.07357571019999999
+        "original": "An. Gambiae s.l. Nao Alimentados",
+        "translation": "Not Feeding (An. Gambiae s.l.)"
       },
       {
-        "x": 0.8227375199999999,
-        "w": 0.058511969999999996
+        "original": "An. Gambiae Total F",
+        "translation": "Total Females (An. Gambiae s.l.)"
       },
       {
-        "x": 0.8846494899999999,
-        "w": 0.05383123999999999
+        "original": "An. Gambiae Total M",
+        "translation": "Total Males (An. Gambiae s.l.)"
       },
       {
-        "x": 0.94268073,
-        "w": 0.06531927
+        "original": "An. Funestus s.l. Alimentados",
+        "translation": "Feeding (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus s.l. Gravidos",
+        "translation": "Pregnant (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus s.l. Nao Alimentados",
+        "translation": "Not Feeding (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus Total F",
+        "translation": "Total Females (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus Total M",
+        "translation": "Total Males (An. Funestus s.l.)"
+      },
+      {
+        "original": "Culex sp M",
+        "translation": "Males (Culex sp)"
+      },
+      {
+        "original": "Culex sp F",
+        "translation": "Females (Culex sp)"
+      },
+      {
+        "original": "Aedes sp M",
+        "translation": "Males (Aedes sp)"
+      },
+      {
+        "original": "Aedes sp F",
+        "translation": "Females (Aedes sp)"
+      },
+      {
+        "original": "An. Coustani M",
+        "translation": "Males (An. Coustani)"
+      },
+      {
+        "original": "An. Coustani F",
+        "translation": "Females (An. Coustani)"
+      },
+      {
+        "original": "An. Phaorensis M",
+        "translation": "Males (An. Phaorensis)"
+      },
+      {
+        "original": "An. Phaorensis F",
+        "translation": "Females (An. Phaorensis)"
+      },
+      {
+        "original": "An. Macu M",
+        "translation": "Males (An. Macu)"
+      },
+      {
+        "original": "An. Macu F",
+        "translation": "Females (An. Macu)"
+      },
+      {
+        "original": "An. Pretori M",
+        "translation": "Males (An. Pretori)"
+      },
+      {
+        "original": "An. Pretori F",
+        "translation": "Females (An. Pretori)"
+      },
+      {
+        "original": "Nr. Redes",
+        "translation": "Number of nets"
+      },
+      {
+        "original": "Nr. Pessoas Dormir",
+        "translation": "Number of sleeping people"
+      },
+      {
+        "original": "Fonte",
+        "translation": "Source of nets"
       }
     ],
-    "points": [
+    "row_structure": [{"y": 0.004, "h": 0.09559999999999999}, {"y": 0.1036, "h": 0.09559999999999999}, {"y": 0.2032, "h": 0.09559999999999999}, {"y": 0.30279999999999996, "h": 0.09559999999999999}, {"y": 0.4024, "h": 0.09559999999999999}, {"y": 0.502, "h": 0.09559999999999999}, {"y": 0.6015999999999999, "h": 0.09559999999999999}, {"y": 0.7011999999999999, "h": 0.09559999999999999}, {"y": 0.8008, "h": 0.09559999999999999}, {"y": 0.9004, "h": 0.09559999999999999}],
+    "column_structure": [{"x": 0.002228826151560178, "w": 0.0274888558692422}, {"x": 0.137444279346211, "w": 0.041604754829123326}, {"x": 0.1812778603268945, "w": 0.03417533432392273}, {"x": 0.21842496285289748, "w": 0.03566121842496285}, {"x": 0.25705794947994054, "w": 0.041604754829123326}, {"x": 0.3016344725111441, "w": 0.046805349182763745}, {"x": 0.3521545319465082, "w": 0.0274888558692422}, {"x": 0.3826151560178306, "w": 0.015601783060921248}, {"x": 0.4011887072808321, "w": 0.014858841010401188}, {"x": 0.4200475482912333, "w": 0.014858841010401188}, {"x": 0.4346210995542348, "w": 0.0237741456166419}, {"x": 0.46136701337295694, "w": 0.0237741456166419}, {"x": 0.4888558692421991, "w": 0.017830609212481426}, {"x": 0.5089153046062407, "w": 0.017087667161961365}, {"x": 0.5289747399702823, "w": 0.0237741456166419}, {"x": 0.5557206537890045, "w": 0.021545319465081723}, {"x": 0.5802377414561665, "w": 0.022288261515601784}, {"x": 0.6047548291233283, "w": 0.019316493313521546}, {"x": 0.6270430906389302, "w": 0.023031203566121844}, {"x": 0.6530460624071323, "w": 0.017087667161961365}, {"x": 0.6723625557206538, "w": 0.02526002971768202}, {"x": 0.700594353640416, "w": 0.017087667161961365}, {"x": 0.7199108469539376, "w": 0.014858841010401188}, {"x": 0.7377414561664191, "w": 0.017087667161961365}, {"x": 0.7570579494799405, "w": 0.017830609212481426}, {"x": 0.7778603268945022, "w": 0.01634472511144131}, {"x": 0.7971768202080238, "w": 0.017830609212481426}, {"x": 0.8172362555720654, "w": 0.023031203566121844}, {"x": 0.8424962852897474, "w": 0.0237741456166419}, {"x": 0.8692421991084696, "w": 0.021545319465081723}, {"x": 0.8930163447251115, "w": 0.04086181277860327}, {"x": 0.936849925705795, "w": 0.060178306092124816}],
+    "points": [{"x":0.0007429420505200594,"y":0.32890500423412966},{"x":0.9977711738484398,"y":0.9013687723500717}]
+  },
+  {
+    "filename": "",
+    "documentType": "other_vectors_disease_c",
+    "columns": [
       {
-        "x": 0.0026244911820217866,
-        "y": 0.2813927114826359
+        "original": "No. da casa",
+        "translation": "House Number"
       },
       {
-        "x": 0.9985868061214566,
-        "y": 0.990296821071677
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Tipo de chão",
+        "translation": "Type of floor"
+      },
+      {
+        "original": "Tipo de tecto",
+        "translation": "Type of ceiling"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "Outros Vectores 1 M",
+        "translation": "Males (Unspecified 1)"
+      },
+      {
+        "original": "Outros Vectores 1 F",
+        "translation": "Females (Unspecified 1)"
+      },
+      {
+        "original": "Outros Vectores 2 M",
+        "translation": "Males (Unspecified 2)"
+      },
+      {
+        "original": "Outros Vectores 2 F",
+        "translation": "Females (Unspecified 2)"
+      },
+      {
+        "original": "Outros Vectores 3 M",
+        "translation": "Males (Unspecified 3)"
+      },
+      {
+        "original": "Outros Vectores 3 F",
+        "translation": "Females (Unspecified 3)"
+      },
+      {
+        "original": "Outros Vectores 4 M",
+        "translation": "Males (Unspecified 4)"
+      },
+      {
+        "original": "Outros Vectores 4 F",
+        "translation": "Females (Unspecified 4)"
+      },
+      {
+        "original": "Outros Vectores 5 M",
+        "translation": "Males (Unspecified 5)"
+      },
+      {
+        "original": "Outros Vectores 5 F",
+        "translation": "Females (Unspecified 5)"
+      },
+      {
+        "original": "Outros Vectores 6 M",
+        "translation": "Males (Unspecified 6)"
+      },
+      {
+        "original": "Outros Vectores 6 F",
+        "translation": "Females (Unspecified 6)"
+      },
+      {
+        "original": "Nr. Redes",
+        "translation": "Number of nets"
+      },
+      {
+        "original": "Nr. Pessoas Dormir",
+        "translation": "Number of sleeping people"
+      },
+      {
+        "original": "Fonte",
+        "translation": "Source of nets"
       }
-    ]
+    ],
+    "row_structure": [{"y": 0.004, "h": 0.09559999999999999}, {"y": 0.1036, "h": 0.09559999999999999}, {"y": 0.2032, "h": 0.09559999999999999}, {"y": 0.30279999999999996, "h": 0.09559999999999999}, {"y": 0.4024, "h": 0.09559999999999999}, {"y": 0.502, "h": 0.09559999999999999}, {"y": 0.6015999999999999, "h": 0.09559999999999999}, {"y": 0.7011999999999999, "h": 0.09559999999999999}, {"y": 0.8008, "h": 0.09559999999999999}, {"y": 0.9004, "h": 0.09559999999999999}],
+    "column_structure": [{"x": 0.0029940119760479044, "w": 0.030688622754491017}, {"x": 0.16167664670658682, "w": 0.059880239520958084}, {"x": 0.22380239520958084, "w": 0.08008982035928144}, {"x": 0.3068862275449102, "w": 0.05089820359281437}, {"x": 0.36227544910179643, "w": 0.06437125748502993}, {"x": 0.43038922155688625, "w": 0.07410179640718563}, {"x": 0.5089820359281437, "w": 0.05538922155688623}, {"x": 0.5673652694610778, "w": 0.0187125748502994}, {"x": 0.5890718562874252, "w": 0.02245508982035928}, {"x": 0.6145209580838323, "w": 0.020958083832335328}, {"x": 0.6384730538922155, "w": 0.023203592814371257}, {"x": 0.6639221556886228, "w": 0.023952095808383235}, {"x": 0.6908682634730539, "w": 0.02470059880239521}, {"x": 0.718562874251497, "w": 0.023952095808383235}, {"x": 0.7455089820359282, "w": 0.0187125748502994}, {"x": 0.7672155688622755, "w": 0.020209580838323353}, {"x": 0.7904191616766467, "w": 0.02245508982035928}, {"x": 0.8158682634730539, "w": 0.019461077844311378}, {"x": 0.8383233532934131, "w": 0.020958083832335328}, {"x": 0.8622754491017964, "w": 0.020958083832335328}, {"x": 0.8862275449101796, "w": 0.05089820359281437}, {"x": 0.9401197604790419, "w": 0.0561377245508982}],
+    "points": [{"x":0.0014970059880239522,"y":0.3129166793823242},{"x":0.9970059880239521,"y":0.9379166793823243}]
+  },
+  {
+    "filename": "",
+    "documentType": "other_vectors_disease_d",
+    "columns": [
+      {
+        "original": "No. da casa",
+        "translation": "House Number"
+      },
+      {
+        "original": "Tipo de parede",
+        "translation": "Type of wall",
+        "enum": "wall"
+      },
+      {
+        "original": "Tipo de chão",
+        "translation": "Type of floor"
+      },
+      {
+        "original": "Tipo de tecto",
+        "translation": "Type of ceiling"
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lat)",
+        "translation": "latitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Coordenadas geogr\u00e1ficas (lon)",
+        "translation": "longitude",
+        "pauseInput": true
+      },
+      {
+        "original": "Nr. pessoas pernoitaram",
+        "translation": "People present"
+      },
+      {
+        "original": "An. Gambiae s.l. Alimentados",
+        "translation": "Feeding (An. Gambiae s.l.)"
+      },
+      {
+        "original": "An. Gambiae s.l. Gravidos",
+        "translation": "Pregnant (An. Gambiae s.l.)"
+      },
+      {
+        "original": "An. Gambiae s.l. Nao Alimentados",
+        "translation": "Not Feeding (An. Gambiae s.l.)"
+      },
+      {
+        "original": "An. Gambiae Total F",
+        "translation": "Total Females (An. Gambiae s.l.)"
+      },
+      {
+        "original": "An. Gambiae Total M",
+        "translation": "Total Males (An. Gambiae s.l.)"
+      },
+      {
+        "original": "An. Funestus s.l. Alimentados",
+        "translation": "Feeding (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus s.l. Gravidos",
+        "translation": "Pregnant (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus s.l. Nao Alimentados",
+        "translation": "Not Feeding (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus Total F",
+        "translation": "Total Females (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Funestus Total M",
+        "translation": "Total Males (An. Funestus s.l.)"
+      },
+      {
+        "original": "An. Coustani F",
+        "translation": "Females (An. Coustani)"
+      },
+      {
+        "original": "An. Phaorensis F",
+        "translation": "Females (An. Phaorensis)"
+      },
+      {
+        "original": "An. Macu F",
+        "translation": "Females (An. Macu)"
+      },
+      {
+        "original": "An. Pretori F",
+        "translation": "Females (An. Pretori)"
+      },
+      {
+        "original": "Presen\u00e7a de rede",
+        "translation": "Presence of net"
+      }
+    ],
+    "row_structure": [{"y": 0.004, "h": 0.09559999999999999}, {"y": 0.1036, "h": 0.09559999999999999}, {"y": 0.2032, "h": 0.09559999999999999}, {"y": 0.30279999999999996, "h": 0.09559999999999999}, {"y": 0.4024, "h": 0.09559999999999999}, {"y": 0.502, "h": 0.09559999999999999}, {"y": 0.6015999999999999, "h": 0.09559999999999999}, {"y": 0.7011999999999999, "h": 0.09559999999999999}, {"y": 0.8008, "h": 0.09559999999999999}, {"y": 0.9004, "h": 0.09559999999999999}],
+    "column_structure": [{"x": 0.0031185031185031187, "w": 0.02702702702702703}, {"x": 0.13097713097713098, "w": 0.0395010395010395}, {"x": 0.1735966735966736, "w": 0.036382536382536385}, {"x": 0.2130977130977131, "w": 0.04054054054054054}, {"x": 0.2577962577962578, "w": 0.04054054054054054}, {"x": 0.30145530145530147, "w": 0.0395010395010395}, {"x": 0.34407484407484407, "w": 0.05197505197505198}, {"x": 0.3991683991683992, "w": 0.02079002079002079}, {"x": 0.42395841995842, "w": 0.02079002079002079}, {"x": 0.4487484407484408, "w": 0.02079002079002079}, {"x": 0.4698544698544699, "w": 0.032224532224532226}, {"x": 0.5051975051975052, "w": 0.035343035343035345}, {"x": 0.5436590436590436, "w": 0.02182952182952183}, {"x": 0.5686070686070686, "w": 0.02286902286902287}, {"x": 0.5945945945945946, "w": 0.02390852390852391}, {"x": 0.6216216216216216, "w": 0.032224532224532226}, {"x": 0.656964656964657, "w": 0.034303534303534305}, {"x": 0.6964656964656964, "w": 0.060291060291060294}, {"x": 0.7598752598752598, "w": 0.062370062370062374}, {"x": 0.8264033264033264, "w": 0.04781704781704782}, {"x": 0.8773388773388774, "w": 0.06548856548856549}, {"x": 0.9459459459459459, "w": 0.05301455301455302}],
+    "points": [{"x":0.002945247658077248,"y":0.2129008316620351},{"x":0.9977477424605721,"y":0.9287845005658383}]
   }
 ]
