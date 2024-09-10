@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utils import s
+from utils import s, show_contour
 from subset_table_warp import (
     filter_bounding_boxes,
     box_to_contour,
@@ -45,7 +45,7 @@ def infer_column_structure(image, skip_names=False):
 
     boxes = filter_bounding_boxes(
         boxes, min_aspect=0.2,
-        max_aspect=15, min_area=400,
+        max_aspect=15, min_area=200,
         max_area=30000
     )
 
@@ -71,6 +71,10 @@ def experiment_find_columns(image_path, expected_cols):
         boxes = infer_column_structure(cropped, skip_names=True)
         if len(boxes) == expected_cols:
             return boxes
+        elif len(boxes) == (expected_cols + 1):
+            return boxes[1:]
+
+    print("Found no boxes!")
 
 if __name__ == '__main__':
     import sys
@@ -85,9 +89,10 @@ if __name__ == '__main__':
     s(header, 'Original Header')
     for (i, contour) in enumerate(contours):
         # Draw contours on the header for visualization
-        header_with_contours = cv2.cvtColor(header, cv2.COLOR_BGR2RGB)
-        cv2.drawContours(header_with_contours, [contour], -1, (0, 255, 0), 2)
-        s(header_with_contours, f'Contour {i}')
+        # header_with_contours = cv2.cvtColor(header, cv2.COLOR_BGR2RGB)
+        show_contour(header, contour)
+        # cv2.drawContours(header_with_contours, [contour], -1, (0, 255, 0), 2)
+        # s(header_with_contours, f'Contour {i}')
 
     boxes = infer_column_structure(header)
     print(f'Found {len(boxes)} boxes')

@@ -129,7 +129,7 @@ def box_to_contour(box):
     # are structured
     contour[:, 0, :] = arr
 
-    return contour
+    return contour.astype(int)
 
 def filter_bounding_boxes(boxes, min_area=20, max_area=5000, min_aspect=0.2, max_aspect=5.0):
     filtered_boxes = []
