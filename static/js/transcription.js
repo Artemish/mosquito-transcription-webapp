@@ -576,7 +576,7 @@ async function fetchTranscription(file) {
     console.log("Fetched transcription:");
     console.log(transcription);
 
-    const default_transcriptions = header.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
+    const default_transcriptions = header?.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
     
     transcriptions = transcription?.transcriptions || default_transcriptions;
     console.log("Set transcriptions to: ", transcriptions);

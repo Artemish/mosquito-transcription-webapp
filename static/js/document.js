@@ -71,9 +71,6 @@ function init_document() {
         setTab('dewarp');
     }
 
-
-    
-
     initialize();
 }
 
@@ -95,7 +92,6 @@ async function fetchDocument(file) {
         console.error(`Failed to fetch document: ${response.statusText}`);
         return;
     }
-
 
     const doc = await response.json();
     console.log("Fetched document:");

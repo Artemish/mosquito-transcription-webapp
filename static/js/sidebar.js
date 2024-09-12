@@ -2,6 +2,7 @@ var headerTypes = null;
 var sidebar = {};
 var fileList = [];
 
+
 async function fetchFilesAndPopulateSidebar() {
     const sidebarList = document.getElementById('file-list');
     const listHeader = document.getElementById('file-list-header');
@@ -67,68 +68,75 @@ async function fetchFilesAndPopulateSidebar() {
       listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
     };
 
-    try {
-        const response = await fetch('list_source_images');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+  function addFileElement(file) { 
+    var listItem = document.createElement('tr');
+    const docStyle = file.has_document ? "complete" : "empty";
+    const tableStyle = file.has_table ? "complete" : "empty";
+    const transcriptStyle = file.complete ?
+      "complete"
+      : file.has_transcript
+      ? "incomplete"
+      : "empty";
 
-        fileList = await response.json();
 
-        sidebarList.innerHTML = '';
+    listItem.innerHTML = `
+      <td class="file-id">${file.id}</td>
+      <td class="${docStyle}"> X </td>
+      <td class="${tableStyle}"> X </td>
+      <td class="${transcriptStyle}"> X </td>
+    `;
 
-        let n_complete = fileList.filter(f => f.complete).length;
-        listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
+    file.element = listItem;
+    listItem.addEventListener('click', () => selectFile(file));
 
-        fileList.forEach(file => {
-            if (file.complete) {
-              return;
-            }
+    sidebarList.appendChild(listItem);
 
-            const listItem = document.createElement('li');
-            listItem.textContent = file.id;
-            if (file.has_transcript) {
-                listItem.classList.add('has-transcript');
-            } else if (file.has_table) {
-                listItem.classList.add('has-table');
-            } else if (file.has_document) {
-                listItem.classList.add('has-document');
-            }
+    return listItem;
+  }
 
-            sidebarList.appendChild(listItem);
-            file.element = listItem;
-
-            listItem.addEventListener('click', () => selectFile(file));
-        });
-
-        loadFileFromParam();
-    } catch (error) {
-        console.error('Error:', error);
+  try {
+    const response = await fetch('list_source_images');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    fileList = await response.json();
+
+    sidebarList.innerHTML = '';
+
+    let n_complete = fileList.filter(f => f.complete).length;
+    listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
+
+    fileList.filter((file) => !file.complete).forEach(addFileElement);
+
+    loadFileFromParam();
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
 
 
 async function loadHeaderTypes() {
-    // Assuming an endpoint like `/list_header_types` that returns an array of image filenames
-    const response = await fetch('static/header_types/headers.json');
-    headerTypes = await response.json();
+  // Assuming an endpoint like `/list_header_types` that returns an array of image filenames
+  const response = await fetch('static/header_types/headers.json');
+  headerTypes = await response.json();
 }
 
 function setCurrentHeader(documentType) {
-    console.log(`Current header set to: ${documentType}`);
-    if (documentType == "") {
-      header = null;
+  console.log(`Current header set to: ${documentType}`);
+  if (documentType == "") {
+    header = null;
+  }
+
+  headerTypes.forEach(headerType => {
+    if (headerType.documentType == documentType) {
+      header = headerType;
     }
+  });
 
-    headerTypes.forEach(headerType => {
-      if (headerType.documentType == documentType) {
-        header = headerType;
-      }
-    });
-
-    const doctypeInput = document.getElementById('document-type');
-    doctypeInput.value = header?.documentType || "";
+  const doctypeInput = document.getElementById('document-type');
+  doctypeInput.value = header?.documentType || "";
 }
 
 // Call the function when the DOM is fully loaded

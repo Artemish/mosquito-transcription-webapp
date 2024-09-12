@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #transcription-container {
     position: relative;
     display: block;
@@ -44,17 +49,20 @@ canvas {
 }
 
 .sidebar {
-    height: 100vh; /* Full height of the viewport */
-    width: 350px; /* Sidebar width */
+    height: calc(100vh - 20px); /* Full height of the viewport */
     background-color: #f1f1f1; /* Sidebar background color */
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
+    padding: 10px;
+    border-right-style: groove;
+    flex-shrink: 1;
 }
 
 .content {
     flex-grow: 1; /* Take up the remaining space */
     background-color: #ffffff; /* Content background color */
     padding: 20px; /* Padding around content */
+    height: calc(100vh - 40px);
+    overflow: auto;
 }
 
 .sidebar h3 {
@@ -67,14 +75,24 @@ canvas {
 }
 
 .sidebar ul li {
+    font-size: 0.8rem;
     padding: 8px;
     text-align: left;
     margin-left: 20px;
     cursor: pointer;
 }
 
+.file-id {
+  max-width: 12em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
 .selected {
     border: 2px solid black;
+    background-color: rgba(0,0,0,0.3);
 }
 
 .has-document {
@@ -90,7 +108,7 @@ canvas {
 }
 
 
-.sidebar ul li:hover {
+.sidebar tbody tr:hover {
     background-color: #ddd; /* Change background on hover */
 }
 
@@ -158,4 +176,18 @@ canvas {
 .btn-secondary {
     background-color: #6c757d;
     color: white;
+}
+
+/* Sidebar table styles */
+
+.empty {
+  background-color: white;
+}
+
+.incomplete {
+  background-color: yellow;
+}
+
+.complete {
+  background-color: green;
 }

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Image Cropper and Segmenter</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='app.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{ url_for('static', filename='js/globals.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/document.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dewarp.js') }}"></script>
     <script src="{{ url_for('static', filename='js/transcription.js') }}"></script>
     <script src="{{ url_for('static', filename='js/identify-document.js') }}"></script>
-</head>
-<body>
-
-  <div class="flex-container">
-    <div id="file-sidebar" class="sidebar">
+  </head>
+  <body>
+    <div class="flex-container">
+      <div id="file-sidebar" class="sidebar">
         <div>
           <a href="download_csv" download="transcription.csv">Download Transcription CSV</a>
         </div>
@@ -22,15 +22,25 @@
           <a href="download_documents_csv" download="documents.csv">Download Documents CSV</a>
         </div>
         <h3 id="file-list-header">Source Files</h3>
-        <ul id="file-list"></ul>
+        <table>
+          <thead>
+            <tr>
+              <th class="file-id">File ID</th>
+              <th class="status">Doc</th>
+              <th class="segmentation">Seg.</th>
+              <th class="transcription">Data</th>
+            </tr>
+          </thead>
+          <tbody id="file-list"></tbody>
+        </table>
+      </div>
+      <div class="content">
+        <h2 id="current-filename"></h2>
+        {% include 'tabnav.html' %}
+        {% include 'document-tab.html' %}
+        {% include 'dewarp-tab.html' %}
+        {% include 'transcription-tab.html' %}
+      </div>
     </div>
-    <div class="content">
-      <h2 id="current-filename"></h2>
-      {% include 'tabnav.html' %}
-      {% include 'document-tab.html' %}
-      {% include 'dewarp-tab.html' %}
-      {% include 'transcription-tab.html' %}
-    </div>
-  </div>
-</body>
+  </body>
 </html>
