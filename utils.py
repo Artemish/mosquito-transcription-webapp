@@ -2,11 +2,14 @@ import cv2
 import sys
 import json
 
-def s(img, title='None'):
+def s(img, title='None', keyfuncs={}):
     cv2.imshow(title, img)
+    ret = None
 
     while True:
         k = cv2.waitKey(0)
+        dofunc = keyfuncs.get(chr(k))
+
         if k == ord('q'):
             break
         elif k == ord('x'):
@@ -14,8 +17,12 @@ def s(img, title='None'):
             sys.exit(1)
         elif k == ord('v'):
             import pdb; pdb.set_trace()
+        elif dofunc is not None:
+            ret = dofunc()
+            break
 
     cv2.destroyAllWindows()
+    return ret
 
 show = s
 
@@ -23,12 +30,12 @@ def show_contour(img, contour):
     # Draw the approximated contour
     img_with_approx = img.copy()
     cv2.drawContours(img_with_approx, [contour], 0, (0, 0, 255), 5)
-    
+
     show(img_with_approx)
 
 from copy import deepcopy
 
-header_index = 6
+header_index = -1
 
 def get_current_cols():
     filename = 'static/header_types/headers.json'
@@ -81,3 +88,23 @@ def update_headers(new_cols):
     with open(filename, 'w') as outf:
         outf.write(json.dumps(headers, indent=2))
 
+## Make a structure outline for a new document type
+def generate_structure(n_rows, n_cols, margin):
+    column_structure = []
+    row_structure = []
+
+    # Calculate the width of each column and height of each row, considering the margin
+    col_width = (1 - margin * (n_cols + 1)) / n_cols
+    row_height = (1 - margin * (n_rows + 1)) / n_rows
+
+    # Generate column_structure
+    for i in range(n_cols):
+        x_position = margin + i * (col_width + margin)
+        column_structure.append({'x': x_position, 'w': col_width})
+
+    # Generate row_structure
+    for j in range(n_rows):
+        y_position = margin + j * (row_height + margin)
+        row_structure.append({'y': y_position, 'h': row_height})
+
+    return column_structure, row_structure
