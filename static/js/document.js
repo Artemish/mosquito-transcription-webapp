@@ -7,6 +7,7 @@ function init_document() {
     const doctypeInput = document.getElementById('document-type');
     const docSubmitButton = document.getElementById('document-submit-btn');
 
+    const districtInput = document.getElementById('document-district-city');
     const locality1 = document.getElementById('document-locality-1');
     const neighborhood1 = document.getElementById('document-neighborhood-1');
     const locality2 = document.getElementById('document-locality-2');
@@ -27,6 +28,7 @@ function init_document() {
       collectDateInput.value = "";
       sprayYearInput.value = "";
       doctypeInput.value = "";
+      districtInput.value = "";
       locality1.value = "";
       neighborhood1.value = "";
       locality2.value = "";
@@ -43,6 +45,7 @@ function init_document() {
         const submission = {
           'file_id': current_file,
           'province': provinceInput.value,
+          'district_city': districtInput.value,
           'locality1': locality1.value,
           'neighborhood1': neighborhood1.value,
           'locality2': locality2.value,
@@ -83,6 +86,7 @@ async function fetchDocument(file) {
     const doctypeInput = document.getElementById('document-type');
     const docSubmitButton = document.getElementById('document-submit-btn');
 
+    const districtInput = document.getElementById('document-district-city');
     const locality1 = document.getElementById('document-locality-1');
     const neighborhood1 = document.getElementById('document-neighborhood-1');
     const locality2 = document.getElementById('document-locality-2');
@@ -101,6 +105,7 @@ async function fetchDocument(file) {
     collectDateInput.value = doc?.collect_date || "";
     sprayYearInput.value = doc?.spray_year || "";
     doctypeInput.value = doc?.doctype || "";
+    districtInput.value = doc?.locality1 || "";
     locality1.value = doc?.locality1 || "";
     neighborhood1.value = doc?.neighborhood1 || "";
     locality2.value = doc?.locality2 || "";
@@ -110,15 +115,18 @@ async function fetchDocument(file) {
 }
 
 function updateProvince() {
-    const districtSelect = document.getElementById('document-locality-1');
+    const districtDatalist = document.getElementById('districts-cities');
+    const districtInput = document.getElementById('document-district-city');
     const provinceSelect = document.getElementById('document-province');
     
     // Get the selected district option
-    const selectedDistrict = districtSelect.options[districtSelect.selectedIndex];
-    const province = selectedDistrict.getAttribute('data-province');
-    
-    // Clear the province dropdown
-    provinceSelect.value = province;
+    const selectedDistrict = districtDatalist.options.namedItem(districtInput.value);
+    if (selectedDistrict) {
+      const province = selectedDistrict.getAttribute('data-province');
+      
+      // Clear the province dropdown
+      provinceSelect.value = province;
+    }
 }
 
 function updateHeader() {

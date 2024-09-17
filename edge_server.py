@@ -33,10 +33,11 @@ users = {
     "mitch": "mosquito",
 }
 
-with open('mozambique_districts.json') as districtfile:
-    districts = json.load(districtfile)
-    districts = sorted(districts, key=lambda x: x['district'])
-    provinces = sorted(set([district['province'] for district in districts]))
+towns = pd.read_csv('mozambique_towns.csv')
+cities = pd.read_csv('mozambique_cities.csv')
+district_province = towns.groupby('district')['province'].agg(lambda x: x.iloc[0])
+city_province = cities.groupby('city')['province'].agg(lambda x: x.iloc[0]) 
+provinces = sorted(towns.province.unique())
 
 @auth.get_password
 def get_password(username):
@@ -394,8 +395,10 @@ def download_documents_csv():
 def home():
     return render_template(
         'index.html',
-        districts = districts,
-        provinces = provinces
+        district_province = district_province,
+        city_province = city_province,
+        provinces = provinces,
+        towns = towns,
     ) 
 
 if __name__ == '__main__':

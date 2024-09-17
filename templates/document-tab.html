@@ -1,4 +1,20 @@
 <div id="document-tab" style="display: none">
+  <!-- Lists of district & towns for autocomplete/suggestion -->
+  <datalist id="districts-cities">
+    {% for (district, province) in district_province.items() %}
+    <option data-province="{{ province }}" name="{{ district }}" value="{{ district }}">
+    {% endfor %}
+    {% for (city, province) in city_province.items() %}
+    <option data-province="{{ province }}" name="{{ city }}" value="{{ city }}">
+    {% endfor %}
+  </datalist>
+
+  <datalist id="towns">
+    {% for town in towns.town.unique() %}
+    <option value="{{ town }}">
+    {% endfor %}
+  </datalist>
+
   <div id="document-container">
     <img id="document-image-display"/>
     <canvas id="document-overlay-canvas"></canvas>
@@ -35,37 +51,31 @@
       <label>
         Province: 
         <select id="document-province" placeholder="Province"/>
-          <option value="">Distrito/Municipo</option>
+          <option value=""></option>
           {% for province in provinces %}
           <option value="{{ province }}">{{ province }}</option>
           {% endfor %}
         </select>
       </label>
-    </div>
-    <div>
       <label>
-        District 1: 
-        <select id="document-locality-1" placeholder="Localidade" onchange="updateProvince()"/>
-          <option value="">Distrito/Municipo</option>
-          {% for item in districts %}
-          <option value="{{ item.district }}" data-province="{{item.province}}">{{ item.district }}</option>
-          {% endfor %}
-        </select>
-      </label>
-      <label>
-        Neighborhood 1: 
-        <input type="text" id="document-neighborhood-1" placeholder="Bairro"/>
+        District/City: 
+        <input id="document-district-city" placeholder="Distrito/Municipio" oninput="updateProvince()" list="districts-cities"/>
       </label>
     </div>
     <div>
       <label>
-        District 2: 
-        <select id="document-locality-2" placeholder="Localidade"/>
-          <option value="" disabled selected>Distrito/Municipo</option>
-          {% for item in districts %}
-          <option value="{{ item.district }}" data-province="{{item.province}}">{{ item.district }}</option>
-          {% endfor %}
-        </select>
+        Location/Town 1: 
+        <input id="document-locality-1" placeholder="Localidade 1" list="towns"/>
+      </label>
+      <label>
+        Neighborhood 2: 
+        <input type="text" id="document-neighborhood-1" placeholder="Bairro 2"/>
+      </label>
+    </div>
+    <div>
+      <label>
+        Location/Town 2: 
+        <input id="document-locality-2" placeholder="Localidade 2" list="towns"/>
       </label>
       <label>
         Neighborhood 2: 
