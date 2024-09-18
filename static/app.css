@@ -17,6 +17,11 @@ body {
     max-width: 90vw;
 }
 
+#document-tab {
+  display: flex;
+  flex-direction: row;
+}
+
 #dewarp-container {
     position: relative;
     display: block;
