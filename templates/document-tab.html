@@ -24,77 +24,97 @@
       Fill out some document metadata. Select the document type by
       clicking on the header below.
     </p>
-    <div>
-      <label>
-        Document type:
-        <select id="document-type" onchange="updateHeader()">
-          <option value=""></option>
-          <option value="anopheles_funestus">Anopheles Funestus</option>
-          <option value="anopheles_funestus_s.1_compact">Anopheles Funestus s.1 (Compact)</option>
-          <option value="anopheles_gambia_s.1">Anopheles Gambiae s.1</option>
-          <option value="anopheles_gambia_s.1_compact">Anopheles Gambiae s.1 (Compact)</option>
-          <option value="anopheles_gambia_s.1_widecol">Anopheles Gambiae s.1 (Wide columns)</option>
-          <option value="other_anopheles">Outros Anopheles</option>
-          <option value="other_anopheles_compact">Outros Anopheles (Compact)</option>
-          <option value="other_vectors">Outros Vectores</option>
-          <option value="other_vectors_compact">Outros Vectores (Compact)</option>
-          <option value="light_traps_indoor_outdoor">Armadilhas de luz (Dentro e Fora)</option>
-          <option value="other_vectors_disease_a">Outros vectores de doenças (Tipo A)</option>
-          <option value="other_vectors_disease_b">Outros vectores de doenças (Tipo B)</option>
-          <option value="other_vectors_disease_c">Outros vectores de doenças (Tipo C)</option>
-          <option value="other_vectors_disease_d">Outros vectores de doenças (Tipo D)</option>
-        </select>
-      </label>
-      {% include 'identify-document.html' %}
-    </div>
-    <div>
-      <label>
-        Province: 
-        <select id="document-province" placeholder="Province"/>
-          <option value=""></option>
-          {% for province in provinces %}
-          <option value="{{ province }}">{{ province }}</option>
-          {% endfor %}
-        </select>
-      </label>
-      <label>
-        District/City: 
-        <input id="document-district-city" placeholder="Distrito/Municipio" oninput="updateProvince()" list="districts-cities"/>
-      </label>
-    </div>
-    <div>
-      <label>
-        Location/Town 1: 
-        <input id="document-locality-1" placeholder="Localidade 1" list="towns"/>
-      </label>
-      <label>
-        Neighborhood 2: 
-        <input type="text" id="document-neighborhood-1" placeholder="Bairro 2"/>
-      </label>
-    </div>
-    <div>
-      <label>
-        Location/Town 2: 
-        <input id="document-locality-2" placeholder="Localidade 2" list="towns"/>
-      </label>
-      <label>
-        Neighborhood 2: 
-        <input type="text" id="document-neighborhood-2" placeholder="Bairro 2"/>
-      </label>
-    </div>
-    <div>
-      <label>
-        Collection date: 
-        <input type="date" id="document-collection-date"
-        placeholder="Data de colheita" placeholder="dd-mm-yyyy"/>
-      </label>
-    </div>
-    <div>
-      <label>
-        Year sprayed: 
-        <input type="number" id="document-year-sprayed" placeholder="Mês de pulverização" min="2000" max="2024" value="2014"/>
-      </label>
-    </div>
+    <table>
+      <tr>
+        <td>
+          <label>
+            Document type:
+            <select id="document-type" onchange="updateHeader()">
+              <option value=""></option>
+              <option value="anopheles_funestus">Anopheles Funestus</option>
+              <option value="anopheles_funestus_s.1_compact">Anopheles Funestus s.1 (Compact)</option>
+              <option value="anopheles_gambia_s.1">Anopheles Gambiae s.1</option>
+              <option value="anopheles_gambia_s.1_compact">Anopheles Gambiae s.1 (Compact)</option>
+              <option value="anopheles_gambia_s.1_widecol">Anopheles Gambiae s.1 (Wide columns)</option>
+              <option value="other_anopheles">Outros Anopheles</option>
+              <option value="other_anopheles_compact">Outros Anopheles (Compact)</option>
+              <option value="other_vectors">Outros Vectores</option>
+              <option value="other_vectors_compact">Outros Vectores (Compact)</option>
+              <option value="light_traps_indoor_outdoor">Armadilhas de luz (Dentro e Fora)</option>
+              <option value="other_vectors_disease_a">Outros vectores de doenças (Tipo A)</option>
+              <option value="other_vectors_disease_b">Outros vectores de doenças (Tipo B)</option>
+              <option value="other_vectors_disease_c">Outros vectores de doenças (Tipo C)</option>
+              <option value="other_vectors_disease_d">Outros vectores de doenças (Tipo D)</option>
+            </select>
+          </label>
+        </td>
+        <td>
+          {% include 'identify-document.html' %}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            Province: 
+            <select id="document-province" placeholder="Province"/>
+              <option value=""></option>
+              {% for province in provinces %}
+              <option value="{{ province }}">{{ province }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </td>
+        <td>
+          <label>
+            District/City: 
+            <input id="document-district-city" placeholder="Distrito/Municipio" oninput="updateProvince()" list="districts-cities"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            Location/Town 1: 
+            <input id="document-locality-1" placeholder="Localidade 1" list="towns"/>
+          </label>
+        </td>
+        <td>
+          <label>
+            Neighborhood 2: 
+            <input type="text" id="document-neighborhood-1" placeholder="Bairro 2"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            Location/Town 2: 
+            <input id="document-locality-2" placeholder="Localidade 2" list="towns"/>
+          </label>
+        </td>
+        <td>
+          <label>
+            Neighborhood 2: 
+            <input type="text" id="document-neighborhood-2" placeholder="Bairro 2"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            Collection date: 
+            <input type="date" id="document-collection-date"
+            placeholder="Data de colheita" placeholder="dd-mm-yyyy"/>
+          </label>
+        </td>
+        <td>
+          <label>
+            Year sprayed: 
+            <input type="number" id="document-year-sprayed" placeholder="Mês de pulverização" min="2000" max="2024" value="2014"/>
+          </label>
+        </td>
+      </tr>
+    </table>
+    <button class="btn btn-primary" id="document-submit-btn">Submit document info</button>
   </div>
-  <button class="btn btn-primary" id="document-submit-btn">Submit document info</button>
 </div>
