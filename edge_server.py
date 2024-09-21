@@ -15,6 +15,7 @@ from box_detection import box_extraction, bbs_to_array, coerce_to_grid
 from subset_table_warp import find_contours, warp_hull
 from contour_stitch import rebuild_img
 from header_detection import experiment_find_columns
+from map_amazon_to_boxes import attempt_transcription, remap_columns
 
 from utils import show_contour, show
 
@@ -388,6 +389,33 @@ def download_documents_csv():
     )
     
     return response
+
+
+@app.route('/transcribe_amazon', methods=['POST'])
+@auth.login_required
+def transcribe_amazon():
+    filename = request.json['filename']
+    document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
+    image_path = f'{TABLE_IMG_DIRECTORY}/{filename}_dewarped.png'
+
+    column_structure = request.json.get("column_structure")
+    points = request.json.get("points")
+
+    header_map = get_header_map()
+
+    with open(document_path) as docfile:
+        document = json.load(docfile)
+
+    doctype = header_map[document['doctype']]
+    expected_columns = len(doctype['columns'])
+
+    transcription = attempt_transcription(
+        doctype, image_path, cols=column_structure, data_box=points
+    )
+
+    remapped = remap_columns(transcription, doctype)
+
+    return jsonify(remapped)
 
 
 @app.route('/')

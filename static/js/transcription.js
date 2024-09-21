@@ -4,6 +4,7 @@ function init_transcription() {
     const submitBtn = document.getElementById('transcription-submit-btn');
     const markCompleteBtn = document.getElementById('transcription-complete-btn');
     const fixColsBtn = document.getElementById('transcription-fixcols-btn');
+    const autoTranscribeBtn = document.getElementById('transcription-autotranscribe-btn');
     const enumTranscription = document.getElementById('enum-transcription');
     const textTranscription = document.getElementById('text-transcription');
     const imageDisplay = document.getElementById('transcription-image-display');
@@ -65,6 +66,7 @@ function init_transcription() {
         submitBtn.addEventListener('click', submitTranscription);
         markCompleteBtn.addEventListener('click', markComplete);
         fixColsBtn.addEventListener('click', fixColumns);
+        autoTranscribeBtn.addEventListener('click', autoTranscribe);
         // selectWall.addEventListener('change', updateSelectWall);
         transcriptionInput.addEventListener('input', redraw);
     }
@@ -550,6 +552,38 @@ function init_transcription() {
 
         columnsApplied = true;
         header.column_structure = result;
+        redraw();
+    }
+
+    async function autoTranscribe() {
+        let submission = {
+          filename: current_file,
+          points: points,
+        }
+
+        if (columnsApplied) {
+          submission.column_structure = header.column_structure
+        }
+
+        const response = await fetch('transcribe_amazon', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submission)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(`Failed to transcribe with AWS: ${result}`);
+            return;
+        }
+
+        console.log("Transcription result: ");
+        console.log(result);
+
+        transcriptions = result;
         redraw();
     }
 
