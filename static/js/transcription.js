@@ -19,6 +19,7 @@ function init_transcription() {
     let pauseCol = false;
     let wallCol = false;
     let queuedInput = "";
+    let columnsApplied = false
 
     const currentCellView = document.getElementById('current-cell-view');
     const transcriptionInput = document.getElementById('transcription-input');
@@ -46,6 +47,7 @@ function init_transcription() {
         points = [];
         overlayVisible = false;
         currentCellIndex = {row: 0, col: 0};
+        columnsApplied = false;
 
         if (header) {
           default_transcriptions = header.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
@@ -477,11 +479,15 @@ function init_transcription() {
     }
 
     async function submitTranscription() {
-        const submission = {
+        let submission = {
           filename: current_file,
           transcriptions: transcriptions,
           documentType: header.documentType,
           points: points
+        }
+
+        if (columnsApplied) {
+          submission['column_structure'] = header.column_structure;
         }
 
         const response = await fetch('submit_transcription', {
@@ -542,6 +548,7 @@ function init_transcription() {
             return;
         }
 
+        columnsApplied = true;
         header.column_structure = result;
         redraw();
     }
@@ -575,6 +582,10 @@ async function fetchTranscription(file) {
     const transcription = await response.json();
     console.log("Fetched transcription:");
     console.log(transcription);
+
+    if (transcription?.column_structure) {
+      header.column_structure = transcription.column_structure;
+    }
 
     const default_transcriptions = header?.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
     
