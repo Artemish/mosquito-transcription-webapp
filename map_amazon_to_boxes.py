@@ -20,6 +20,9 @@ def keep_digits(string):
 
 
 def guess_wall_type(wall):
+    if wall is None:
+        return None
+    
     closest_match = difflib.get_close_matches(wall.lower(), WALL_TYPES, n=1, cutoff=0.6)
     if closest_match:
         output = closest_match[0]

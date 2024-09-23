@@ -451,8 +451,43 @@ function init_transcription() {
         });
     }
 
+
+    function drawSummaryCells() {
+        const nrows = header.row_structure.length;
+
+        header.column_structure.forEach((col, colIndex) => {
+          let col_sum = transcriptions.map((row, row_i) => Number(row[colIndex])).reduce((a,b) => a + b, 0)
+          if (col_sum == 0) {
+            return;
+          }
+
+          const cell = cellToRect(nrows-1, colIndex); 
+          // End the column just above the first cell
+          const topExtent = cell.y + cell.h + 5
+          const text = header.columns[colIndex].original;
+
+          // Draw a white rectangle for the cell
+          context.fillStyle = 'rgba(255, 255, 255, 0.6)';
+          context.fillRect(cell.x, topExtent, cell.w, topExtent+20);
+
+          let x = cell.x;
+          let y = topExtent;
+
+          context.font = `20 Arial`;
+          context.fillStyle = 'black';
+          context.textBaseline = 'top';
+
+          // setFontSizeToFit(text, cell.w - 4);
+          // context.fillText(text, x, 2, cell.w - 4); // Adjust text position and max width as needed
+          // drawTextToBox(String(col_sum), cell.x + 2, topExtent + 2, cell.w - 4, 24);
+          context.fillText(String(col_sum), x + 2, topExtent + 2, cell.w - 4);
+        });
+    }
+
+
     function drawTranscriptionOverlay() {
         drawColumnNames();
+        drawSummaryCells();
 
         header.row_structure.forEach((row, rowIndex) => {
             header.column_structure.forEach((col, colIndex) => {
