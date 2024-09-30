@@ -18,8 +18,15 @@ body {
 }
 
 #document-tab {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+}
+
+#document-inputs {
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
+  width: 100%;
 }
 
 #dewarp-container {
@@ -29,7 +36,10 @@ body {
     max-width: 90vw;
 }
 
-#document-image-display,
+#document-image-display {
+  width: 100%;
+}
+
 #transcription-image-display,
 #dewarp-image-display {
     max-width: 100%;
@@ -195,4 +205,8 @@ table {
 
 .complete {
   background-color: green;
+}
+
+#file-list > tr > td:not(:first-child) {
+  text-align: center;
 }
