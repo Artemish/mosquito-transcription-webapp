@@ -44,7 +44,7 @@ def infer_column_structure(image, skip_names=False):
     boxes = map(contour_to_box, contours)
 
     boxes = filter_bounding_boxes(
-        boxes, min_aspect=0.2,
+        boxes, min_aspect=0.12,
         max_aspect=15, min_area=200,
         max_area=30000
     )
@@ -80,19 +80,21 @@ if __name__ == '__main__':
     import sys
     image_path = sys.argv[1]
     image = cv2.imread(image_path)
+    height = image.shape[0]
     
-    header = image[100:200,:,:]
-    contours, _ = column_contours(header)
-    print(contours)
+    for start_y in range(100, (height-100), 100):
+        header = image[start_y:start_y+100,:,:]
+        contours, _ = column_contours(header)
+        print(contours)
 
-    # Display the results
-    s(header, 'Original Header')
-    for (i, contour) in enumerate(contours):
-        # Draw contours on the header for visualization
-        # header_with_contours = cv2.cvtColor(header, cv2.COLOR_BGR2RGB)
-        show_contour(header, contour)
-        # cv2.drawContours(header_with_contours, [contour], -1, (0, 255, 0), 2)
-        # s(header_with_contours, f'Contour {i}')
+        # Display the results
+        s(header, 'Original Header')
+        for (i, contour) in enumerate(contours):
+            # Draw contours on the header for visualization
+            # header_with_contours = cv2.cvtColor(header, cv2.COLOR_BGR2RGB)
+            show_contour(header, contour)
+            # cv2.drawContours(header_with_contours, [contour], -1, (0, 255, 0), 2)
+            # s(header_with_contours, f'Contour {i}')
 
-    boxes = infer_column_structure(header)
-    print(f'Found {len(boxes)} boxes')
+        boxes = infer_column_structure(header)
+        print(f'Found {len(boxes)} boxes')
