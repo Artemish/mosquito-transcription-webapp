@@ -1,15 +1,29 @@
 <div id="dewarp-tab" style="display: none">
-  <div id="dewarp-buttons">
-    <button id="detect-tables-btn">Detect tables</button>
-    <button id="dewarp-btn" style="display: none">Apply dewarp</button>
+  <div>
     <p>
-      Try and find and crop the data table in the scan. Hit detect
-      tables to get a list of outlines, and use '[' and ']' to swap
-      between them. If you find a good one, hit 'Apply dewarp'
+      Capture the data table in the document by clicking points on the
+      document. Start by clicking the top left corner, and click
+      points along the top line (corners are easiest), then click the
+      matching points along the bottom of the document, going
+      clockwise until you reach the bottom left corner. 
+    </p>
+    <p>
+      You can drag and drop points by clicking around them. When you
+      have an equal number of points on the top line and bottom line,
+      you can click "Apply Dewarp" to have the program try and warp
+      the table into a square image for easy transcription.
+    </p>
+    <p>
+      If the document doesn't end up very square, you can come back to
+      the Dewarp tab and try again until it looks good.
     </p>
   </div>
   <div id="dewarp-container">
     <img id="dewarp-image-display"/>
     <canvas id="dewarp-overlay-canvas"></canvas>
+  </div>
+  <div id="dewarp-buttons">
+    <button id="dewarp-btn" class="btn btn-primary">Apply dewarp</button>
+    <button id="reset-btn" class="btn">Reset points</button>
   </div>
 </div>
