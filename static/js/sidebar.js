@@ -26,7 +26,7 @@ async function fetchFilesAndPopulateSidebar() {
       }
     }
 
-    let selectFile = function(file) {
+    let selectFile = function(file, tab) {
       file.element.classList.add('selected');
       setFileParam(file.id);
 
@@ -46,14 +46,16 @@ async function fetchFilesAndPopulateSidebar() {
 
       if (! file.has_document) {
         fetchAndDisplayImage(file.id, target="document"); 
-        setTab('document');
+        tab = tab || 'document';
       } else if (! file.has_table) {
         fetchAndDisplayImage(file.id, target="dewarp"); 
-        setTab('dewarp');
+        tab = tab || 'dewarp';
       } else {
         fetchAndDisplayImage(file.id, target="transcription"); 
-        setTab('transcription');
+        tab = tab || 'transcription';
       }
+
+      setTab(tab);
     };
 
     sidebar.markComplete = function() {
@@ -66,6 +68,13 @@ async function fetchFilesAndPopulateSidebar() {
 
       let n_complete = fileList.filter(f => f.complete).length;
       listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
+    };
+
+    sidebar.continueNext = function() {
+      fileList.find(f => f.id == current_file).has_table = true;
+      sidebar.redraw();
+
+      selectFile(fileList.find(f => !f.has_table), 'dewarp');
     };
 
   function addFileElement(file) { 
@@ -94,6 +103,15 @@ async function fetchFilesAndPopulateSidebar() {
     return listItem;
   }
 
+  sidebar.redraw = function() { 
+    sidebarList.innerHTML = '';
+
+    let n_complete = fileList.filter(f => f.complete).length;
+    listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
+
+    fileList.filter((file) => !file.complete).forEach(addFileElement);
+  }
+
   try {
     const response = await fetch('list_source_images');
     if (!response.ok) {
@@ -102,12 +120,7 @@ async function fetchFilesAndPopulateSidebar() {
 
     fileList = await response.json();
 
-    sidebarList.innerHTML = '';
-
-    let n_complete = fileList.filter(f => f.complete).length;
-    listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
-
-    fileList.filter((file) => !file.complete).forEach(addFileElement);
+    sidebar.redraw();
 
     loadFileFromParam();
   } catch (error) {

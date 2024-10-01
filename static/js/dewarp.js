@@ -57,6 +57,7 @@ function init_dewarp() {
         points.push([x, y])
         isDragging = true;
         draggedPointIndex = points.length - 1;
+        dewarpBtn.disabled = false;
       }
 
       e.preventDefault();
@@ -106,11 +107,18 @@ function init_dewarp() {
     function redraw() {
         context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
         drawContour(points);
+          // Find the transition point
+        const transitionIndex = findTopBottomTransition(points, threshold);
+
+        if (transitionIndex !== null) {
+            console.log("Transition found at index:", transitionIndex);
+            drawLinesBetweenTopAndBottom(context, points, transitionIndex);
+        } else {
+            console.log("No transition found");
+        }
     }
 
     function handleImageClick(e) {
-        dewarpBtn.disabled = false;
-
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -146,15 +154,71 @@ function init_dewarp() {
 
             reset();
             fetchAndDisplayImage(current_file, target="transcription"); 
-            setTab('transcription');
+            
+            sidebar.continueNext();
         }, 'image/png');
+    }
+
+    // Function to calculate the angle between three points
+    function calculateAngle(p0, p1, p2) {
+        // Create vectors P0->P1 and P1->P2
+        const vectorA = [p1[0] - p0[0], p1[1] - p0[1]];  // Vector P0->P1
+        const vectorB = [p2[0] - p1[0], p2[1] - p1[1]];  // Vector P1->P2
+
+        // Calculate the dot product of the two vectors
+        const dotProduct = (vectorA[0] * vectorB[0]) + (vectorA[1] * vectorB[1]);
+
+        // Calculate the magnitude of the vectors
+        const magnitudeA = Math.sqrt((vectorA[0] ** 2) + (vectorA[1] ** 2));
+        const magnitudeB = Math.sqrt((vectorB[0] ** 2) + (vectorB[1] ** 2));
+
+        // Calculate the cosine of the angle between the vectors
+        const cosineOfAngle = dotProduct / (magnitudeA * magnitudeB);
+
+        // Calculate the angle in radians, then convert to degrees
+        const angleRadians = Math.acos(cosineOfAngle);
+        const angleDegrees = angleRadians * (180 / Math.PI);
+
+        return angleDegrees;
+    }
+
+    // Function to find the point where the top half stops and bottom half begins
+    function findTopBottomTransition(points, threshold = 70) {
+        for (let i = 1; i < points.length - 1; i++) {
+            const angle = calculateAngle(points[i - 1], points[i], points[i + 1]);
+
+            if (angle >= threshold) {
+                return i + 1; // This is the point where the bottom half begins
+            }
+        }
+        return null; // No transition found
+    }
+
+    // Function to draw a line between top and bottom half matching points
+    function drawLinesBetweenTopAndBottom(canvasContext, points, transitionIndex) {
+        const numTopPoints = transitionIndex; // Points from 0 to transitionIndex-1 are the top half
+        const numBottomPoints = points.length - transitionIndex; // Remaining points are the bottom half
+
+        context.strokeStyle = 'blue';
+
+        // Draw lines between matching points on the top and bottom halves
+        for (let i = 0; i < Math.min(numTopPoints, numBottomPoints); i++) {
+            const topPoint = points[transitionIndex - 1 - i];
+            const bottomPoint = points[transitionIndex + i];
+
+            // Draw a line between the top and bottom points
+            canvasContext.beginPath();
+            canvasContext.moveTo(topPoint[0], topPoint[1]);
+            canvasContext.lineTo(bottomPoint[0], bottomPoint[1]);
+            canvasContext.stroke();
+        }
     }
 
     function drawContour() {
       console.log("Drawning points:", points);
       context.font = '20px Arial';
       context.fillStyle = 'red';
-      context.strokeStyle = 'black';
+      context.strokeStyle = 'green';
       context.lineWidth = 2;
 
       for (let i = 0; i < points.length; i++) {
