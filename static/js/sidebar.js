@@ -77,13 +77,13 @@ async function fetchFilesAndPopulateSidebar() {
 
       if (tab == 'document') {
         currentFile.has_document = true;
-        nextFile = fileList.find(f => !f.has_document);
+        nextFile = fileList.find(f => !f.has_document && f.id > current_file);
       } else if (tab == 'dewarp') {
         currentFile.has_table = true;
-        nextFile = fileList.find(f => !f.has_table);
+        nextFile = fileList.find(f => !f.has_table && f.id > current_file);
       } else if (tab == 'transcription') {
         currentFile.has_transcript = true;
-        nextFile = fileList.find(f => !f.has_transcript);
+        nextFile = fileList.find(f => !f.has_transcript && f.id > current_file);
       }
 
       sidebar.redraw();
