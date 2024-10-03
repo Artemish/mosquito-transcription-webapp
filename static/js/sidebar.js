@@ -35,18 +35,17 @@ function init_sidebar() {
   }
 
   function selectFile(file, tab) {
-    file.element.classList.add('selected');
+    outlineSelected(file);
+
     setFileParam(file.id);
 
     document_tab.reset();
     dewarp_tab.reset();
     transcription_tab.reset();
 
-    prevSelection = file.element;
-    console.log(file);
-
     fetchDocument(file).then((_) => fetchTranscription(file));
     current_file = file.id;
+    prevSelection = file.element;
 
     if (! file.has_document) {
       fetchAndDisplayImage(file.id, target="document"); 
