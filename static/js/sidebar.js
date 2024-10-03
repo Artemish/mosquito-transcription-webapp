@@ -46,6 +46,7 @@ async function fetchFilesAndPopulateSidebar() {
 
       if (! file.has_document) {
         fetchAndDisplayImage(file.id, target="document"); 
+        document_tab.focus();
         tab = tab || 'document';
       } else if (! file.has_table) {
         fetchAndDisplayImage(file.id, target="dewarp"); 

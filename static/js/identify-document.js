@@ -129,6 +129,8 @@ function init_identify_document() {
   // Close modal
   function closeModal() {
       modal.style.display = 'none';
+      const districtInput = document.getElementById('document-district-city');
+      districtInput.focus();
   }
 
   function initialize() { 

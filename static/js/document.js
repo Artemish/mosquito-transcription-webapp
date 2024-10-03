@@ -1,6 +1,9 @@
 let document_tab = {};
 
 function init_document() {
+    const documentTabElement = document.getElementById('document-tab');
+
+    const identifyBtn = document.getElementById('identifyBtn');
     const provinceInput = document.getElementById('document-province');
     const collectDateInput = document.getElementById('document-collection-date');
     const sprayYearInput = document.getElementById('document-year-sprayed');
@@ -18,8 +21,13 @@ function init_document() {
     function initialize() {
         attachEventListeners();
         document_tab = {
-          reset: reset
+          reset: reset,
+          focus: focus
         };
+    }
+
+    function focus() {
+      identifyBtn.focus();
     }
 
     function reset() {
@@ -38,6 +46,15 @@ function init_document() {
 
     function attachEventListeners() {
         docSubmitButton.addEventListener('click', handleDocumentSubmit);
+        documentTabElement.addEventListener('keydown', checkCtrlEnter);
+    }
+
+    function checkCtrlEnter(e) {
+        // Check if both the Ctrl key and Enter key are pressed
+        if (e.ctrlKey && e.key === 'Enter') {
+            e.preventDefault();  // Optionally prevent the default action
+            handleDocumentSubmit(e);   // Call your custom function
+        }
     }
 
     // Handle transcription input and navigation
