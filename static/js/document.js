@@ -71,7 +71,7 @@ function init_document() {
         console.log(response);
         
         fetchAndDisplayImage(current_file, target="dewarp"); 
-        setTab('dewarp');
+        sidebar.continueNext('document');
     }
 
     initialize();

@@ -70,11 +70,23 @@ async function fetchFilesAndPopulateSidebar() {
       listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
     };
 
-    sidebar.continueNext = function() {
-      fileList.find(f => f.id == current_file).has_table = true;
-      sidebar.redraw();
+    sidebar.continueNext = function(tab) {
+      let currentFile = fileList.find(f => f.id == current_file);
+      let nextFile = currentFile;
 
-      selectFile(fileList.find(f => !f.has_table), 'dewarp');
+      if (tab == 'document') {
+        currentFile.has_document = true;
+        nextFile = fileList.find(f => !f.has_document);
+      } else if (tab == 'dewarp') {
+        currentFile.has_table = true;
+        nextFile = fileList.find(f => !f.has_table);
+      } else if (tab == 'transcription') {
+        currentFile.has_transcript = true;
+        nextFile = fileList.find(f => !f.has_transcript);
+      }
+
+      sidebar.redraw();
+      selectFile(nextFile, tab);
     };
 
   function addFileElement(file) { 

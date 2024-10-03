@@ -155,7 +155,7 @@ function init_dewarp() {
             reset();
             fetchAndDisplayImage(current_file, target="transcription"); 
             
-            sidebar.continueNext();
+            sidebar.continueNext('dewarp');
         }, 'image/png');
     }
 
