@@ -59,7 +59,7 @@ function init_sidebar() {
 
     sidebarList.removeChild(file.element);
 
-    selectFile(fileList.find(f => !f.complete));
+    selectFile(fileList.find(f => !f.complete && f.id > current_file));
 
     let n_complete = fileList.filter(f => f.complete).length;
     listHeader.textContent = `Source Files (${n_complete} / ${fileList.length} complete)`;
