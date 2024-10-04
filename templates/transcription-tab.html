@@ -6,7 +6,7 @@
   <div id="transcription-area" style="margin-top: 20px;">
       <div>Transcribe Cell:</div>
       <img id="current-cell-view" src="" alt="Zoomed Cell" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
-      <div id="enum-transcription" style="display: none">
+      <div id="enum-transcription-wall" style="display: none">
         <select name="wall" id="select-wall">
           <option value="">-- Select a wall type --</option>
           <option value="Alvenaria">Alvenaria (Brickwork)</option>
@@ -22,6 +22,26 @@
           <option value="Paupica">Paupica (Wood and mud)</option>
           <option value="Pedra">Pedra (Stone)</option>
           <option value="Rebocado">Rebocado (Cement bricks with rebar)</option>
+          <option value="Tijolo">Tijolo (Brick)</option>
+        </select>
+      </div>
+      <div id="enum-transcription-floor" style="display: none">
+        <select name="floor" id="select-floor">
+          <option value="">-- Select a floor type --</option>
+          <option value="Areia">Areia (Sand)</option>
+          <option value="Cimento">Cimento (Cement)</option>
+          <option value="Maticado">Maticado (Clay/Plaster)</option>
+          <option value="Pavimentado">Pavimentado (Paved)</option>
+        </select>
+      </div>
+      <div id="enum-transcription-ceiling" style="display: none">
+        <select name="ceiling" id="select-ceiling">
+          <option value="">-- Select a ceiling type --</option>
+          <option value="Capim">Capim (Grass)</option>
+          <option value="Chapa">Chapa (Sheet metal)</option>
+          <option value="Palha">Palha (Straw)</option>
+          <option value="Placa">Placa (Boards)</option>
+          <option value="Macute">Macute (??)</option>
         </select>
       </div>
       <div id="text-transcription">

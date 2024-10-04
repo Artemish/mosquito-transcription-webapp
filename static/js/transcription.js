@@ -5,15 +5,31 @@ function init_transcription() {
     const markCompleteBtn = document.getElementById('transcription-complete-btn');
     const fixColsBtn = document.getElementById('transcription-fixcols-btn');
     const autoTranscribeBtn = document.getElementById('transcription-autotranscribe-btn');
-    const enumTranscription = document.getElementById('enum-transcription');
     const textTranscription = document.getElementById('text-transcription');
+    const enumTranscriptionWall = document.getElementById('enum-transcription-wall');
+    const enumTranscriptionFloor = document.getElementById('enum-transcription-floor');
+    const enumTranscriptionCeiling = document.getElementById('enum-transcription-ceiling');
     const imageDisplay = document.getElementById('transcription-image-display');
     const container = document.getElementById('container');
     const canvas = document.getElementById('transcription-overlay-canvas');
     const context = canvas.getContext('2d');
     const resultBox = document.getElementById('segmentation-result');
     const selectWall = document.getElementById('select-wall');
+    const selectFloor = document.getElementById('select-floor');
+    const selectCeiling = document.getElementById('select-ceiling');
     const transcriptionTab = document.getElementById('transcription-tab');
+    const shiftNumberMap = {
+      '!': '1', '@': '2', '#': '3',
+      '$': '4', '%': '5', '^': '6',
+      '&': '7', '*': '8', '(': '9',
+      ')': '0'
+    };
+
+    const enumElements = {
+      wall: selectWall,
+      floor: selectFloor,
+      ceiling: selectCeiling
+    };
 
     let overlayVisible = false;
     let currentCellIndex = {row: 0, col: 0};
@@ -183,15 +199,20 @@ function init_transcription() {
     //     selectCell(0, 0); // Start transcription with the top-left cell
     // }
 
-    function showWall(show) {
-      if (show) {
-        enumTranscription.style = "display: block";
-        textTranscription.style = "display: none";
-        selectWall.focus({preventScroll: true});
+    function showEnum(enumType) {
+      textTranscription.style = "display: none";
+      enumTranscriptionWall.style = "display: none";
+      enumTranscriptionFloor.style = "display: none";
+      enumTranscriptionCeiling.style = "display: none";
+
+      if (enumType == "wall") {
+        enumTranscriptionWall.style = "display: block";
+      } else if (enumType == 'floor') {
+        enumTranscriptionFloor.style = "display: block";
+      } else if (enumType == 'ceiling') {
+        enumTranscriptionCeiling.style = "display: block";
       } else {
-        enumTranscription.style = "display: none";
         textTranscription.style = "display: block";
-        transcriptionInput.focus({preventScroll: true});
       }
     }
 
@@ -208,16 +229,18 @@ function init_transcription() {
 
         queuedInput = "";
         pauseCol = header.columns[colIndex].pauseInput;
-        wallCol = header.columns[colIndex].enum == "wall";
 
-        if (wallCol) {
-          selectWall.value = transcriptions[rowIndex][colIndex];
+        let enumType = header.columns[colIndex].enum
+        let currentEnum = enumElements[enumType];
+
+        if (currentEnum) {
+          currentEnum.value = transcriptions[rowIndex][colIndex];
         }
 
         console.log(`Pausing: ${pauseCol}`);
-        console.log(`wallCol: ${wallCol}`);
+        console.log(`enumType: ${enumType}`);
 
-        showWall(wallCol);
+        showEnum(enumType);
         
         // Show zoomed cell view
         const cropCanvas = document.createElement('canvas');
@@ -260,14 +283,20 @@ function init_transcription() {
         let maxCol = header.column_structure.length - 1;
         let newRow = currentCellIndex.row;
         let newCol = currentCellIndex.col;
+        let enumType = header.columns[newCol].enum
+        let enumElement = enumElements[enumType];
 
         if (("0123456789".includes(e.key)) && !pauseCol) {
             transcriptions[newRow][newCol] = transcriptionInput.value + e.key;
             e.preventDefault(); // Prevent default to avoid keeping the value in the input
             newRow += 1;
-        } else if (e.key.match(/^[a-z]$/) && wallCol) {
+        } else if (e.shiftKey && e.key in shiftNumberMap) {
+          e.preventDefault();
+          let origKey = shiftNumberMap[e.key];
+          transcriptionInput.value += origKey;
+        } else if (e.key.match(/^[a-z]$/) && enumType) {
           queuedInput += e.key;
-          let options = findOptionsByPrefix(selectWall, queuedInput);
+          let options = findOptionsByPrefix(enumElement, queuedInput);
           if (options.length == 1) {
               newRow += 1;
               transcriptions[currentCellIndex.row][currentCellIndex.col] = options[0].value;
@@ -279,8 +308,8 @@ function init_transcription() {
           switch(e.key) {
               case 'Enter':
                   // Store transcription
-                  if (wallCol) {
-                    transcriptions[currentCellIndex.row][currentCellIndex.col] = selectWall.value;
+                  if (enumElement) {
+                    transcriptions[currentCellIndex.row][currentCellIndex.col] = enumElement.value;
                   } else {
                     transcriptions[currentCellIndex.row][currentCellIndex.col] = transcriptionInput.value;
                   }

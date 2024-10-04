@@ -1739,11 +1739,13 @@
       },
       {
         "original": "Tipo de ch\u00e3o",
-        "translation": "Type of floor"
+        "translation": "Type of floor",
+        "enum": "floor"
       },
       {
         "original": "Tipo de tecto",
-        "translation": "Type of ceiling"
+        "translation": "Type of ceiling",
+        "enum": "ceiling"
       },
       {
         "original": "Coordenadas geogr\u00e1ficas (lat)",
@@ -1930,11 +1932,13 @@
       },
       {
         "original": "Tipo de ch\u00e3o",
-        "translation": "Type of floor"
+        "translation": "Type of floor",
+        "enum": "floor"
       },
       {
         "original": "Tipo de tecto",
-        "translation": "Type of ceiling"
+        "translation": "Type of ceiling",
+        "enum": "ceiling"
       },
       {
         "original": "Coordenadas geogr\u00e1ficas (lat)",
@@ -2249,11 +2253,13 @@
       },
       {
         "original": "Tipo de ch\u00e3o",
-        "translation": "Type of floor"
+        "translation": "Type of floor",
+        "enum": "floor"
       },
       {
         "original": "Tipo de tecto",
-        "translation": "Type of ceiling"
+        "translation": "Type of ceiling",
+        "enum": "ceiling"
       },
       {
         "original": "Coordenadas geogr\u00e1ficas (lat)",
@@ -2488,11 +2494,13 @@
       },
       {
         "original": "Tipo de ch\u00e3o",
-        "translation": "Type of floor"
+        "translation": "Type of floor",
+        "enum": "floor"
       },
       {
         "original": "Tipo de tecto",
-        "translation": "Type of ceiling"
+        "translation": "Type of ceiling",
+        "enum": "ceiling"
       },
       {
         "original": "Coordenadas geogr\u00e1ficas (lat)",
