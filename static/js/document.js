@@ -88,7 +88,8 @@ function init_document() {
         console.log(response);
         
         fetchAndDisplayImage(current_file, target="dewarp"); 
-        sidebar.continueNext('document');
+        
+        setTab('transcription');
     }
 
     initialize();
