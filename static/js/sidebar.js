@@ -26,17 +26,7 @@ function init_sidebar() {
     }
   }
 
-  function outlineSelected(file) {
-    file.element.classList.add('selected');
-
-    if (prevSelection) {
-      prevSelection.classList.remove('selected');
-    }
-  }
-
   function selectFile(file, tab) {
-    outlineSelected(file);
-
     setFileParam(file.id);
 
     document_tab.reset();
@@ -46,6 +36,7 @@ function init_sidebar() {
     fetchDocument(file).then((_) => fetchTranscription(file));
     current_file = file.id;
     prevSelection = file.element;
+    sidebar.redraw();
 
     if (! file.has_document) {
       fetchAndDisplayImage(file.id, target="document"); 
@@ -95,6 +86,11 @@ function init_sidebar() {
 
   function addFileElement(file) { 
     var listItem = document.createElement('tr');
+
+    if (file.id == current_file) {
+      listItem.classList.add('selected');
+    }
+
     const docStyle = file.has_document ? "complete" : "empty";
     const tableStyle = file.has_table ? "complete" : "empty";
     const transcriptStyle = file.complete ?
@@ -129,6 +125,8 @@ function init_sidebar() {
   }
 
   async function loadFiles() {
+    console.log("Reloading files");
+
     const response = await fetch('list_source_images');
     if (!response.ok) {
       alert(`Failed to load files: ${response.status}`);
@@ -149,6 +147,9 @@ function init_sidebar() {
       markComplete: markComplete,
       continueNext: continueNext,
     };
+
+    // reload files every 15 minutes
+    setInterval(loadFiles, 15 * 60 * 1000);
   }
 
   initialize();
