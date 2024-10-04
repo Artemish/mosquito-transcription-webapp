@@ -15,7 +15,8 @@ function init_identify_document() {
               { text: 'Anopheles Funestus', next: 2 },
               { text: 'Anopheles Gambiae s.l.', next: 3 },
               { text: 'Outros Anopheles', next: 4 },
-              { text: 'Outros Doencas (Other disease vectors)', next: 5 }
+              { text: 'Outros Doencas (Other disease vectors)', next: 5 },
+              { text: 'Procopack/Capture Manual', next: 'procopack' }
           ]
       },
       { // Question 2, funestus
