@@ -216,6 +216,17 @@ function init_transcription() {
       }
     }
 
+    function clearCurrentColumn() {
+        console.log(`Clearing column ${currentCellIndex.col}`);
+        for (r = 0; r < header.row_structure.length; r++) {
+          transcriptions[r][currentCellIndex.col] = "";
+        }
+        console.log(`returning to home row`);
+        selectCell(0, currentCellIndex.col);
+        transcriptionInput.value = "";
+        redraw();
+    }
+
     // function deleteCurrentCell() {
     //   const [row, col] = [currentCellIndex.row, currentCellIndex.col];
     //   segmentationData[row].splice(col, 1);
@@ -236,9 +247,6 @@ function init_transcription() {
         if (currentEnum) {
           currentEnum.value = transcriptions[rowIndex][colIndex];
         }
-
-        console.log(`Pausing: ${pauseCol}`);
-        console.log(`enumType: ${enumType}`);
 
         showEnum(enumType);
         
@@ -294,6 +302,9 @@ function init_transcription() {
           e.preventDefault();
           let origKey = shiftNumberMap[e.key];
           transcriptionInput.value += origKey;
+        } else if (e.key == 'X')  {
+          clearCurrentColumn();
+          e.preventDefault();
         } else if (e.key.match(/^[a-z]$/) && enumType) {
           queuedInput += e.key;
           let options = findOptionsByPrefix(enumElement, queuedInput);
