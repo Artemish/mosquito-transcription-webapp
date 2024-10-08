@@ -12,6 +12,15 @@ WALL_TYPES = [wt.lower() for wt in [
     "Pedra", "Rebocado",
 ]]
 
+FLOOR_TYPES = [ft.lower() for ft in [
+    "Areia", "Cimento", "Maticado", "Chapa", "Pavimentado",
+]]
+
+CEILING_TYPES = [ct.lower() for ct in [
+    "Capim", "Caniço", "Chapa", "Palha", "Placa", "Plastico", "Telha",
+    "Macute", "Zinco",
+]]
+
 def keep_digits(string):
     if string is None:
         return None
@@ -19,11 +28,18 @@ def keep_digits(string):
     return re.sub(r'[^\d]', '', string)
 
 
-def guess_wall_type(wall):
-    if wall is None:
+def guess_enum_type(string, enum_type):
+    if string is None:
         return None
     
-    closest_match = difflib.get_close_matches(wall.lower(), WALL_TYPES, n=1, cutoff=0.6)
+    choices = {
+        'wall': WALL_TYPES,
+        'floor': FLOOR_TYPES,
+        'ceiling': CEILING_TYPES,
+    }.get(enum_type)
+
+    closest_match = difflib.get_close_matches(string.lower(), choices, n=1, cutoff=0.6)
+
     if closest_match:
         output = closest_match[0]
         if output == "canico":
@@ -84,6 +100,9 @@ def make_cell_tree(doctype):
 def attempt_transcription(doctype, source_file, data_box=None, cols=None):
     if cols:
         doctype['column_structure'] = cols
+
+    col_struct = doctype['column_structure']
+
     if data_box:
         doctype['points'] = data_box
 
@@ -112,8 +131,24 @@ def attempt_transcription(doctype, source_file, data_box=None, cols=None):
         i, j = reverse[(p_x, p_y)]
         text = word.text
 
-        print(f'Found text `{text}` for ({i}, {j})')
-        result[i][j] = text
+        cell_width = col_struct[j]['w']
+        if (word.bbox.width > cell_width * 3):
+            print(f"Found big word: {text}")
+            chars = len(text)
+            char_width = word.bbox.width / chars
+            for i_c, c in enumerate(text):
+                char_center = word.bbox.x + char_width * (0.5 + i_c)
+                mp = (char_center, word.bbox.y + word.bbox.height / 2)
+                np = lookup.query(mp, distance_upper_bound = 0.04)[1]
+                if np == len(lookup.data):
+                    continue
+                p_x, p_y = lookup.data[np]
+                i, j = reverse[(p_x, p_y)]
+                print(f'Putting text fragment {c} at [{i}, {j}]')
+                result[i][j] = c
+        else:
+            print(f'Found text `{text}` for ({i}, {j})')
+            result[i][j] = text
 
     return result
 
@@ -131,14 +166,16 @@ def remap_columns(data, doctype):
 
     for c_i in range(n_cols):
         column_type = doctype['columns'][c_i]
-        if column_type.get('enum') == 'wall':
+        enum = column_type.get('enum')
+
+        if enum:
             for r_i in range(n_rows):
-                output[r_i][c_i] = guess_wall_type(data[r_i][c_i])
+                output[r_i][c_i] = guess_enum_type(data[r_i][c_i], enum)
         elif column_type['translation'] == 'latitude':
             for r_i in range(n_rows):
                 orig = data[r_i][c_i]
                 long = data[r_i][c_i+1]
-                if 'E' in long and orig and orig[0] in ['5', '$', '8']:
+                if long and 'E' in long and orig and orig[0] in ['5', '$', '8']:
                     output[r_i][c_i] = 'S' + orig[1:]
 
         elif column_type['translation'] not in ['latitude', 'longitude']:
