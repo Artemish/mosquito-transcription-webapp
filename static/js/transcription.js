@@ -244,12 +244,12 @@ function init_transcription() {
         let enumType = header.columns[colIndex].enum
         let currentEnum = enumElements[enumType];
 
+        showEnum(enumType);
+
         if (currentEnum) {
           currentEnum.value = transcriptions[rowIndex][colIndex];
           currentEnum.focus({preventScoll: true});
         }
-
-        showEnum(enumType);
         
         // Show zoomed cell view
         const cropCanvas = document.createElement('canvas');
