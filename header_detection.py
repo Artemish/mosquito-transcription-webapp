@@ -24,7 +24,7 @@ def column_contours(image, show=False):
     height, width = thresholded.shape
     for col in range(width):
         column_pixels = thresholded[:, col]
-        if np.sum(column_pixels == 0) >= (height / 1.5):  # Consider it a line if half or more pixels are black
+        if np.sum(column_pixels == 0) >= (height / 1.2):  # Consider it a line if half or more pixels are black
             line_image[:, col] = 255
 
     if show:
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     image = cv2.imread(image_path)
     height = image.shape[0]
     
-    for start_y in range(100, (height-100), 100):
+    for start_y in range(100, (height-100), 50):
         header = image[start_y:start_y+100,:,:]
         contours, _ = column_contours(header)
         print(contours)
