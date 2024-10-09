@@ -13,7 +13,7 @@ WALL_TYPES = [wt.lower() for wt in [
 ]]
 
 FLOOR_TYPES = [ft.lower() for ft in [
-    "Areia", "Cimento", "Maticado", "Chapa", "Pavimentado",
+    "Areia", "Cimento", "Maticado", "Chapa", "Pavimentado", "Tijolo"
 ]]
 
 CEILING_TYPES = [ct.lower() for ct in [
