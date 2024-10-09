@@ -170,13 +170,21 @@ def remap_columns(data, doctype):
 
         if enum:
             for r_i in range(n_rows):
-                output[r_i][c_i] = guess_enum_type(data[r_i][c_i], enum)
+                guess = guess_enum_type(data[r_i][c_i], enum)
+                guess = guess.replace(',', '.')
+                output[r_i][c_i] = guess
         elif column_type['translation'] == 'latitude':
             for r_i in range(n_rows):
                 orig = data[r_i][c_i]
                 long = data[r_i][c_i+1]
+
+                guess = orig
                 if long and 'E' in long and orig and orig[0] in ['5', '$', '8']:
-                    output[r_i][c_i] = 'S' + orig[1:]
+                    guess = 'S' + orig[1:]
+
+                guess = guess.replace(',', '.')
+
+                output[r_i][c_i] = guess
 
         elif column_type['translation'] not in ['latitude', 'longitude']:
             for r_i in range(n_rows):
