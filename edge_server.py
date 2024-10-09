@@ -425,6 +425,7 @@ def transcribe_amazon():
     image_path = f'{TABLE_IMG_DIRECTORY}/{filename}_dewarped.png'
 
     column_structure = request.json.get("column_structure")
+    row_structure = request.json.get("row_structure")
     points = request.json.get("points")
 
     header_map = get_header_map()
@@ -436,7 +437,8 @@ def transcribe_amazon():
     expected_columns = len(doctype['columns'])
 
     transcription = attempt_transcription(
-        doctype, image_path, cols=column_structure, data_box=points
+        doctype, image_path, cols=column_structure, data_box=points,
+        rows=row_structure
     )
 
     remapped = remap_columns(transcription, doctype)

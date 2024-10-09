@@ -97,9 +97,11 @@ def make_cell_tree(doctype):
 
   return lookup_map, reverse_map
 
-def attempt_transcription(doctype, source_file, data_box=None, cols=None):
+def attempt_transcription(doctype, source_file, data_box=None, cols=None, rows=None):
     if cols:
         doctype['column_structure'] = cols
+    if rows:
+        doctype['row_structure'] = rows
 
     col_struct = doctype['column_structure']
 
