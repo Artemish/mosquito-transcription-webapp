@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utils import s, show_contour
+from utils import s, show_contour, crop_to_points
 from subset_table_warp import (
     filter_bounding_boxes,
     box_to_contour,
@@ -62,8 +62,12 @@ def infer_column_structure(image, skip_names=False):
 
     return boxes_xw_format
 
-def experiment_find_columns(image_path, expected_cols):
+def experiment_find_columns(image_path, expected_cols, points=[]):
     image = cv2.imread(image_path)
+
+    if points:
+        image = crop_to_points(image, points)
+
     height = image.shape[0]
 
     for start_y in range(100, (height-100), 100):
@@ -73,6 +77,23 @@ def experiment_find_columns(image_path, expected_cols):
             return boxes
         elif len(boxes) == (expected_cols + 1):
             return boxes[1:]
+
+    print("Found no boxes!")
+
+def experiment_find_rows(image_path, expected_rows, points=[]):
+    image = cv2.imread(image_path)
+
+    if points:
+        image = crop_to_points(image, points)
+
+    image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    width = image.shape[1]
+
+    for start_y in range(100, (width-100), 100):
+        cropped = image[start_y:start_y+100,:,:]
+        boxes = infer_column_structure(cropped, skip_names=False)
+        if len(boxes) == expected_rows:
+            return [{'h': box['w'], 'y': box['x']} for box in boxes]
 
     print("Found no boxes!")
 

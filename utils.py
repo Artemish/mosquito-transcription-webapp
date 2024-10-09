@@ -79,6 +79,18 @@ def shift_col(i, val):
 
     update_headers(new_cols)
 
+def crop_to_points(img, points):
+    (tl_x, tl_y) = points[0]['x'], points[0]['y']
+    (br_x, br_y) = points[1]['x'], points[1]['y']
+    h, w = img.shape[:2]
+
+    tl_x = int(tl_x * w)
+    tl_y = int(tl_y * h)
+    br_x = int(br_x * w)
+    br_y = int(br_y * h)
+
+    return img[tl_y:br_y, tl_x:br_x]
+
 
 def update_headers(new_cols):
     filename = 'static/header_types/headers.json'

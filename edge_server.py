@@ -14,7 +14,7 @@ import json
 from box_detection import box_extraction, bbs_to_array, coerce_to_grid
 from subset_table_warp import find_contours, warp_hull
 from contour_stitch import rebuild_img
-from header_detection import experiment_find_columns
+from header_detection import experiment_find_columns, experiment_find_rows
 from map_amazon_to_boxes import attempt_transcription, remap_columns
 
 from utils import show_contour, show
@@ -297,6 +297,7 @@ def fix_columns():
     filename = request.json['filename']
     document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
     image_path = f'{TABLE_IMG_DIRECTORY}/{filename}_dewarped.png'
+    points = request.json.get('points')
 
     header_map = get_header_map()
 
@@ -306,12 +307,37 @@ def fix_columns():
     doctype = header_map[document['doctype']]
     expected_columns = len(doctype['columns'])
 
-    extracted_cols = experiment_find_columns(image_path, expected_columns)
+    extracted_cols = experiment_find_columns(image_path, expected_columns, points=points)
 
     if extracted_cols:
         return jsonify(extracted_cols)
     else:
         return jsonify({"error": "Failed to extact expected columns"}), 400
+
+
+@app.route('/fix_rows', methods=['POST'])
+@auth.login_required
+def fix_rows():
+    filename = request.json['filename']
+    document_path = f'{TRANSCRIPT_DIRECTORY}/{filename}_document.json'
+    image_path = f'{TABLE_IMG_DIRECTORY}/{filename}_dewarped.png'
+    points = request.json.get('points')
+
+    header_map = get_header_map()
+
+    with open(document_path) as docfile:
+        document = json.load(docfile)
+
+    doctype = header_map[document['doctype']]
+    expected_rows = len(doctype['row_structure'])
+
+    extracted_rows = experiment_find_rows(image_path, expected_rows, points=points)
+
+
+    if extracted_rows:
+        return jsonify(extracted_rows)
+    else:
+        return jsonify({"error": "Failed to extact expected rows"}), 400
 
 
 def get_header_map():

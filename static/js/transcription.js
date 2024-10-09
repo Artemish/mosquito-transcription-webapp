@@ -4,6 +4,7 @@ function init_transcription() {
     const submitBtn = document.getElementById('transcription-submit-btn');
     const markCompleteBtn = document.getElementById('transcription-complete-btn');
     const fixColsBtn = document.getElementById('transcription-fixcols-btn');
+    const fixRowsBtn = document.getElementById('transcription-fixrows-btn');
     const autoTranscribeBtn = document.getElementById('transcription-autotranscribe-btn');
     const textTranscription = document.getElementById('text-transcription');
     const enumTranscriptionWall = document.getElementById('enum-transcription-wall');
@@ -37,6 +38,7 @@ function init_transcription() {
     let wallCol = false;
     let queuedInput = "";
     let columnsApplied = false
+    let rowsApplied = false
 
     const currentCellView = document.getElementById('current-cell-view');
     const transcriptionInput = document.getElementById('transcription-input');
@@ -65,6 +67,7 @@ function init_transcription() {
         overlayVisible = false;
         currentCellIndex = {row: 0, col: 0};
         columnsApplied = false;
+        rowsApplied = false;
 
         if (header) {
           default_transcriptions = header.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
@@ -82,6 +85,7 @@ function init_transcription() {
         submitBtn.addEventListener('click', submitTranscription);
         markCompleteBtn.addEventListener('click', markComplete);
         fixColsBtn.addEventListener('click', fixColumns);
+        fixRowsBtn.addEventListener('click', fixRows);
         autoTranscribeBtn.addEventListener('click', autoTranscribe);
         // selectWall.addEventListener('change', updateSelectWall);
         transcriptionInput.addEventListener('input', redraw);
@@ -568,6 +572,10 @@ function init_transcription() {
           submission['column_structure'] = header.column_structure;
         }
 
+        if (rowsApplied) {
+          submission['row_structure'] = header.row_structure;
+        }
+
         const response = await fetch('submit_transcription', {
             method: 'POST',
             headers: {
@@ -622,12 +630,38 @@ function init_transcription() {
         const result = await response.json();
 
         if (!response.ok) {
-            alert(`Failed to fix columns: ${result}`);
+            alert(`Failed to fix columns: ${result.error}`);
             return;
         }
 
         columnsApplied = true;
         header.column_structure = result;
+        redraw();
+    }
+
+    async function fixRows() {
+        const submission = {
+          filename: current_file,
+          points: points,
+        }
+
+        const response = await fetch('fix_rows', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submission)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(`Failed to fix rows: ${result.error}`);
+            return;
+        }
+
+        rowsApplied = true;
+        header.row_structure = result;
         redraw();
     }
 
@@ -639,6 +673,10 @@ function init_transcription() {
 
         if (columnsApplied) {
           submission.column_structure = header.column_structure
+        }
+
+        if (rowsApplied) {
+          submission.row_structure = header.row_structure
         }
 
         const response = await fetch('transcribe_amazon', {
@@ -695,6 +733,10 @@ async function fetchTranscription(file) {
 
     if (transcription?.column_structure) {
       header.column_structure = transcription.column_structure;
+    }
+
+    if (transcription?.row_structure) {
+      header.row_structure = transcription.row_structure;
     }
 
     const default_transcriptions = header?.row_structure.map((_, rowIndex) => header.column_structure.map((_, colIndex) => colIndex == 0 ? (rowIndex + 1).toString() : ""));
