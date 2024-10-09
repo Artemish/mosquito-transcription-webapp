@@ -246,6 +246,7 @@ function init_transcription() {
 
         if (currentEnum) {
           currentEnum.value = transcriptions[rowIndex][colIndex];
+          currentEnum.focus({preventScoll: true});
         }
 
         showEnum(enumType);
@@ -273,7 +274,7 @@ function init_transcription() {
         // Show transcription input
         transcriptionInput.style.display = 'block';
         transcriptionInput.value = transcriptions[rowIndex][colIndex];
-        if (!wallCol) {
+        if (!enumType) {
           transcriptionInput.focus({preventScoll: true}); // Focus on the input for immediate typing
         }
 
