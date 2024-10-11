@@ -70,7 +70,7 @@ def experiment_find_columns(image_path, expected_cols, points=[]):
 
     height = image.shape[0]
 
-    for start_y in range(100, (height-100), 100):
+    for start_y in range(100, (height-100), 25):
         cropped = image[start_y:start_y+100,:,:]
         boxes = infer_column_structure(cropped, skip_names=True)
         if len(boxes) == expected_cols:
@@ -89,7 +89,7 @@ def experiment_find_rows(image_path, expected_rows, points=[]):
     image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
     width = image.shape[1]
 
-    for start_y in range(100, (width-100), 100):
+    for start_y in range(100, (width-100), 25):
         cropped = image[start_y:start_y+100,:,:]
         boxes = infer_column_structure(cropped, skip_names=False)
         if len(boxes) == expected_rows:
