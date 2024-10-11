@@ -617,6 +617,7 @@ function init_transcription() {
     async function fixColumns() {
         const submission = {
           filename: current_file,
+          points: points,
         }
 
         const response = await fetch('fix_columns', {
