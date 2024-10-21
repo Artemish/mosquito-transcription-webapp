@@ -123,7 +123,7 @@ async function fetchDocument(file) {
     collectDateInput.value = doc?.collect_date || "";
     sprayYearInput.value = doc?.spray_year || "";
     doctypeInput.value = doc?.doctype || "";
-    districtInput.value = doc?.locality1 || "";
+    districtInput.value = doc?.district_city || "";
     locality1.value = doc?.locality1 || "";
     neighborhood1.value = doc?.neighborhood1 || "";
     locality2.value = doc?.locality2 || "";
