@@ -69,10 +69,12 @@ def experiment_find_columns(image_path, expected_cols, points=[]):
         image = crop_to_points(image, points)
 
     height = image.shape[0]
+    print(f'Height: {height}')
 
-    for start_y in range(100, (height-100), 25):
+    for start_y in range(100, height, 25):
         cropped = image[start_y:start_y+100,:,:]
         boxes = infer_column_structure(cropped, skip_names=True)
+        print(f'Found {len(boxes)} at y={start_y}, expected {expected_cols}')
         if len(boxes) == expected_cols:
             return boxes
         elif len(boxes) == (expected_cols + 1):
@@ -104,9 +106,9 @@ if __name__ == '__main__':
     height = image.shape[0]
     
     for start_y in range(100, (height-100), 50):
-        header = image[start_y:start_y+100,:,:]
+        header = image[start_y:start_y+50,:,:]
         contours, _ = column_contours(header)
-        print(contours)
+        # print(contours)
 
         # Display the results
         s(header, 'Original Header')
