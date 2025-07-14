@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Redactor</title>
+    <style>
+        #canvasWrapper {
+            position: relative;
+        }
+        #canvas, #markerCanvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px solid black;
+        }
+
+        button {
+          font-size: 1.2rem;
+          margin: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div>
+      <div>
+        <label for='directoryLoader'>Select Image Input Folder</label>
+        <input type="file" id="directoryLoader" webkitdirectory directory multiple/>
+      <div>
+        <button id="redactButton">Redact</button>
+        <button id="saveButton">Save</button>
+        <button id="nextButton">Next Image</button>
+        <button id="prevButton">Previous Image</button>
+        <button id="cycleButton">Redact/Save/Next (spacebar)</button>
+      </div>
+    </div>
+    <div id="canvasWrapper">
+        <canvas id="canvas"></canvas>
+        <canvas id="markerCanvas"></canvas>
+    </div>
+
+    <script>
+      var directoryLoader = document.getElementById('directoryLoader');
+        directoryLoader.addEventListener('change', handleDirectory, false);
+        var canvas = document.getElementById('canvas');
+        var markerCanvas = document.getElementById('markerCanvas');
+        var ctx = canvas.getContext('2d');
+        var markerCtx = markerCanvas.getContext('2d');
+        var imageQueue = [];
+        var currentImageIndex = 0;
+        var points = []; // Reset points
+
+      document.addEventListener('keydown', function(event) {
+          if (event.keyCode === 32) { // 32 is the key code for the space bar
+              event.preventDefault(); // Prevent the default action of the space bar
+              handleCycle();
+          }
+      });
+
+        function handleDirectory(e){
+            imageQueue = Array.from(e.target.files).filter(file => isImage(file));
+            if (imageQueue.length > 0) {
+                currentImageIndex = 0;
+                loadImage(imageQueue[currentImageIndex]);
+            }
+        }
+
+        function isImage(file) {
+            return file.type.match('image.*');
+        }
+
+        function loadImage(file) {
+            var reader = new FileReader();
+            reader.onload = function(event){
+                var img = new Image();
+                img.onload = function(){
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    markerCanvas.width = img.width;
+                    markerCanvas.height = img.height;
+                    ctx.drawImage(img,0,0);
+                    markerCtx.clearRect(0, 0, markerCanvas.width, markerCanvas.height); // Clear marker canvas
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(file);
+            originalFileName = file.name.split('.')[0];
+        }
+
+        handleClick = function(evt) {
+            var rect = markerCanvas.getBoundingClientRect();
+            var x = evt.clientX - rect.left;
+            var y = evt.clientY - rect.top;
+            points.push({x: x, y: y});
+            // Mark the clicked point on the marker canvas for visual reference
+            markerCtx.beginPath();
+            markerCtx.arc(x, y, 5, 0, 2 * Math.PI);
+            markerCtx.fillStyle = 'red';
+            markerCtx.fill();
+        };
+
+        handleRedact = function() {
+            if (points.length > 2) {
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                points.forEach(point => ctx.lineTo(point.x, point.y));
+                ctx.closePath();
+                ctx.fillStyle = 'black';
+                ctx.fill();
+                // Clear the marker canvas after redaction
+                markerCtx.clearRect(0, 0, markerCanvas.width, markerCanvas.height);
+                points = []; // Reset points
+            } else {
+                alert('Please click on at least three points to define an area to redact.');
+            }
+        }
+
+        handleSave = function() {
+            if (canvas.width && canvas.height) {
+                var link = document.createElement('a');
+                link.download = originalFileName + '_redacted.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } else {
+                alert('Please upload and redact an image first.');
+            }
+        }
+
+        handleNext = function() {
+            if (currentImageIndex < imageQueue.length - 1) {
+                currentImageIndex++;
+                loadImage(imageQueue[currentImageIndex]);
+            } else {
+                alert('No more images in the directory.');
+            }
+        };
+
+        handlePrev = function() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                loadImage(imageQueue[currentImageIndex]);
+            } else {
+                alert('This is the first image in the directory.');
+            }
+        };
+
+        handleCycle = function() {
+          handleRedact();
+          handleSave();
+          handleNext();
+        }
+
+        markerCanvas.addEventListener('click', handleClick, false);
+
+        document.getElementById('redactButton').addEventListener('click', handleRedact);
+        document.getElementById('saveButton').addEventListener('click', handleSave);
+        document.getElementById('nextButton').addEventListener('click', handleNext);
+        document.getElementById('prevButton').addEventListener('click', handlePrev);
+
+        document.getElementById('cycleButton').addEventListener('click', handleCycle);
+    </script>
+</body>
+</html>
