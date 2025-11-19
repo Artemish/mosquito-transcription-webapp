@@ -13,20 +13,33 @@ function setTab(tab) {
         tabs[i].className = tabs[i].className.replace(" selected", "");
     }
 
+    const uploadTab = document.getElementById('upload-tab');
     const documentTab = document.getElementById('document-tab');
     const dewarpTab = document.getElementById('dewarp-tab');
     const transcriptionTab = document.getElementById('transcription-tab');
+    const uploadNav = document.getElementById('nav-upload');
     const documentNav = document.getElementById('nav-document');
     const dewarpNav = document.getElementById('nav-dewarp');
     const transcriptionNav = document.getElementById('nav-transcription');
 
-    fetchAndDisplayImage(current_file, tab);
+    // Only fetch and display image if not on upload tab
+    if (tab !== 'upload') {
+        fetchAndDisplayImage(current_file, tab);
+    }
 
+    uploadTab.style.display = "none";
     documentTab.style.display = "none";
     dewarpTab.style.display = "none";
     transcriptionTab.style.display = "none";
 
-    if (tab == 'document') {
+    if (tab == 'upload') {
+        uploadNav.className += " selected";
+        uploadTab.style.display = "";
+        // Initialize upload tab if needed
+        if (typeof initUploadTab === 'function') {
+            initUploadTab();
+        }
+    } else if (tab == 'document') {
         // Add class "selected" to the tab that was clicked
         documentNav.className += " selected";
         documentTab.style.display = "";

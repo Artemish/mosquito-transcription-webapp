@@ -146,6 +146,35 @@ def upload_file():
     return jsonify(segmentation_result)
 
 
+@app.route('/upload_source_image', methods=['POST'])
+@auth.login_required
+def upload_source_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    
+    # Ensure the filename is secure
+    filename = file.filename
+    if '..' in filename or filename.startswith('/'):
+        return jsonify({"error": "Invalid filename"}), 400
+    
+    # Save the file to the source directory
+    filepath = os.path.join(SOURCE_DIRECTORY, filename)
+    
+    # Check if file already exists
+    if os.path.exists(filepath):
+        return jsonify({"error": "File already exists", "filename": filename}), 409
+    
+    try:
+        file.save(filepath)
+        return jsonify({"success": True, "filename": filename}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route('/find_table', methods=['POST'])
 @auth.login_required
 def find_table():
