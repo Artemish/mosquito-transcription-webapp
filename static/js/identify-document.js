@@ -9,55 +9,55 @@ function init_identify_document() {
   // Questions and answers logic
   const questions = [
       { // Question 1, baseline
-        question: "Identify some of the keywords in the title of the document:",
+        question: "Identifique algumas das palavras-chave no título do documento:",
           options: [
-              { text: 'Armadilhas de Luz (Light traps)', next: 'light_traps_indoor_outdoor' },
+              { text: 'Armadilhas de Luz', next: 'light_traps_indoor_outdoor' },
               { text: 'Anopheles Funestus', next: 2 },
               { text: 'Anopheles Gambiae s.l.', next: 3 },
               { text: 'Outros Anopheles', next: 4 },
-              { text: 'Outros Doencas (Other disease vectors)', next: 5 },
-              { text: 'Procopack/Capture Manual', next: 'procopack' }
+              { text: 'Outros Vectores de Doenças', next: 5 },
+              { text: 'Procopack/Captura Manual', next: 'procopack' }
           ]
       },
       { // Question 2, funestus
-          question: "How many rows does this document have?",
+          question: "Quantas linhas tem este documento?",
           options: [
               { text: '10', next: 'anopheles_funestus' },
               { text: '15', next: 'anopheles_funestus_s.1_compact' },
           ]
       },
       { // Question 3, gambiae
-          question: "How many rows does this document have?",
+          question: "Quantas linhas tem este documento?",
           options: [
               { text: '10', next: 'anopheles_gambia_s.1' },
               { text: '15', next: 'anopheles_gambia_s.1_compact' },
           ]
       },
       { // Question 4, outros anopheles
-          question: "TODO identify outros anopheles documents?",
+          question: "A FAZER: identificar documentos outros anopheles?",
           options: [
-              { text: 'return', next: 1 },
+              { text: 'Voltar', next: 1 },
               { text: '15', next: 'anopheles_gambia_s.1_compact' },
           ]
       },
       { // Question 5, other disease vectors
-          question: "What kind of net data is present in the document?",
+          question: "Que tipo de dados de rede está presente no documento?",
           options: [
-              { text: 'Simple (presenca de rede)', next: 6 },
-              { text: 'Full (source, type, presence)', next: 7 },
+              { text: 'Simples (presença de rede)', next: 6 },
+              { text: 'Completo (fonte, tipo, presença)', next: 7 },
           ]
       },
       { // Question 6, other disease vectors, simple net data
-          question: "Which of the following species are recorded?",
+          question: "Quais das seguintes espécies estão registadas?",
           options: [
-              { text: 'Culex/Aedes, blank', next: 'other_vectors_disease_a' },
-              { text: 'Gambiae, funestus, cous/phar/macu/pretori (or 4 blank)', next: 'other_vectors_disease_d' },
+              { text: 'Culex/Aedes, em branco', next: 'other_vectors_disease_a' },
+              { text: 'Gambiae, funestus, cous/phar/macu/pretori (ou 4 em branco)', next: 'other_vectors_disease_d' },
           ]
       },
       { // Question 7, other disease vectors, full net data
-          question: "Which of the following species are recorded?",
+          question: "Quais das seguintes espécies estão registadas?",
           options: [
-              { text: '6 empty sections for Outras Especies M/F', next: 'other_vectors_disease_c' },
+              { text: '6 secções vazias para Outras Espécies M/F', next: 'other_vectors_disease_c' },
               { text: 'Gambiae, funestus, culex/aedes + cous/phar/macu/pretori (M/F)', next: 'other_vectors_disease_b' },
           ]
       },
@@ -96,12 +96,12 @@ function init_identify_document() {
 
     // Create a paragraph for the question text
     const completeText = document.createElement('p');
-    completeText.textContent = `Document identified: ${result}`;
+    completeText.textContent = `Documento identificado: ${result}`;
     modalContent.appendChild(completeText);
 
     const closeButton = document.createElement('button');
     closeButton.className = 'btn btn-primary';
-    closeButton.textContent = 'Close';
+    closeButton.textContent = 'Fechar';
     closeButton.addEventListener('click', closeModal);
 
     modalContent.appendChild(closeButton);
