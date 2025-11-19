@@ -4,11 +4,11 @@
     <canvas id="transcription-overlay-canvas"></canvas>
   </div>
   <div id="transcription-area" style="margin-top: 20px;">
-      <div>Transcribe Cell:</div>
-      <img id="current-cell-view" src="" alt="Zoomed Cell" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
+      <div>Transcrever Célula:</div>
+      <img id="current-cell-view" src="" alt="Célula Ampliada" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
       <div id="enum-transcription-wall" style="display: none">
         <select name="wall" id="select-wall">
-          <option value="">-- Select a wall type --</option>
+          <option value="">-- Seleccione um tipo de parede --</option>
           <option value="Alvenaria">Alvenaria (Brickwork)</option>
           <option value="Bloco">Bloco (Mud Bricks)</option>
           <option value="Caniço">Caniço (Wattle and reed)</option>
@@ -32,7 +32,7 @@
       </div>
       <div id="enum-transcription-floor" style="display: none">
         <select name="floor" id="select-floor">
-          <option value="">-- Select a floor type --</option>
+          <option value="">-- Seleccione um tipo de chão --</option>
           <option value="Areia">Areia (Sand)</option>
           <option value="Bloco">Bloco (Bricks)</option>
           <option value="Cimento">Cimento (Cement)</option>
@@ -45,7 +45,7 @@
       </div>
       <div id="enum-transcription-ceiling" style="display: none">
         <select name="ceiling" id="select-ceiling">
-          <option value="">-- Select a ceiling type --</option>
+          <option value="">-- Seleccione um tipo de tecto --</option>
           <option value="Capim">Capim (Grass)</option>
           <option value="Caniço">Caniço (Wattle and reed)</option>
           <option value="Chapa">Chapa (Sheet metal)</option>
@@ -55,29 +55,29 @@
           <option value="Telha">Telha (Tile)</option>
           <option value="Macute">Macute (??)</option>
           <option value="Zinco">Zinco (??)</option>
-          <option value="?">? (Could not read)</option>
+          <option value="?">? (Não foi possível ler)</option>
         </select>
       </div>
       <div id="text-transcription">
-        <input type="text" id="transcription-input" placeholder="Enter transcription here" style="display: none;"/>
+        <input type="text" id="transcription-input" placeholder="Introduza a transcrição aqui" style="display: none;"/>
       </div>
   </div>
   <div id="transcription-buttons">
     <p>
-      Start by clicking the top left of the data rows (i.e. the top
-      left of row 1), then click the bottom right of the data rows.
-      This should outline the data table in blue.
+      Comece clicando no canto superior esquerdo das linhas de dados (ou seja, o canto superior
+      esquerdo da linha 1), depois clique no canto inferior direito das linhas de dados.
+      Isto deve contornar a tabela de dados a azul.
     </p>
     <p>
-      Hit space to toggle the boxes detected. Navigate with the arrow
-      keys. By default, transcription moves forward after putting in a
-      single number - go back with the Left arrow key and add a digit
-      if the number is 10 or greater.
+      Pressione a barra de espaço para alternar as caixas detectadas. Navegue com as teclas
+      de setas. Por padrão, a transcrição avança depois de inserir um
+      único número - volte atrás com a tecla de seta para a esquerda e adicione um dígito
+      se o número for 10 ou maior.
     </p>
-    <button id="transcription-submit-btn">Submit transcription</button>
-    <button id="transcription-complete-btn">Mark transcription complete</button>
-    <button id="transcription-fixcols-btn">Try to fix columns</button>
-    <button id="transcription-fixrows-btn">Try to fix rows</button>
-    <button id="transcription-autotranscribe-btn">Attempt transcription</button>
+    <button id="transcription-submit-btn">Submeter transcrição</button>
+    <button id="transcription-complete-btn">Marcar transcrição como completa</button>
+    <button id="transcription-fixcols-btn">Tentar corrigir colunas</button>
+    <button id="transcription-fixrows-btn">Tentar corrigir linhas</button>
+    <button id="transcription-autotranscribe-btn">Tentar transcrição automática</button>
   </div>
 </div>

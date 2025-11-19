@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="UTF-8">
-    <title>Image Cropper and Segmenter</title>
+    <title>Cortador e Segmentador de Imagens</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='app.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{ url_for('static', filename='js/globals.js') }}"></script>
@@ -11,24 +11,25 @@
     <script src="{{ url_for('static', filename='js/dewarp.js') }}"></script>
     <script src="{{ url_for('static', filename='js/transcription.js') }}"></script>
     <script src="{{ url_for('static', filename='js/identify-document.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
   </head>
   <body>
     <div class="flex-container">
       <div id="file-sidebar" class="sidebar">
         <div>
-          <a href="download_csv" download="transcription.csv">Download Transcription CSV</a>
+          <a href="download_csv" download="transcription.csv">Descarregar CSV de Transcrição</a>
         </div>
         <div>
-          <a href="download_documents_csv" download="documents.csv">Download Documents CSV</a>
+          <a href="download_documents_csv" download="documents.csv">Descarregar CSV de Documentos</a>
         </div>
-        <h3 id="file-list-header">Source Files</h3>
+        <h3 id="file-list-header">Ficheiros Fonte</h3>
         <table>
           <thead>
             <tr>
-              <th class="file-id">File ID</th>
+              <th class="file-id">ID do Ficheiro</th>
               <th class="status">Doc</th>
               <th class="segmentation">Seg.</th>
-              <th class="transcription">Data</th>
+              <th class="transcription">Dados</th>
             </tr>
           </thead>
           <tbody id="file-list"></tbody>
