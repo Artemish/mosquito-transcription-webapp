@@ -172,9 +172,6 @@ async function uploadSingleFile(file) {
 
     const response = await fetch('/upload_source_image', {
         method: 'POST',
-        headers: {
-            'Authorization': 'Basic ' + btoa(username + ':' + password)
-        },
         body: formData
     });
 
