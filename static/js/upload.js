@@ -22,7 +22,7 @@ function initUploadTab() {
 
     // Handle upload button
     uploadBtn.addEventListener('click', () => {
-        uploadFiles();
+        uploadFiles().then(() => { sidebar.loadFiles(); });
     });
 
     // Handle clear queue button
