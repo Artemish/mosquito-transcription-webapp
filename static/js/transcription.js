@@ -667,39 +667,52 @@ function init_transcription() {
     }
 
     async function autoTranscribe() {
-        let submission = {
-          filename: current_file,
-          points: points,
+        // Store original button text and disable button
+        const originalText = autoTranscribeBtn.textContent;
+        autoTranscribeBtn.textContent = 'A processar...';
+        autoTranscribeBtn.disabled = true;
+        autoTranscribeBtn.style.cursor = 'wait';
+
+        try {
+            let submission = {
+              filename: current_file,
+              points: points,
+            }
+
+            if (columnsApplied) {
+              submission.column_structure = header.column_structure
+            }
+
+            if (rowsApplied) {
+              submission.row_structure = header.row_structure
+            }
+
+            const response = await fetch('transcribe_amazon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submission)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(`Failed to transcribe with AWS: ${result}`);
+                return;
+            }
+
+            console.log("Transcription result: ");
+            console.log(result);
+
+            transcriptions = result;
+            redraw();
+        } finally {
+            // Restore button state
+            autoTranscribeBtn.textContent = originalText;
+            autoTranscribeBtn.disabled = false;
+            autoTranscribeBtn.style.cursor = 'pointer';
         }
-
-        if (columnsApplied) {
-          submission.column_structure = header.column_structure
-        }
-
-        if (rowsApplied) {
-          submission.row_structure = header.row_structure
-        }
-
-        const response = await fetch('transcribe_amazon', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(submission)
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-            alert(`Failed to transcribe with AWS: ${result}`);
-            return;
-        }
-
-        console.log("Transcription result: ");
-        console.log(result);
-
-        transcriptions = result;
-        redraw();
     }
 
     async function updateSelectWall() {
