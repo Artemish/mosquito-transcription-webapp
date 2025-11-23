@@ -30,6 +30,7 @@ TABLE_IMG_DIRECTORY = 'table_images'
 IMG_RE = re.compile(r'.*\.(png|jpg)')
 
 users = {
+    "staff": "mosquito",
     "alexa": "mosquito",
     "mitch": "mosquito",
 }
