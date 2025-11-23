@@ -74,10 +74,78 @@
       único número - volte atrás com a tecla de seta para a esquerda e adicione um dígito
       se o número for 10 ou maior.
     </p>
-    <button id="transcription-submit-btn">Submeter transcrição</button>
-    <button id="transcription-complete-btn">Marcar transcrição como completa</button>
-    <button id="transcription-fixcols-btn">Tentar corrigir colunas</button>
-    <button id="transcription-fixrows-btn">Tentar corrigir linhas</button>
-    <button id="transcription-autotranscribe-btn">Tentar transcrição automática</button>
+    <button id="transcription-help-btn" class="btn btn-secondary" onclick="openTranscriptionHelpModal()">? Ajuda</button>
+    <button id="transcription-submit-btn" class="btn btn-primary">Submeter transcrição</button>
+    <button id="transcription-complete-btn" class="btn btn-success">Marcar transcrição como completa</button>
+    <button id="transcription-fixcols-btn" class="btn btn-warning">Tentar corrigir colunas</button>
+    <button id="transcription-fixrows-btn" class="btn btn-warning">Tentar corrigir linhas</button>
+    <button id="transcription-autotranscribe-btn" class="btn btn-info">Tentar transcrição automática</button>
+  </div>
+</div>
+
+<!-- Transcription Help Modal -->
+<div id="transcription-help-modal" class="modal">
+  <div class="modal-content help-modal-content">
+    <div class="modal-header">
+      <h2>Ajuda - Atalhos de Transcrição</h2>
+      <span class="close-modal" onclick="closeTranscriptionHelpModal()">&times;</span>
+    </div>
+    
+    <div class="modal-body">
+      <h3>Navegação</h3>
+      <table class="help-table">
+        <tr>
+          <td class="hotkey"><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></td>
+          <td>Mover entre células na tabela</td>
+        </tr>
+        <tr>
+          <td class="hotkey"><kbd>Enter</kbd></td>
+          <td>Guardar célula actual e mover para a próxima linha</td>
+        </tr>
+      </table>
+
+      <h3>Entrada de Dados</h3>
+      <table class="help-table">
+        <tr>
+          <td class="hotkey"><kbd>0</kbd>-<kbd>9</kbd></td>
+          <td>Em colunas normais, avança automaticamente para a próxima linha após inserir um dígito. Para números ≥10, use ← para voltar e adicionar outro dígito</td>
+        </tr>
+        <tr>
+          <td class="hotkey"><kbd>Shift</kbd> + símbolo numérico</td>
+          <td>Digita o número subjacente (ex: Shift+! digita 1, Shift+@ digita 2)</td>
+        </tr>
+        <tr>
+          <td class="hotkey"><kbd>a</kbd>-<kbd>z</kbd></td>
+          <td>Em colunas de enumeração (parede/chão/tecto), faz correspondência de prefixo por autocompletar. Digite letras suficientes até que apenas uma opção corresponda, depois avança automaticamente</td>
+        </tr>
+      </table>
+
+      <h3>Funções Especiais</h3>
+      <table class="help-table">
+        <tr>
+          <td class="hotkey"><kbd>X</kbd></td>
+          <td>Limpa toda a coluna actual e retorna à linha superior dessa coluna</td>
+        </tr>
+        <tr>
+          <td class="hotkey"><kbd>Espaço</kbd></td>
+          <td>Alterna a visibilidade da sobreposição de transcrição (mostra/esconde todos os valores transcritos na imagem)</td>
+        </tr>
+      </table>
+
+      <h3>Comportamento Inteligente</h3>
+      <ul>
+        <li>Ao navegar além da última coluna, passa para a primeira coluna da próxima linha</li>
+        <li>Ao navegar além da última linha, passa para a primeira linha da próxima coluna</li>
+        <li>Detecção automática de padrões em colunas de latitude/longitude e pré-preenchimento de prefixos</li>
+      </ul>
+
+      <h3>Instruções de Início</h3>
+      <ol>
+        <li>Clique no canto superior esquerdo da tabela de dados</li>
+        <li>Clique no canto inferior direito da tabela de dados</li>
+        <li>A tabela ficará contornada a azul</li>
+        <li>Use os atalhos acima para transcrever eficientemente</li>
+      </ol>
+    </div>
   </div>
 </div>
