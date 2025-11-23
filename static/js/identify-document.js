@@ -15,8 +15,9 @@ function init_identify_document() {
               { text: 'Anopheles Funestus', next: 2 },
               { text: 'Anopheles Gambiae s.l.', next: 3 },
               { text: 'Outros Anopheles', next: 4 },
-              { text: 'Outros Vectores de Doenças', next: 5 },
-              { text: 'Procopack/Captura Manual', next: 'procopack' }
+              { text: 'Outros Doencas (Other diseases)', next: 5 },
+              { text: 'Outros Vectores (Other vectors)', next: 8 },
+              { text: 'Procopack/Capture Manual', next: 'procopack' }
           ]
       },
       { // Question 2, funestus
@@ -34,10 +35,10 @@ function init_identify_document() {
           ]
       },
       { // Question 4, outros anopheles
-          question: "A FAZER: identificar documentos outros anopheles?",
+          question: "How many rows does this document have?",
           options: [
-              { text: 'Voltar', next: 1 },
-              { text: '15', next: 'anopheles_gambia_s.1_compact' },
+              { text: '10', next: 'other_anopheles' },
+              { text: '15', next: 'other_anopheles_compact' },
           ]
       },
       { // Question 5, other disease vectors
@@ -59,6 +60,13 @@ function init_identify_document() {
           options: [
               { text: '6 secções vazias para Outras Espécies M/F', next: 'other_vectors_disease_c' },
               { text: 'Gambiae, funestus, culex/aedes + cous/phar/macu/pretori (M/F)', next: 'other_vectors_disease_b' },
+          ]
+      },
+      { // Question 8, Other Vectors
+          question: "How many rows does this document have?",
+          options: [
+              { text: '10', next: 'other_vectors' },
+              { text: '15', next: 'other_vectors_compact' },
           ]
       },
   ];
