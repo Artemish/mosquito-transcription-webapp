@@ -87,9 +87,10 @@ function init_document() {
 
         console.log(response);
         
-        fetchAndDisplayImage(current_file, target="dewarp"); 
+        await fetchAndDisplayImage(current_file, target="dewarp"); 
+        await fetchTranscription(current_file);
         
-        setTab('transcription');
+        setTab('dewarp');
     }
 
     initialize();
