@@ -162,7 +162,7 @@ table {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -173,6 +173,10 @@ table {
     align-items: center;
 }
 
+.modal.show {
+    display: flex;
+}
+
 .modal-content {
     background-color: white;
     padding: 20px;
@@ -180,12 +184,73 @@ table {
     text-align: center;
 }
 
+.upload-modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.modal-header {
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-modal {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #ddd;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
 .btn {
     padding: 10px 20px;
-    margin: 10px;
+    margin: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .btn-primary {
@@ -193,9 +258,44 @@ table {
     color: white;
 }
 
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
 .btn-secondary {
     background-color: #6c757d;
     color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
 }
 
 /* Sidebar table styles */
@@ -214,4 +314,71 @@ table {
 
 #file-list > tr > td:not(:first-child) {
   text-align: center;
+}
+
+/* Help modal specific styles */
+.help-modal-content {
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.help-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.help-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+
+.help-table td.hotkey {
+    width: 30%;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.help-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Keyboard key styling */
+kbd {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 0 0 2px #fff;
+    color: #333;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0 2px;
+    padding: 2px 6px;
+    white-space: nowrap;
+}
+
+.modal-body h3 {
+    color: #007bff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-body ul, .modal-body ol {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
 }

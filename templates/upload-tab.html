@@ -1,69 +1,78 @@
-<div id="upload-tab" style="display: none">
-  <div id="upload-section">
-    <h3>Carregar Ficheiros</h3>
-    <p>
-      Seleccione ficheiros ou uma pasta completa de imagens para carregar para o servidor.
-      Os ficheiros suportados incluem PNG e JPG.
-    </p>
+<!-- Upload Modal -->
+<div id="upload-modal" class="modal">
+  <div class="modal-content upload-modal-content">
+    <div class="modal-header">
+      <h2>Carregar Ficheiros</h2>
+      <span class="close-modal" onclick="closeUploadModal()">&times;</span>
+    </div>
     
-    <div id="upload-controls">
-      <div style="margin-bottom: 20px;">
-        <label for="file-input" class="btn btn-primary" style="cursor: pointer;">
-          Seleccionar Ficheiros
-          <input type="file" id="file-input" multiple accept="image/png,image/jpeg,image/jpg" style="display: none;"/>
-        </label>
-        <label for="folder-input" class="btn btn-primary" style="cursor: pointer; margin-left: 10px;">
-          Seleccionar Pasta
-          <input type="file" id="folder-input" webkitdirectory directory multiple style="display: none;"/>
-        </label>
-      </div>
-      
-      <div id="upload-queue" style="margin-bottom: 20px;">
-        <h4>Ficheiros Seleccionados: <span id="file-count">0</span></h4>
-        <div id="file-list-upload" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; display: none;">
-          <!-- File list will be populated here -->
-        </div>
-      </div>
-      
-      <button id="upload-btn" class="btn btn-primary" style="display: none;">Carregar Ficheiros</button>
-      <button id="clear-queue-btn" class="btn" style="display: none; margin-left: 10px;">Limpar Fila</button>
-      
-      <div id="upload-progress" style="margin-top: 20px; display: none;">
-        <h4>Progresso do Carregamento</h4>
-        <div style="background-color: #f0f0f0; border-radius: 5px; overflow: hidden;">
-          <div id="progress-bar" style="height: 30px; background-color: #4CAF50; width: 0%; transition: width 0.3s; text-align: center; line-height: 30px; color: white; font-weight: bold;">
-            0%
+    <div class="modal-body">
+      <div id="upload-section">
+        <p>
+          Seleccione ficheiros ou uma pasta completa de imagens para carregar para o servidor.
+          Os ficheiros suportados incluem PNG e JPG.
+        </p>
+        
+        <div id="upload-controls">
+          <div style="margin-bottom: 20px;">
+            <label for="file-input" class="btn btn-primary" style="cursor: pointer;">
+              Seleccionar Ficheiros
+              <input type="file" id="file-input" multiple accept="image/png,image/jpeg,image/jpg" style="display: none;"/>
+            </label>
+            <label for="folder-input" class="btn btn-primary" style="cursor: pointer; margin-left: 10px;">
+              Seleccionar Pasta
+              <input type="file" id="folder-input" webkitdirectory directory multiple style="display: none;"/>
+            </label>
+          </div>
+          
+          <div id="upload-queue" style="margin-bottom: 20px;">
+            <h4>Ficheiros Seleccionados: <span id="file-count">0</span></h4>
+            <div id="file-list-upload" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; display: none;">
+              <!-- File list will be populated here -->
+            </div>
+          </div>
+          
+          <button id="upload-btn" class="btn btn-primary" style="display: none;">Carregar Ficheiros</button>
+          <button id="clear-queue-btn" class="btn" style="display: none; margin-left: 10px;">Limpar Fila</button>
+          
+          <div id="upload-progress" style="margin-top: 20px; display: none;">
+            <h4>Progresso do Carregamento</h4>
+            <div style="background-color: #f0f0f0; border-radius: 5px; overflow: hidden;">
+              <div id="progress-bar" style="height: 30px; background-color: #4CAF50; width: 0%; transition: width 0.3s; text-align: center; line-height: 30px; color: white; font-weight: bold;">
+                0%
+              </div>
+            </div>
+            <p id="upload-status" style="margin-top: 10px;"></p>
           </div>
         </div>
-        <p id="upload-status" style="margin-top: 10px;"></p>
+      </div>
+      
+      <div id="document-list-section" style="margin-top: 40px;">
+        <h3>Documentos Actuais</h3>
+        <p>
+          Lista de todos os documentos fonte actualmente no servidor.
+        </p>
+        
+        <div style="margin-bottom: 10px;">
+          <button id="refresh-documents-btn" class="btn">Actualizar Lista</button>
+          <input type="text" id="filter-documents" placeholder="Filtrar documentos..." style="margin-left: 10px; padding: 5px;"/>
+        </div>
+        
+        <table id="documents-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: #f0f0f0;">
+              <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Nome do Ficheiro</th>
+              <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Documento</th>
+              <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Segmentação</th>
+              <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Transcrição</th>
+              <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Completo</th>
+            </tr>
+          </thead>
+          <tbody id="documents-table-body">
+            <!-- Document rows will be populated here -->
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
-  
-  <div id="document-list-section" style="margin-top: 40px;">
-    <h3>Documentos Actuais</h3>
-    <p>
-      Lista de todos os documentos fonte actualmente no servidor.
-    </p>
-    
-    <div style="margin-bottom: 10px;">
-      <button id="refresh-documents-btn" class="btn">Actualizar Lista</button>
-      <input type="text" id="filter-documents" placeholder="Filtrar documentos..." style="margin-left: 10px; padding: 5px;"/>
-    </div>
-    
-    <table id="documents-table" style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr style="background-color: #f0f0f0;">
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Nome do Ficheiro</th>
-          <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Documento</th>
-          <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Segmentação</th>
-          <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Transcrição</th>
-          <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Completo</th>
-        </tr>
-      </thead>
-      <tbody id="documents-table-body">
-        <!-- Document rows will be populated here -->
-      </tbody>
-    </table>
   </div>
 </div>

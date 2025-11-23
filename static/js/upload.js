@@ -1,6 +1,32 @@
-// Upload tab functionality
+// Upload modal functionality
 
 let uploadQueue = [];
+
+function openUploadModal() {
+    const modal = document.getElementById('upload-modal');
+    modal.classList.add('show');
+    
+    // Initialize upload functionality if not already done
+    if (typeof initUploadTab === 'function') {
+        initUploadTab();
+    }
+    
+    // Load documents list when opening modal
+    loadDocumentsList();
+}
+
+function closeUploadModal() {
+    const modal = document.getElementById('upload-modal');
+    modal.classList.remove('show');
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('upload-modal');
+    if (event.target === modal) {
+        closeUploadModal();
+    }
+});
 
 function initUploadTab() {
     const fileInput = document.getElementById('file-input');

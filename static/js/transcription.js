@@ -747,6 +747,35 @@ async function fetchTranscription(file) {
     points = transcription?.points || header?.points || [];
 }
 
+// Help modal functions
+function openTranscriptionHelpModal() {
+    const modal = document.getElementById('transcription-help-modal');
+    modal.classList.add('show');
+}
+
+function closeTranscriptionHelpModal() {
+    const modal = document.getElementById('transcription-help-modal');
+    modal.classList.remove('show');
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('transcription-help-modal');
+    if (event.target === modal) {
+        closeTranscriptionHelpModal();
+    }
+});
+
+// Close modal with Escape key
+window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('transcription-help-modal');
+        if (modal.classList.contains('show')) {
+            closeTranscriptionHelpModal();
+        }
+    }
+});
+
 window.addEventListener('load', (event) => {
   init_transcription();
 });
