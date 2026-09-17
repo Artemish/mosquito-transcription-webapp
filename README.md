@@ -1,6 +1,10 @@
 # Mosquito Transcription Webapp
 
-A web application for segmenting scanned mosquito-surveillance forms and recording structured transcriptions.
+This application supports the digitization of scanned mosquito-surveillance forms from Mozambique. Its browser-based workflow records document metadata, corrects photographed table geometry, captures structured cell values, and exports the resulting records as CSV.
+
+Application operators should use the [English user manual](docs/USER_MANUAL.md) or the equivalent [Portuguese user manual](docs/MANUAL_DO_UTILIZADOR.md).
+
+The instructions below are intended for developers and system administrators deploying the application.
 
 ## Run with Docker Compose
 
