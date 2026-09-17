@@ -9,3 +9,4 @@ scipy
 gunicorn
 flask_httpauth
 amazon-textract-textractor
+geopandas
