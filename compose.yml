@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    image: mosquito-transcription-webapp:local
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      - ./source_images:/app/source_images
+      - ./table_images:/app/table_images
+      - ./transcriptions:/app/transcriptions

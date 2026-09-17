@@ -1,0 +1,41 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.db
+venv/
+.venv/
+
+# Operational inputs and generated outputs are mounted at runtime.
+source_images/*
+!source_images/README.md
+table_images/*
+!table_images/README.md
+transcriptions/*
+!transcriptions/README.md
+
+# Local analysis, experiments, and generated artifacts are not required by
+# the deployed web application.
+corrections/
+d2/
+data_cleaning/
+data_exploration/
+doctype_identification/
+test/
+test_cases/
+unknown_documents/
+/*.jpg
+/*.png
+/*.xcf
+/*.tar.gz
+map.html
+mozambique.geojson
+mozambique.geoJson
+notes.md
+out.json
+textract_example.json
+textracted.html
+x
