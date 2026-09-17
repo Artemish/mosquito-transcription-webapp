@@ -29,10 +29,8 @@ TABLE_IMG_DIRECTORY = 'table_images'
 
 IMG_RE = re.compile(r'.*\.(png|jpg)')
 
-users = {
-    "alexa": "mosquito",
-    "mitch": "mosquito",
-}
+auth_username = os.environ.get('AUTH_USERNAME')
+auth_password = os.environ.get('AUTH_PASSWORD')
 
 towns = pd.read_csv('mozambique_towns.csv')
 cities = pd.read_csv('mozambique_cities.csv')
@@ -42,8 +40,8 @@ provinces = sorted(towns.province.unique())
 
 @auth.get_password
 def get_password(username):
-    if username in users:
-        return users.get(username)
+    if auth_username and auth_password and username == auth_username:
+        return auth_password
     return None
 
 @auth.error_handler
