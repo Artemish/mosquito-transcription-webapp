@@ -66,3 +66,9 @@ docker run --rm \
   -v "$PWD/transcriptions:/app/transcriptions" \
   mosquito-transcription-webapp
 ```
+
+## License
+
+The application source code is licensed under the [Apache License 2.0](LICENSE).
+
+Datasets, document images, geographic files, fonts, and other third-party assets are not automatically covered by the software license. Their individual terms must be reviewed before redistribution.
