@@ -5,3 +5,7 @@ numpy
 opencv-contrib-python
 pandas
 pillow
+gunicorn
+flask_httpauth
+amazon-textract-textractor
+geopandas
