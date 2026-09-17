@@ -50,6 +50,19 @@ The Compose configuration bind-mounts these persistent directories:
 - `table_images/` — generated and segmented table images
 - `transcriptions/` — document metadata, transcription JSON, and `checks.db`
 
+## Update interface translations
+
+The HTML interface uses Flask-Babel with English source strings and a Portuguese translation catalog. After changing translatable strings in the templates, update and compile the catalog:
+
+```bash
+pybabel extract -F babel.cfg -o messages.pot .
+pybabel update -i messages.pot -d translations
+# Edit translations/pt/LC_MESSAGES/messages.po
+pybabel compile -d translations
+```
+
+Users can choose English or Portuguese in the sidebar. The `lang=en` and `lang=pt` query parameters can also be used directly; otherwise, the browser's preferred language is used, with Portuguese as the fallback.
+
 ## Run with Docker directly
 
 Build the image:

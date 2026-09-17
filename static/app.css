@@ -90,6 +90,16 @@ canvas {
     padding-left: 15px;
 }
 
+.language-selector {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.language-selector a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .sidebar ul {
     list-style-type: none; /* Remove bullets */
     padding: 0;

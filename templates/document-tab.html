@@ -20,32 +20,29 @@
     <canvas id="document-overlay-canvas"></canvas>
   </div>
   <div id="document-inputs">
-    <p>
-      Preencha alguns metadados do documento. Seleccione o tipo de documento
-      clicando no cabeçalho abaixo.
-    </p>
+    <p>{{ _('Enter the document metadata. Select the document type by clicking the header below.') }}</p>
     <table>
       <tr>
         <td>
           <label>
-            Tipo de documento:
+            {{ _('Document type:') }}
             <select id="document-type" onchange="updateHeader()">
               <option value=""></option>
-              <option value="anopheles_funestus">Anopheles Funestus</option>
-              <option value="anopheles_funestus_s.1_compact">Anopheles Funestus s.1 (Compacto)</option>
-              <option value="anopheles_gambia_s.1">Anopheles Gambiae s.1</option>
-              <option value="anopheles_gambia_s.1_compact">Anopheles Gambiae s.1 (Compacto)</option>
-              <option value="anopheles_gambia_s.1_widecol">Anopheles Gambiae s.1 (Colunas largas)</option>
-              <option value="other_anopheles">Outros Anopheles</option>
-              <option value="other_anopheles_compact">Outros Anopheles (Compacto)</option>
-              <option value="other_vectors">Outros Vectores</option>
-              <option value="other_vectors_compact">Outros Vectores (Compacto)</option>
-              <option value="procopack">Procopack/Captura Manual</option>
-              <option value="light_traps_indoor_outdoor">Armadilhas de luz (Dentro e Fora)</option>
-              <option value="other_vectors_disease_a">Outros vectores de doenças (Tipo A)</option>
-              <option value="other_vectors_disease_b">Outros vectores de doenças (Tipo B)</option>
-              <option value="other_vectors_disease_c">Outros vectores de doenças (Tipo C)</option>
-              <option value="other_vectors_disease_d">Outros vectores de doenças (Tipo D)</option>
+              <option value="anopheles_funestus">{{ _('Anopheles Funestus') }}</option>
+              <option value="anopheles_funestus_s.1_compact">{{ _('Anopheles Funestus s.1 (Compact)') }}</option>
+              <option value="anopheles_gambia_s.1">{{ _('Anopheles Gambiae s.1') }}</option>
+              <option value="anopheles_gambia_s.1_compact">{{ _('Anopheles Gambiae s.1 (Compact)') }}</option>
+              <option value="anopheles_gambia_s.1_widecol">{{ _('Anopheles Gambiae s.1 (Wide columns)') }}</option>
+              <option value="other_anopheles">{{ _('Other Anopheles') }}</option>
+              <option value="other_anopheles_compact">{{ _('Other Anopheles (Compact)') }}</option>
+              <option value="other_vectors">{{ _('Other vectors') }}</option>
+              <option value="other_vectors_compact">{{ _('Other vectors (Compact)') }}</option>
+              <option value="procopack">{{ _('Procopack/Manual collection') }}</option>
+              <option value="light_traps_indoor_outdoor">{{ _('Light traps (Indoor and outdoor)') }}</option>
+              <option value="other_vectors_disease_a">{{ _('Other disease vectors (Type A)') }}</option>
+              <option value="other_vectors_disease_b">{{ _('Other disease vectors (Type B)') }}</option>
+              <option value="other_vectors_disease_c">{{ _('Other disease vectors (Type C)') }}</option>
+              <option value="other_vectors_disease_d">{{ _('Other disease vectors (Type D)') }}</option>
             </select>
           </label>
         </td>
@@ -56,8 +53,8 @@
       <tr>
         <td>
           <label>
-            Província: 
-            <select id="document-province" placeholder="Província"/>
+            {{ _('Province:') }}
+            <select id="document-province" aria-label="{{ _('Province') }}">
               <option value=""></option>
               {% for province in provinces %}
               <option value="{{ province }}">{{ province }}</option>
@@ -67,55 +64,54 @@
         </td>
         <td>
           <label>
-            Distrito/Município: 
-            <input id="document-district-city" placeholder="Distrito/Município" oninput="updateProvince()" list="districts-cities"/>
+            {{ _('District/Municipality:') }}
+            <input id="document-district-city" placeholder="{{ _('District/Municipality') }}" oninput="updateProvince()" list="districts-cities"/>
           </label>
         </td>
       </tr>
       <tr>
         <td>
           <label>
-            Localidade/Povoação 1: 
-            <input id="document-locality-1" placeholder="Localidade 1" list="towns"/>
+            {{ _('Locality/Village 1:') }}
+            <input id="document-locality-1" placeholder="{{ _('Locality 1') }}" list="towns"/>
           </label>
         </td>
         <td>
           <label>
-            Bairro 1: 
-            <input type="text" id="document-neighborhood-1" placeholder="Bairro 1"/>
-          </label>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label>
-            Localidade/Povoação 2: 
-            <input id="document-locality-2" placeholder="Localidade 2" list="towns"/>
-          </label>
-        </td>
-        <td>
-          <label>
-            Bairro 2: 
-            <input type="text" id="document-neighborhood-2" placeholder="Bairro 2"/>
+            {{ _('Neighborhood 1:') }}
+            <input type="text" id="document-neighborhood-1" placeholder="{{ _('Neighborhood 1') }}"/>
           </label>
         </td>
       </tr>
       <tr>
         <td>
           <label>
-            Data de colheita: 
-            <input type="date" id="document-collection-date"
-            placeholder="Data de colheita" placeholder="dd-mm-aaaa"/>
+            {{ _('Locality/Village 2:') }}
+            <input id="document-locality-2" placeholder="{{ _('Locality 2') }}" list="towns"/>
           </label>
         </td>
         <td>
           <label>
-            Ano/mes de pulverização: 
-            <input type="text" id="document-year-sprayed" placeholder="Mês de pulverização"/>
+            {{ _('Neighborhood 2:') }}
+            <input type="text" id="document-neighborhood-2" placeholder="{{ _('Neighborhood 2') }}"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            {{ _('Collection date:') }}
+            <input type="date" id="document-collection-date" aria-label="{{ _('Collection date') }}"/>
+          </label>
+        </td>
+        <td>
+          <label>
+            {{ _('Spraying month/year:') }}
+            <input type="text" id="document-year-sprayed" placeholder="{{ _('Spraying month/year') }}"/>
           </label>
         </td>
       </tr>
     </table>
-    <button class="btn btn-primary" id="document-submit-btn">Submeter informação do documento</button>
+    <button class="btn btn-primary" id="document-submit-btn">{{ _('Submit document information') }}</button>
   </div>
 </div>

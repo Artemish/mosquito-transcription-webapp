@@ -4,148 +4,71 @@
     <canvas id="transcription-overlay-canvas"></canvas>
   </div>
   <div id="transcription-area" style="margin-top: 20px;">
-      <div>Transcrever Célula:</div>
-      <img id="current-cell-view" src="" alt="Célula Ampliada" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
+      <div>{{ _('Transcribe cell:') }}</div>
+      <img id="current-cell-view" src="" alt="{{ _('Enlarged cell') }}" style="display: none; border: 1px solid #000; margin-bottom: 10px;"/>
       <div id="enum-transcription-wall" style="display: none">
         <select name="wall" id="select-wall">
-          <option value="">-- Seleccione um tipo de parede --</option>
-          <option value="Alvenaria">Alvenaria (Brickwork)</option>
-          <option value="Bloco">Bloco (Mud Bricks)</option>
-          <option value="Caniço">Caniço (Wattle and reed)</option>
-          <option value="Capim">Capim (Grass)</option>
-          <option value="Chapa">Chapa (Boards)</option>
-          <option value="Cimento">Cimento (Cement)</option>
-          <option value="Convencional">Conventional</option>
-          <option value="Macuti">Macuti (Coconut/Palm leaves)</option>
-          <option value="Madeira">Madeira (Wood)</option>
-          <option value="Maticado">Maticado (plaster)</option>
-          <option value="Matope">Matope (Mud)</option>
-          <option value="Misto">Misto (Mixed)</option>
-          <option value="Paupica">Paupica (Wood and mud)</option>
-          <option value="Palha">Palha (Straw)</option>
-          <option value="Pedra">Pedra (Stone)</option>
-          <option value="Rebocado">Rebocado (Cement bricks with rebar)</option>
-          <option value="Tijolo">Tijolo (Brick)</option>
-          <option value="Zinco">Zinco (??)</option>
-          <option value="?">? (Could not read)</option>
+          <option value="">{{ _('-- Select a wall type --') }}</option>
+          <option value="Alvenaria">{{ _('Brickwork') }}</option>
+          <option value="Bloco">{{ _('Mud bricks') }}</option>
+          <option value="Caniço">{{ _('Wattle and reed') }}</option>
+          <option value="Capim">{{ _('Grass') }}</option>
+          <option value="Chapa">{{ _('Boards') }}</option>
+          <option value="Cimento">{{ _('Cement') }}</option>
+          <option value="Convencional">{{ _('Conventional') }}</option>
+          <option value="Macuti">{{ _('Coconut/palm leaves') }}</option>
+          <option value="Madeira">{{ _('Wood') }}</option>
+          <option value="Maticado">{{ _('Plaster') }}</option>
+          <option value="Matope">{{ _('Mud') }}</option>
+          <option value="Misto">{{ _('Mixed') }}</option>
+          <option value="Paupica">{{ _('Wood and mud') }}</option>
+          <option value="Palha">{{ _('Straw') }}</option>
+          <option value="Pedra">{{ _('Stone') }}</option>
+          <option value="Rebocado">{{ _('Cement bricks with rebar') }}</option>
+          <option value="Tijolo">{{ _('Brick') }}</option>
+          <option value="Zinco">{{ _('Zinc') }}</option>
+          <option value="?">{{ _('Could not read') }}</option>
         </select>
       </div>
       <div id="enum-transcription-floor" style="display: none">
         <select name="floor" id="select-floor">
-          <option value="">-- Seleccione um tipo de chão --</option>
-          <option value="Areia">Areia (Sand)</option>
-          <option value="Bloco">Bloco (Bricks)</option>
-          <option value="Cimento">Cimento (Cement)</option>
-          <option value="Chapa">Chapa (Boards)</option>
-          <option value="Maticado">Maticado (Clay/Plaster)</option>
-          <option value="Pavimentado">Pavimentado (Paved)</option>
-          <option value="Tijolo">Tijolo (Brick)</option>
-          <option value="?">? (Could not read)</option>
+          <option value="">{{ _('-- Select a floor type --') }}</option>
+          <option value="Areia">{{ _('Sand') }}</option>
+          <option value="Bloco">{{ _('Bricks') }}</option>
+          <option value="Cimento">{{ _('Cement') }}</option>
+          <option value="Chapa">{{ _('Boards') }}</option>
+          <option value="Maticado">{{ _('Clay/plaster') }}</option>
+          <option value="Pavimentado">{{ _('Paved') }}</option>
+          <option value="Tijolo">{{ _('Brick') }}</option>
+          <option value="?">{{ _('Could not read') }}</option>
         </select>
       </div>
       <div id="enum-transcription-ceiling" style="display: none">
         <select name="ceiling" id="select-ceiling">
-          <option value="">-- Seleccione um tipo de tecto --</option>
-          <option value="Capim">Capim (Grass)</option>
-          <option value="Caniço">Caniço (Wattle and reed)</option>
-          <option value="Chapa">Chapa (Sheet metal)</option>
-          <option value="Palha">Palha (Straw)</option>
-          <option value="Placa">Placa (Boards)</option>
-          <option value="Plastico">Plastico (Plastic)</option>
-          <option value="Telha">Telha (Tile)</option>
-          <option value="Macute">Macute (??)</option>
-          <option value="Zinco">Zinco (??)</option>
-          <option value="?">? (Não foi possível ler)</option>
+          <option value="">{{ _('-- Select a ceiling type --') }}</option>
+          <option value="Capim">{{ _('Grass') }}</option>
+          <option value="Caniço">{{ _('Wattle and reed') }}</option>
+          <option value="Chapa">{{ _('Sheet metal') }}</option>
+          <option value="Palha">{{ _('Straw') }}</option>
+          <option value="Placa">{{ _('Board panels') }}</option>
+          <option value="Plastico">{{ _('Plastic') }}</option>
+          <option value="Telha">{{ _('Tile') }}</option>
+          <option value="Macute">{{ _('Macute') }}</option>
+          <option value="Zinco">{{ _('Zinc') }}</option>
+          <option value="?">{{ _('Could not read') }}</option>
         </select>
       </div>
       <div id="text-transcription">
-        <input type="text" id="transcription-input" placeholder="Introduza a transcrição aqui" style="display: none;"/>
+        <input type="text" id="transcription-input" placeholder="{{ _('Enter the transcription here') }}" style="display: none;"/>
       </div>
   </div>
   <div id="transcription-buttons">
-    <p>
-      Comece clicando no canto superior esquerdo das linhas de dados (ou seja, o canto superior
-      esquerdo da linha 1), depois clique no canto inferior direito das linhas de dados.
-      Isto deve contornar a tabela de dados a azul.
-    </p>
-    <p>
-      Pressione a barra de espaço para alternar as caixas detectadas. Navegue com as teclas
-      de setas. Por padrão, a transcrição avança depois de inserir um
-      único número - volte atrás com a tecla de seta para a esquerda e adicione um dígito
-      se o número for 10 ou maior.
-    </p>
-    <button id="transcription-help-btn" class="btn btn-secondary" onclick="openTranscriptionHelpModal()">? Ajuda</button>
-    <button id="transcription-submit-btn" class="btn btn-primary">Submeter transcrição</button>
-    <button id="transcription-complete-btn" class="btn btn-success">Marcar transcrição como completa</button>
-    <button id="transcription-fixcols-btn" class="btn btn-warning">Tentar corrigir colunas</button>
-    <button id="transcription-fixrows-btn" class="btn btn-warning">Tentar corrigir linhas</button>
-    <button id="transcription-autotranscribe-btn" class="btn btn-info">Tentar transcrição automática</button>
-  </div>
-</div>
-
-<!-- Transcription Help Modal -->
-<div id="transcription-help-modal" class="modal">
-  <div class="modal-content help-modal-content">
-    <div class="modal-header">
-      <h2>Ajuda - Atalhos de Transcrição</h2>
-      <span class="close-modal" onclick="closeTranscriptionHelpModal()">&times;</span>
-    </div>
-    
-    <div class="modal-body">
-      <h3>Navegação</h3>
-      <table class="help-table">
-        <tr>
-          <td class="hotkey"><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></td>
-          <td>Mover entre células na tabela</td>
-        </tr>
-        <tr>
-          <td class="hotkey"><kbd>Enter</kbd></td>
-          <td>Guardar célula actual e mover para a próxima linha</td>
-        </tr>
-      </table>
-
-      <h3>Entrada de Dados</h3>
-      <table class="help-table">
-        <tr>
-          <td class="hotkey"><kbd>0</kbd>-<kbd>9</kbd></td>
-          <td>Em colunas normais, avança automaticamente para a próxima linha após inserir um dígito. Para números ≥10, use ← para voltar e adicionar outro dígito</td>
-        </tr>
-        <tr>
-          <td class="hotkey"><kbd>Shift</kbd> + símbolo numérico</td>
-          <td>Digita o número subjacente (ex: Shift+! digita 1, Shift+@ digita 2)</td>
-        </tr>
-        <tr>
-          <td class="hotkey"><kbd>a</kbd>-<kbd>z</kbd></td>
-          <td>Em colunas de enumeração (parede/chão/tecto), faz correspondência de prefixo por autocompletar. Digite letras suficientes até que apenas uma opção corresponda, depois avança automaticamente</td>
-        </tr>
-      </table>
-
-      <h3>Funções Especiais</h3>
-      <table class="help-table">
-        <tr>
-          <td class="hotkey"><kbd>X</kbd></td>
-          <td>Limpa toda a coluna actual e retorna à linha superior dessa coluna</td>
-        </tr>
-        <tr>
-          <td class="hotkey"><kbd>Espaço</kbd></td>
-          <td>Alterna a visibilidade da sobreposição de transcrição (mostra/esconde todos os valores transcritos na imagem)</td>
-        </tr>
-      </table>
-
-      <h3>Comportamento Inteligente</h3>
-      <ul>
-        <li>Ao navegar além da última coluna, passa para a primeira coluna da próxima linha</li>
-        <li>Ao navegar além da última linha, passa para a primeira linha da próxima coluna</li>
-        <li>Detecção automática de padrões em colunas de latitude/longitude e pré-preenchimento de prefixos</li>
-      </ul>
-
-      <h3>Instruções de Início</h3>
-      <ol>
-        <li>Clique no canto superior esquerdo da tabela de dados</li>
-        <li>Clique no canto inferior direito da tabela de dados</li>
-        <li>A tabela ficará contornada a azul</li>
-        <li>Use os atalhos acima para transcrever eficientemente</li>
-      </ol>
-    </div>
+    <p>{{ _('Start by clicking the top-left corner of the data rows (the top-left corner of row 1), then click the bottom-right corner of the data rows. This should outline the data table in blue.') }}</p>
+    <p>{{ _('Press the space bar to toggle the detected boxes. Navigate with the arrow keys. By default, transcription advances after you enter one digit. If the number is 10 or greater, go back with the left arrow key and add another digit.') }}</p>
+    <button id="transcription-submit-btn">{{ _('Submit transcription') }}</button>
+    <button id="transcription-complete-btn">{{ _('Mark transcription as complete') }}</button>
+    <button id="transcription-fixcols-btn">{{ _('Try to correct columns') }}</button>
+    <button id="transcription-fixrows-btn">{{ _('Try to correct rows') }}</button>
+    <button id="transcription-autotranscribe-btn">{{ _('Try automatic transcription') }}</button>
   </div>
 </div>

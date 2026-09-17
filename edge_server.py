@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory, Response
+from flask_babel import Babel, get_locale
 from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS
 from glob import glob
@@ -21,8 +22,27 @@ from utils import show_contour, show
 import checks as checks_db
 
 app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'pt'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
+SUPPORTED_LOCALES = ('en', 'pt')
+
+
+def select_locale():
+    requested_locale = request.args.get('lang')
+    if requested_locale in SUPPORTED_LOCALES:
+        return requested_locale
+    return request.accept_languages.best_match(SUPPORTED_LOCALES) or 'pt'
+
+
+babel = Babel(app, locale_selector=select_locale)
 CORS(app) # This will enable CORS for all routes and methods
 auth = HTTPBasicAuth()
+
+
+@app.context_processor
+def inject_locale():
+    return {'current_locale': str(get_locale())}
 
 SOURCE_DIRECTORY = 'source_images'
 TRANSCRIPT_DIRECTORY = 'transcriptions'

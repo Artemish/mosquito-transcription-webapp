@@ -19,7 +19,8 @@ RUN python -m pip install --upgrade pip \
 
 COPY . .
 
-RUN mkdir -p source_images table_images transcriptions \
+RUN pybabel compile --directory translations \
+    && mkdir -p source_images table_images transcriptions \
     && useradd --create-home --uid 10001 appuser \
     && chown -R appuser:appuser /app
 
