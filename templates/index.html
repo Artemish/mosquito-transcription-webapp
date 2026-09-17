@@ -7,6 +7,8 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{ url_for('static', filename='js/globals.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checks.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checks-panel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/document.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dewarp.js') }}"></script>
     <script src="{{ url_for('static', filename='js/transcription.js') }}"></script>
@@ -37,7 +39,15 @@
           </thead>
           <tbody id="file-list"></tbody>
         </table>
+        <div class="sidebar-checks-btn-wrap">
+          <button id="nav-checks" class="btn sidebar-checks-btn" data-count="0">
+            &#10003; <span class="checks-btn-label">Verificações</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Checks drawer (slides in over the sidebar) -->
+      {% include 'checks-modal.html' %}
       <div class="content">
         <h2 id="current-filename"></h2>
         {% include 'tabnav.html' %}

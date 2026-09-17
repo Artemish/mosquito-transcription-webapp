@@ -18,6 +18,7 @@ from header_detection import experiment_find_columns, experiment_find_rows
 from map_amazon_to_boxes import attempt_transcription, remap_columns
 
 from utils import show_contour, show
+import checks as checks_db
 
 app = Flask(__name__)
 CORS(app) # This will enable CORS for all routes and methods
@@ -38,6 +39,7 @@ district_province = towns.groupby('district')['province'].agg(lambda x: x.iloc[0
 city_province = cities.groupby('city')['province'].agg(lambda x: x.iloc[0]) 
 provinces = sorted(towns.province.unique())
 
+checks_db.init_db()
 @auth.get_password
 def get_password(username):
     if auth_username and auth_password and username == auth_username:
@@ -473,10 +475,53 @@ def transcribe_amazon():
     return jsonify(remapped)
 
 
+# ---------------------------------------------------------------------------
+# Check system – items that need to be revisited
+# ---------------------------------------------------------------------------
+
+@app.route('/checks', methods=['GET'])
+@auth.login_required
+def list_checks():
+    """Return all checks, or filter by ?file_id=<id>."""
+    file_id = request.args.get('file_id')
+    return jsonify(checks_db.get_checks(file_id)), 200
+
+
+@app.route('/checks', methods=['POST'])
+@auth.login_required
+def create_check():
+    """
+    Add a new check item.
+    Body (JSON): { file_id, row, col, error_text }
+    """
+    data = request.json or {}
+    missing = [f for f in ('file_id', 'row', 'col', 'error_text') if f not in data]
+    if missing:
+        return jsonify({"error": f"Missing fields: {', '.join(missing)}"}), 400
+
+    try:
+        row = int(data['row'])
+        col = int(data['col'])
+    except (TypeError, ValueError):
+        return jsonify({"error": "'row' and 'col' must be integers"}), 400
+
+    record = checks_db.add_check(data['file_id'], row, col, data['error_text'])
+    return jsonify(record), 201
+
+
+@app.route('/checks/<int:check_id>', methods=['DELETE'])
+@auth.login_required
+def delete_check(check_id):
+    """Remove a check item by its id."""
+    deleted = checks_db.remove_check(check_id)
+    if deleted:
+        return jsonify({"success": True}), 200
+    return jsonify({"error": "Check not found"}), 404
+
+
 @app.route('/')
 @auth.login_required
-def home():
-    return render_template(
+def home():    return render_template(
         'index.html',
         district_province = district_province,
         city_province = city_province,
@@ -485,4 +530,4 @@ def home():
     ) 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)

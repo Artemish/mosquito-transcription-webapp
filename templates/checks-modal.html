@@ -1,0 +1,32 @@
+<div id="checks-drawer" class="checks-drawer">
+
+  <div class="checks-drawer-header">
+    <span class="checks-drawer-title">Verificações em Aberto</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <button id="checks-scan-btn" class="btn btn-secondary checks-scan-btn"
+              title="Verificar coordenadas em todas as transcrições">
+        &#128270; Verificar lat/lon
+      </button>
+      <button id="checks-drawer-close" class="checks-close-btn" title="Fechar">&times;</button>
+    </div>
+  </div>
+
+  <!-- Summary / status bar -->
+  <div id="checks-summary" class="checks-summary"></div>
+
+  <!-- Prev / next navigation -->
+  <div id="checks-nav" class="checks-nav" style="display:none;">
+    <button id="checks-prev-btn" class="btn" title="Verificação anterior">&#8592;</button>
+    <span id="checks-nav-label" class="checks-nav-label"></span>
+    <button id="checks-next-btn" class="btn" title="Próxima verificação">&#8594;</button>
+  </div>
+
+  <!-- List of checks -->
+  <div class="checks-list" id="checks-list">
+    <p id="checks-empty-msg" style="display:none; text-align:center; color:#888; padding:20px;">
+      Não há verificações em aberto.
+    </p>
+    <!-- Cards injected by checks-panel.js -->
+  </div>
+
+</div>
