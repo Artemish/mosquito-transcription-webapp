@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="{{ current_locale }}">
   <head>
     <meta charset="UTF-8">
-    <title>Cortador e Segmentador de Imagens</title>
+    <title>{{ _('Image Cropper and Segmenter') }}</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='app.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{ url_for('static', filename='js/globals.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checks.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checks-panel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/document.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dewarp.js') }}"></script>
     <script src="{{ url_for('static', filename='js/transcription.js') }}"></script>
@@ -16,28 +18,41 @@
   <body>
     <div class="flex-container">
       <div id="file-sidebar" class="sidebar">
+        <nav class="language-selector" aria-label="{{ _('Language') }}">
+          <a href="{{ url_for('home', lang='en', filename=request.args.get('filename')) }}" lang="en"{% if current_locale == 'en' %} aria-current="page"{% endif %}>{{ _('English') }}</a>
+          <span aria-hidden="true">|</span>
+          <a href="{{ url_for('home', lang='pt', filename=request.args.get('filename')) }}" lang="pt"{% if current_locale == 'pt' %} aria-current="page"{% endif %}>{{ _('Portuguese') }}</a>
+        </nav>
         <div>
-          <a href="download_csv" download="transcription.csv">Descarregar CSV de Transcrição</a>
+          <a href="download_csv" download="transcription.csv">{{ _('Download transcription CSV') }}</a>
         </div>
         <div>
-          <a href="download_documents_csv" download="documents.csv">Descarregar CSV de Documentos</a>
+          <a href="download_documents_csv" download="documents.csv">{{ _('Download document CSV') }}</a>
         </div>
         <button id="open-upload-modal-btn" display="flex" class="btn btn-primary" onclick="openUploadModal()" style="margin-bottom: 10px;">
           Carregar Ficheiros
         </button>
-        <h3 id="file-list-header">Ficheiros Fonte</h3>
+        <h3 id="file-list-header">{{ _('Source files') }}</h3>
         <table>
           <thead>
             <tr>
-              <th class="file-id">ID do Ficheiro</th>
-              <th class="status">Doc</th>
-              <th class="segmentation">Seg.</th>
-              <th class="transcription">Dados</th>
+              <th class="file-id">{{ _('File ID') }}</th>
+              <th class="status">{{ _('Doc.') }}</th>
+              <th class="segmentation">{{ _('Seg.') }}</th>
+              <th class="transcription">{{ _('Data') }}</th>
             </tr>
           </thead>
           <tbody id="file-list"></tbody>
         </table>
+        <div class="sidebar-checks-btn-wrap">
+          <button id="nav-checks" class="btn sidebar-checks-btn" data-count="0">
+            &#10003; <span class="checks-btn-label">{{ _('Checks') }}</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Checks drawer (slides in over the sidebar) -->
+      {% include 'checks-modal.html' %}
       <div class="content">
         <h2 id="current-filename"></h2>
         {% include 'tabnav.html' %}

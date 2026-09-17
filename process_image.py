@@ -14,7 +14,9 @@ from textractor.data.constants import TextractFeatures, Direction, DirectionalFi
 
 def textract_image(image_file):
   image = Image.open(image_file)
-  extractor = Textractor(profile_name="default")
+  # Textractor/boto3 reads AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+  # from the process environment.
+  extractor = Textractor()
   
   # See https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/textract/client/analyze_document.html
   print(f'Sending {image_file} to Amazon Textract..')

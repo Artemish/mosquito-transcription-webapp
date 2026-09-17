@@ -80,14 +80,16 @@ async function fetchAndDisplayImage(file_id, target) {
     const imageBlob = await response.blob();
     const imageUrl = URL.createObjectURL(imageBlob);
 
-    imageDisplay.onload = function() {
-        canvas.width = imageDisplay.width;
-        canvas.height = imageDisplay.height;
-    };
-    console.log(imageBlob);
-    console.log(imageUrl);
-
-    imageDisplay.src = imageUrl;
+    // Wait for the image to fully decode so imageDisplay.width/height are
+    // non-zero before callers try to draw overlays on top of it.
+    await new Promise((resolve) => {
+        imageDisplay.onload = function() {
+            canvas.width = imageDisplay.width;
+            canvas.height = imageDisplay.height;
+            resolve();
+        };
+        imageDisplay.src = imageUrl;
+    });
 
     current_file = file_id;
     fileHeader.textContent = current_file;

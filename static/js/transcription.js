@@ -47,7 +47,28 @@ function init_transcription() {
         attachEventListeners();
         transcription_tab = {
           redraw: redraw,
-          reset: reset
+          reset: reset,
+          selectCell: selectCell,
+          toggleOverlay: toggleTranscriptionOverlay,
+          /**
+           * Show the overlay and jump to the given 0-based cell.
+           * Safe to call immediately after the image/transcription load.
+           */
+          focusCheck: function(row, col) {
+            if (!header || points.length < 2) {
+              console.warn('focusCheck called before header/points ready');
+              return;
+            }
+            const maxRow = header.row_structure.length - 1;
+            const maxCol = header.column_structure.length - 1;
+            if (row > maxRow || col > maxCol) {
+              console.warn(`focusCheck: cell (${row}, ${col}) out of bounds for header with ${maxRow+1} rows, ${maxCol+1} cols`);
+              row = Math.min(row, maxRow);
+              col = Math.min(col, maxCol);
+            }
+            if (!overlayVisible) toggleTranscriptionOverlay();
+            selectCell(row, col);
+          },
         };
 	const resizeObserver = new ResizeObserver((entries) => {
 	  for (let entry of entries) {
@@ -171,6 +192,8 @@ function init_transcription() {
     }
 
     function outlineCurrentCell() {
+        if (!header || !header.row_structure || !header.column_structure) return;
+
         const cell = cellToRect(currentCellIndex.row, currentCellIndex.col);
 
         context.beginPath();
@@ -288,6 +311,9 @@ function init_transcription() {
     // Handle transcription input and navigation
     function handleTranscriptionInputKeydown(e) {
         if (currentTab != "transcription") {
+          return;
+        }
+        if (!header || points.length < 2) {
           return;
         }
 

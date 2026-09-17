@@ -1,0 +1,32 @@
+<div id="checks-drawer" class="checks-drawer">
+
+  <div class="checks-drawer-header">
+    <span class="checks-drawer-title">{{ _('Open checks') }}</span>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <button id="checks-scan-btn" class="btn btn-secondary checks-scan-btn"
+              title="{{ _('Check coordinates in all transcriptions') }}">
+        &#128270; {{ _('Check latitude/longitude') }}
+      </button>
+      <button id="checks-drawer-close" class="checks-close-btn" title="{{ _('Close') }}">&times;</button>
+    </div>
+  </div>
+
+  <!-- Summary / status bar -->
+  <div id="checks-summary" class="checks-summary"></div>
+
+  <!-- Prev / next navigation -->
+  <div id="checks-nav" class="checks-nav" style="display:none;">
+    <button id="checks-prev-btn" class="btn" title="{{ _('Previous check') }}">&#8592;</button>
+    <span id="checks-nav-label" class="checks-nav-label"></span>
+    <button id="checks-next-btn" class="btn" title="{{ _('Next check') }}">&#8594;</button>
+  </div>
+
+  <!-- List of checks -->
+  <div class="checks-list" id="checks-list">
+    <p id="checks-empty-msg" style="display:none; text-align:center; color:#888; padding:20px;">
+      {{ _('There are no open checks.') }}
+    </p>
+    <!-- Cards injected by checks-panel.js -->
+  </div>
+
+</div>
